@@ -12,7 +12,7 @@ header('location:not_allowed_user.php');
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
-		<title>Регистрация</title>
+		<title>Регистрация в IExam</title>
 		<link rel="stylesheet" type="text/css" href="main.css">
 		<link rel="WWW Icon" href="www_icon1.ico"/>
 		<script type="text/javascript" charset="utf-8">
