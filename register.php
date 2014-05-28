@@ -9,13 +9,13 @@
 		mysql_query("SET NAMES 'utf8'");
 		mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 		$result= mysql_query("INSERT INTO simple_login (firstname, lastname, ID, username, password)VALUES('$fname', '$lname', '$ID', '$username','".md5($password)."')" );
-			if($result){
+		
+		if($result){
 			header("Location: reg_success.php");
-			} 
-			else {
-			header("Location: reg_error.php");
-			}
-		session_destroy();
+		} 
+		else {
+			(new MessagePage)->show("Registration unsuccessful!", "Registration unsuccessful");
+		}
 	}
 ?>
 	
@@ -61,34 +61,31 @@
 		}
 	}
 </script>
-	<b>
-	<div class="col-md-3">
-		<span><img src="secure.png" alt="some_text" width="36" height="36"><h3 style="display: inline;">Регистрация</h3></span>
-		<br />
-		<form name="reg" action="" onsubmit="return validateForm()" method="post" role="form" >
-			<div class="form-group">
-				<label>Име:</label>
-				<input class="form-control" type="text" name="fname" />
-			</div>
-			<div class="form-group">
-				<label>Фамилия:</label>
-				<input class="form-control" type="text" name="lname" />
-			</div>
-			<div class="form-group">
-				<label>ЕГН:</label>
-				<input class="form-control" type="text" name="ID" />
-			</div>
-			<div class="form-group">
-				<label>Фак. Номер:</label>
-				<input class="form-control" type="text" name="username" />
-			</div>
-			<div class="form-group">
-				<label>Парола:</label>
-				<input class="form-control" type="password" name="password" />
-			</div>
-			<input class="form-control btn btn-primary" name="submit" type="submit" value="Регистрирай се"/>
-			<a href="main.php" class="btn btn-info" >Назад</a>
-			
-		</form>
-	</div>
-</divform>
+<div class="col-md-3">
+	<span><img src="secure.png" alt="some_text" width="36" height="36"><h3 style="display: inline;">Регистрация</h3></span>
+	<br />
+	<form name="reg" action="" onsubmit="return validateForm()" method="post" role="form" >
+		<div class="form-group">
+			<label>Име:</label>
+			<input class="form-control" type="text" name="fname" />
+		</div>
+		<div class="form-group">
+			<label>Фамилия:</label>
+			<input class="form-control" type="text" name="lname" />
+		</div>
+		<div class="form-group">
+			<label>ЕГН:</label>
+			<input class="form-control" type="text" name="ID" />
+		</div>
+		<div class="form-group">
+			<label>Фак. Номер:</label>
+			<input class="form-control" type="text" name="username" />
+		</div>
+		<div class="form-group">
+			<label>Парола:</label>
+			<input class="form-control" type="password" name="password" />
+		</div>
+		<input class="form-control btn btn-primary" name="submit" type="submit" value="Регистрирай се"/>
+		<a href="main.php" class="btn btn-info" >Назад</a>	
+	</form>
+</div>
