@@ -16,9 +16,9 @@ require('utilities/MessagePage.php');
 	<head>
 		<meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
 		<title>Регистрация в IExam</title>
+		
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<link rel="WWW Icon" href="www_icon1.ico"/>
-		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	</head>
@@ -26,11 +26,11 @@ require('utilities/MessagePage.php');
 	<header class="bg-info">
 		<h1>IExam</h1>
 	</header>
-	<nav class="col-md-2">
-		<ul>
-			<li>Home</li>
-			<li>Login</li>
-			<li>Register</li>
+	<nav id="navigation" class="col-md-2">
+		<ul class="nav nav-pills nav-stacked">
+			<li><a href="index"/>Home</a></li>
+			<li><a href="login"/>Login</a></li>
+			<li><a href="register"/>Register</a></li>
 		</ul>
 	</nav>
 		<section class="container col-md-8">
@@ -55,8 +55,8 @@ require('utilities/MessagePage.php');
 		<?php }  ?>
 		</section>
 	</body>
-	<script src="js/bootstrap.min.js" />
 	<script src="js/jquery.2.1.1.min.js" />
+	<script src="js/bootstrap.min.js" />
 </html>
 
 <?php
