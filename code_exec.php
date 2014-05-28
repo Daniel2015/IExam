@@ -1,13 +1,5 @@
 <?php
- session_start();
-if(isset($_SESSION['SESS_ADMIN_USERNAME'])){
-header('location:not_allowed_admin.php');
-exit();
-}
-if(isset($_SESSION['SESS_FIRST_NAME'])){
-header('location:not_allowed_user.php');
-   exit();
-}
+session_start();
 if(empty($_POST['password'])){
 header('location:index.php');
    exit();
@@ -16,7 +8,6 @@ header('location:index.php');
 ?>
 
 <?php
-include('connection.php');
 // if(isset($_POST['Submit']))
 // {
 	$fname=$_POST['fname'];

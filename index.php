@@ -1,5 +1,5 @@
 <?php
- session_start();
+session_start();
 if(isset($_SESSION['SESS_ADMIN_USERNAME'])){
 header('location:not_allowed_admin.php');
 }
@@ -8,6 +8,7 @@ header('location:not_allowed_user.php');
    exit();
 }
 
+require('connection.php');
 require('utilities/MessagePage.php');
 ?>
 <!DOCTYPE html>
@@ -19,15 +20,23 @@ require('utilities/MessagePage.php');
 		<link rel="WWW Icon" href="www_icon1.ico"/>
 	</head>
 	<body>
+	<h1>IExam</h1>
 		<div>
 		<?php
 			if(isset($_GET['page']))
 			{
-				include($_GET['page']);
+				require($_GET['page']);
 			}
-			
+			else
+			{			
 			//(new MessagePage)->show("MARAAA", "Login success", "http://abv.bg");
 		?>
+			<h2>Index</h2>
+		<?php }  ?>
 		</div>
 	</body>
 </html>
+
+<?php
+	mysql_close($bd);
+?>

@@ -1,3 +1,24 @@
+<?php
+	if(isset($_POST['submit']))
+	{
+		$fname=$_POST['fname'];
+		$lname=$_POST['lname'];
+		$ID=$_POST['ID'];
+		$username=$_POST['username'];
+		$password=$_POST['password'];
+		mysql_query("SET NAMES 'utf8'");
+		mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+		$result= mysql_query("INSERT INTO simple_login (firstname, lastname, ID, username, password)VALUES('$fname', '$lname', '$ID', '$username','".md5($password)."')" );
+			if($result){
+			header("Location: reg_success.php");
+			} 
+			else {
+			header("Location: reg_error.php");
+			}
+		session_destroy();
+	}
+?>
+	
 <script type="text/javascript" charset="utf-8">
 	alert("<?= $_GET['page'] ?>");
 	function validateForm()
@@ -43,7 +64,7 @@
 </script>
 	<b>
 	<table width="80px" align="center" cellpadding="0" cellspacing="0" class="table">
-		<form name="reg" action="code_exec.php" onsubmit="return validateForm()" method="post">
+		<form name="reg" action="" onsubmit="return validateForm()" method="post">
 			<tr><td></td></tr>
 			<tr class="top">
 				<td><img src="secure.png" alt="some_text" width="18" height="18"><b>&nbspРегистрация&nbsp&nbsp</b></td>
