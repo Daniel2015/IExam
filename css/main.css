@@ -1,0 +1,75 @@
+.err{
+	color:red;
+	}
+body {
+	background-image:url("../shattered.png");
+	background-repeat:repeat;
+	background-position:center top;
+	}
+.table{
+	float:left;
+	text-align:center;
+	margin-top:82px;
+	margin-left:10px;
+	width:178px;
+	border-style:double;
+	border-color:#80b5ea;
+	border-spacing:5px;	
+	}
+tr.top td{
+	border-style:double;
+	border-color:#0066FF;
+	}
+#table_users{
+	float:right;
+	border-color:#80b5ea;
+	text-align:left;
+	border-style:solid;
+	margin-top:82px;
+	border-collapse:collapse;
+	border-width:2px;
+	margin-left:50px;
+	}
+.tr_users td{
+	width:100px;
+	border-style:solid;
+	border-width:2px;
+	border-color:#80b5ea;
+	}
+#navtable{
+	float:left;
+	}
+#testtable{
+	float:left;
+	}
+#table_test{
+	float:right;
+	border-color:#80b5ea;
+	text-align:left;
+	border-style:solid;
+	margin-top:82px;
+	border-collapse:collapse;
+	border-width:2px;
+	margin-left:50px;
+	}
+.tbl_test td{
+	border-style:solid;
+	border-width:2px;
+	border-color:#80b5ea;
+	}
+#create_table_test{
+	float:right;
+	border-color:#80b5ea;
+	text-align:left;
+	border-style:solid;
+	margin-top:82px;
+	border-collapse:collapse;
+	border-width:2px;
+	margin-left:50px;
+	}
+#create_table{
+float:left;
+}
+#results {
+float:right;
+}

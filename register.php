@@ -63,48 +63,33 @@
 	}
 </script>
 	<b>
-	<table width="80px" align="center" cellpadding="0" cellspacing="0" class="table">
-		<form name="reg" action="" onsubmit="return validateForm()" method="post">
-			<tr><td></td></tr>
-			<tr class="top">
-				<td><img src="secure.png" alt="some_text" width="18" height="18"><b>&nbspРегистрация&nbsp&nbsp</b></td>
-			</tr>
-			<tr>
-				<td>Име:</td>
-			</tr>
-			<tr>
-				<td><input type="text" name="fname" /></td>
-			</tr>
-			<tr>
-				<td>Фамилия:</td>
-			</tr>
-			<tr>
-				<td><input type="text" name="lname" /><td>
-			</tr>
-			<tr>
-				<td>ЕГН:</td>
-			</tr>
-			<tr>
-				<td><input type="text" name="ID" /></td>
-			</tr>
-			<tr>
-				<td>Фак. Номер:</td>
-			</tr>
-			<tr>
-				<td><input type="text" name="username" /></td>
-			</tr>
-			<tr>
-				<td>Парола:</td>
-			</tr>
-			<tr>
-				<td><input type="password" name="password" /></td>
-			</tr>
-			<tr>
-				<td><input name="submit" type="submit" value="Регистрирай се" class="btn"/></td>
-			</tr>
-			<tr>
-				<td><a href="main.php" class="btn" >Назад</a></td>
-			</tr>
+	<div class="col-md-3">
+		<span><img src="secure.png" alt="some_text" width="36" height="36"><h3 style="display: inline;">Регистрация</h3></span>
+		<br />
+		<form name="reg" action="" onsubmit="return validateForm()" method="post" role="form" >
+			<div class="form-group">
+				<label>Име:</label>
+				<input class="form-control" type="text" name="fname" />
+			</div>
+			<div class="form-group">
+				<label>Фамилия:</label>
+				<input class="form-control" type="text" name="lname" />
+			</div>
+			<div class="form-group">
+				<label>ЕГН:</label>
+				<input class="form-control" type="text" name="ID" />
+			</div>
+			<div class="form-group">
+				<label>Фак. Номер:</label>
+				<input class="form-control" type="text" name="username" />
+			</div>
+			<div class="form-group">
+				<label>Парола:</label>
+				<input class="form-control" type="password" name="password" />
+			</div>
+			<input class="form-control btn btn-primary" name="submit" type="submit" value="Регистрирай се"/>
+			<a href="main.php" class="btn btn-info" >Назад</a>
+			
 		</form>
-	</table>
-</b>
+	</div>
+</divform>

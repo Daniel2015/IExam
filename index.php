@@ -16,12 +16,24 @@ require('utilities/MessagePage.php');
 	<head>
 		<meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
 		<title>Регистрация в IExam</title>
-		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<link rel="WWW Icon" href="www_icon1.ico"/>
+		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	</head>
 	<body>
-	<h1>IExam</h1>
-		<div>
+	<header class="bg-info">
+		<h1>IExam</h1>
+	</header>
+	<nav class="col-md-2">
+		<ul>
+			<li>Home</li>
+			<li>Login</li>
+			<li>Register</li>
+		</ul>
+	</nav>
+		<section class="container col-md-8">
 		<?php
 			if(isset($_GET['page']))
 			{
@@ -33,8 +45,10 @@ require('utilities/MessagePage.php');
 		?>
 			<h2>Index</h2>
 		<?php }  ?>
-		</div>
+		</section>
 	</body>
+	<script src="js/bootstrap.min.js" />
+	<script src="js/jquery.2.1.1.min.js" />
 </html>
 
 <?php
