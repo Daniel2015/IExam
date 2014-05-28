@@ -20,7 +20,6 @@
 ?>
 	
 <script type="text/javascript" charset="utf-8">
-	alert("<?= $_GET['page'] ?>");
 	function validateForm()
 	{
 		var a=document.forms["reg"]["fname"].value;

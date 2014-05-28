@@ -49,7 +49,7 @@ require('utilities/MessagePage.php');
 			}
 			else
 			{			
-			//(new MessagePage)->show("MARAAA", "Login success", "http://abv.bg");
+			//(new MessagePage)->show("Login success", "Login success", "profile");
 		?>
 			<h2>Index</h2>
 		<?php }  ?>
