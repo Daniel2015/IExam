@@ -37,7 +37,15 @@ require('utilities/MessagePage.php');
 		<?php
 			if(isset($_GET['page']))
 			{
-				require($_GET['page']);
+				$filePath = $_GET['page'];
+				if(file_exists($filePath))
+				{
+					require($filePath);
+				}
+				else
+				{
+					require("common pages/404.php");
+				}
 			}
 			else
 			{			
