@@ -1,4 +1,6 @@
 <?php
+	require_once("models/UsersModel.php");
+
 	if(isset($_POST['submit']))
 	{
 		$fname=$_POST['fname'];
@@ -6,16 +8,27 @@
 		$ID=$_POST['ID'];
 		$username=$_POST['username'];
 		$password=$_POST['password'];
-		mysql_query("SET NAMES 'utf8'");
-		mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-		$result= mysql_query("INSERT INTO simple_login (firstname, lastname, ID, username, password)VALUES('$fname', '$lname', '$ID', '$username','".md5($password)."')" );
-			if($result){
+		
+		$user = new UsersModel;
+		
+		$user->firstName = $fname;
+		$user->lastName = $lname;
+		$user->fn = $ID;
+		$user->username = $username;
+		$user->password = $password;
+		
+		//mysql_query("SET NAMES 'utf8'");
+		//mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+		
+		$result= $user->insert();
+		if($result)
+		{
 			header("Location: reg_success.php");
-			} 
-			else {
+		} 
+		else 
+		{
 			header("Location: reg_error.php");
-			}
-		session_destroy();
+		}
 	}
 ?>
 	
@@ -61,34 +74,33 @@
 		}
 	}
 </script>
-	<b>
-	<div class="col-md-3">
-		<span><img src="secure.png" alt="some_text" width="36" height="36"><h3 style="display: inline;">Регистрация</h3></span>
-		<br />
-		<form name="reg" action="" onsubmit="return validateForm()" method="post" role="form" >
-			<div class="form-group">
-				<label>Име:</label>
-				<input class="form-control" type="text" name="fname" />
-			</div>
-			<div class="form-group">
-				<label>Фамилия:</label>
-				<input class="form-control" type="text" name="lname" />
-			</div>
-			<div class="form-group">
-				<label>ЕГН:</label>
-				<input class="form-control" type="text" name="ID" />
-			</div>
-			<div class="form-group">
-				<label>Фак. Номер:</label>
-				<input class="form-control" type="text" name="username" />
-			</div>
-			<div class="form-group">
-				<label>Парола:</label>
-				<input class="form-control" type="password" name="password" />
-			</div>
-			<input class="form-control btn btn-primary" name="submit" type="submit" value="Регистрирай се"/>
-			<a href="main.php" class="btn btn-info" >Назад</a>
-			
-		</form>
-	</div>
-</divform>
+
+<div class="col-md-3">
+	<span><img src="secure.png" alt="some_text" width="36" height="36"><h3 style="display: inline;">Регистрация</h3></span>
+	<br />
+	<form name="reg" action="" onsubmit="return validateForm()" method="post" role="form" >
+		<div class="form-group">
+			<label>Име:</label>
+			<input class="form-control" type="text" name="fname" />
+		</div>
+		<div class="form-group">
+			<label>Фамилия:</label>
+			<input class="form-control" type="text" name="lname" />
+		</div>
+		<div class="form-group">
+			<label>ЕГН:</label>
+			<input class="form-control" type="text" name="ID" />
+		</div>
+		<div class="form-group">
+			<label>Фак. Номер:</label>
+			<input class="form-control" type="text" name="username" />
+		</div>
+		<div class="form-group">
+			<label>Парола:</label>
+			<input class="form-control" type="password" name="password" />
+		</div>
+		<input class="form-control btn btn-primary" name="submit" type="submit" value="Регистрирай се"/>
+		<a href="main.php" class="btn btn-info" >Назад</a>
+		
+	</form>
+</div>
