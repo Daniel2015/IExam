@@ -18,7 +18,7 @@ require('utilities/MessagePage.php');
 		<title>Регистрация в IExam</title>
 		
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<link rel="WWW Icon" href="www_icon1.ico"/>
+		<link rel="WWW Icon" href="images/www_icon1.ico"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	</head>

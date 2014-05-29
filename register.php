@@ -76,7 +76,7 @@
 	}
 </script>
 <div class="col-md-3">
-	<span><img src="secure.png" alt="some_text" width="36" height="36"><h3 style="display: inline;">Регистрация</h3></span>
+	<span><img src="images/secure.png" alt="some_text" width="36" height="36"><h3 style="display: inline;">Регистрация</h3></span>
 	<br />
 	<form name="reg" action="" onsubmit="return validateForm()" method="post" role="form" >
 		<div class="form-group">
