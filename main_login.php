@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('connection.php');
 if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in')){
 session_destroy();

@@ -1,7 +1,7 @@
 <?php
 	if(isset($_SESSION['SESS_FIRST_NAME']))
 	{
-		header('location:main_login.php');
+		header('location: main_login');
 		exit();
 	}
 	if(isset($_SESSION['SESS_ADMIN_USERNAME']))
@@ -71,7 +71,7 @@
 				or die("Login failed: " . mysql_error());
 				
 				
-				header("location: /IExam/main_login");
+				header("location: main_login");
 				exit();
 			}
 			else
