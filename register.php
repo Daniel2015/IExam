@@ -102,6 +102,6 @@
 			<input class="form-control" type="password" name="password" />
 		</div>
 		<input class="form-control btn btn-primary" name="submit" type="submit" value="Регистрирай се"/>
-		<a href="main.php" class="btn btn-info" >Назад</a>
+		<a href="index.php" class="btn btn-info" >Назад</a>
 	</form>
 </div>
