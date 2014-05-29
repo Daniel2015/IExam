@@ -77,31 +77,36 @@
 		}
 	}
 </script>
-<div class="col-md-3">
-	<span><img src="images/secure.png" alt="some_text" width="36" height="36"><h3 style="display: inline;">Регистрация</h3></span>
-	<br />
-	<form name="reg" action="" onsubmit="return validateForm()" method="post" role="form" >
-		<div class="form-group">
-			<label>Име:</label>
-			<input class="form-control" type="text" name="fname" />
-		</div>
-		<div class="form-group">
-			<label>Фамилия:</label>
-			<input class="form-control" type="text" name="lname" />
-		</div>
-		<div class="form-group">
-			<label>ЕГН:</label>
-			<input class="form-control" type="text" name="ID" />
-		</div>
-		<div class="form-group">
-			<label>Фак. Номер:</label>
-			<input class="form-control" type="text" name="username" />
-		</div>
-		<div class="form-group">
-			<label>Парола:</label>
-			<input class="form-control" type="password" name="password" />
-		</div>
-		<input class="form-control btn btn-primary" name="submit" type="submit" value="Регистрирай се"/>
-		<a href="main.php" class="btn btn-info" >Назад</a>
-	</form>
+<div class="col-md-4">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+		<span><img src="images/secure.png" alt="some_text" width="21" height="21"><h4 style="display: inline;">Регистрация</h4></span>
+	  </div>
+	  <div class="panel-body">
+		  <form name="reg" action="" onsubmit="return validateForm()" method="post" role="form" >
+			  <div class="form-group">
+				  <label>Име:</label>
+				  <input class="form-control" type="text" name="fname" />
+			  </div>
+			  <div class="form-group">
+				  <label>Фамилия:</label>
+				  <input class="form-control" type="text" name="lname" />
+			  </div>
+			  <div class="form-group">
+				  <label>ЕГН:</label>
+				  <input class="form-control" type="text" name="ID" />
+			  </div>
+			  <div class="form-group">
+				  <label>Фак. Номер:</label>
+				  <input class="form-control" type="text" name="username" />
+			  </div>
+			  <div class="form-group">
+				  <label>Парола:</label>
+				  <input class="form-control" type="password" name="password" />
+			  </div>
+			  <input class="form-control btn btn-primary" name="submit" type="submit" value="Регистрирай се"/>
+			  <a href="main.php" class="btn btn-info" >Назад</a>
+		  </form>
+	  </div>
+	</div>
 </div>
