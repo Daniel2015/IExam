@@ -23,12 +23,14 @@
 		$result= $user->insert();
 		if($result)
 		{
-			header("Location: reg_success.php");
+			//header("Location: reg_success.php");
+			(new MessagePage)->show("Registration unsuccessful!", "Registration unsuccessful", "success");
+			exit();
 		} 
 		else 
 		{
 			//header("Location: reg_error.php");
-			(new MessagePage)->show("Registration unsuccessful!", "Registration unsuccessful");
+			(new MessagePage)->show("Registration unsuccessful!", "Registration unsuccessful", "danger");
 		}
 	}
 ?>

@@ -1,11 +1,13 @@
-<?
+<?php
 	if(!empty($redirectTo)) {
+		echo '<script>
+				setTimeout(function () {
+					window.location.href="$redirectTo";
+				}, $timeout);
+			</script>';
+	} 
 ?>
-<script>
-	setTimeout(function () {
-		window.location.href= '<?= $redirectTo ?>';
-	}, <?= $timeout ?>);
-</script> 
-<? } ?> 
-<h2><?= $title ?></h2>
-<div class="lead"><?= $message ?></div>
+<div class="alert alert-<?= $type ?>">
+	<strong><?= $title ?></strong><br />
+	<?= $message ?>
+</div>

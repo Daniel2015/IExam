@@ -39,8 +39,8 @@
 			return mysql_query("INSERT INTO simple_login
 			(firstname, lastname, ID, username, password)
 			VALUES
-			('$this->firstName', '$this->lastName', '$this->fn', '$this->username', '".md5($password)."')")
-			or die('Registration faild: ' . mysql_error());
+			('$this->firstName', '$this->lastName', '$this->fn', '$this->username', '".md5($this->password)."')");
+			//or die('Registration faild: ' . mysql_error());
 		}		
 		
 		public function update()
