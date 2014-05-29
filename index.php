@@ -1,12 +1,12 @@
 <?php
 session_start();
-if(isset($_SESSION['SESS_ADMIN_USERNAME'])){
-header('location:not_allowed_admin.php');
-}
-if(isset($_SESSION['SESS_FIRST_NAME'])){
-header('location:not_allowed_user.php');
-   exit();
-}
+// if(isset($_SESSION['SESS_ADMIN_USERNAME'])){
+// header('location:not_allowed_admin.php');
+// }
+// if(isset($_SESSION['SESS_FIRST_NAME'])){
+// header('location:not_allowed_user.php');
+   // exit();
+// }
 
 require('connection.php');
 require('utilities/MessagePage.php');
