@@ -23,8 +23,8 @@ require('utilities/MessagePage.php');
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	</head>
 	<body>
-	<header class="bg-info">
-		<h1>IExam</h1>
+	<header>
+		<h1 class="col-md-offset-1"><span class="glyphicon glyphicon-pencil"></span>IExam</h1>
 	</header>
 	<nav id="navigation" class="col-md-2">
 		<ul class="nav nav-pills nav-stacked">
