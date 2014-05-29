@@ -1,10 +1,9 @@
 <?php
-class MessagePage
-{
-	public static function show($message, $title, $redirectTo, $timeout = 1800)
+	class MessagePage
 	{
-		//header('Location: /common pages/messagepage');
-		include('/common pages/messagepage.php');
+		public static function show($message, $title, $redirectTo = "", $timeout = 1800)
+		{
+			require('/common pages/messagepage.php');
+		}
 	}
-}
 ?>

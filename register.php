@@ -27,7 +27,8 @@
 		} 
 		else 
 		{
-			header("Location: reg_error.php");
+			//header("Location: reg_error.php");
+			(new MessagePage)->show("Registration unsuccessful!", "Registration unsuccessful");
 		}
 	}
 ?>
@@ -74,7 +75,6 @@
 		}
 	}
 </script>
-
 <div class="col-md-3">
 	<span><img src="secure.png" alt="some_text" width="36" height="36"><h3 style="display: inline;">Регистрация</h3></span>
 	<br />
@@ -101,6 +101,5 @@
 		</div>
 		<input class="form-control btn btn-primary" name="submit" type="submit" value="Регистрирай се"/>
 		<a href="main.php" class="btn btn-info" >Назад</a>
-		
 	</form>
 </div>
