@@ -1,6 +1,5 @@
 <?php
 	require_once('connection.php');
-	require_once('connection.php');
 
 	if(isset($_SESSION['SESS_ADMIN_USERNAME'])){
 		session_destroy();
