@@ -70,8 +70,7 @@
 				mysql_query("INSERT INTO logged_in_users (firstname, lastname, ID, username, loggedInTime )VALUES('".$_SESSION['SESS_FIRST_NAME']."', '".$_SESSION['SESS_LAST_NAME']."', '".$_SESSION['SESS_ID']."', '".$_SESSION['SESS_USERNAME']."', '".$_SESSION['SESS_TIME']."')" )
 				or die("Login failed: " . mysql_error());
 				
-				(new MessagePage)->show("", "Влязохте успешно!", "success");
-				header("refresh:2;url=main_login");
+				(new MessagePage)->show("", "Влязохте успешно!", "success", "main_login");
 				exit();
 			}
 			else

@@ -9,7 +9,8 @@
 	if(isset($_SESSION['SESS_FIRST_NAME'])){
 		mysql_query("DELETE FROM logged_in_users WHERE username='".$_SESSION['SESS_USERNAME']."'");
 		session_destroy();
-		MessagePage::show("Logout successful!", "", "success", "index");
+		
+		MessagePage::show("", "Излязохте успешно!", "success", "index");
 	}
 	else {
 		header('location: index.php');
