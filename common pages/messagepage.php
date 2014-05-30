@@ -2,8 +2,8 @@
 	if(!empty($redirectTo)) {
 		echo '<script>
 				setTimeout(function () {
-					window.location.href="$redirectTo";
-				}, $timeout);
+					window.location.href="' . $redirectTo . '";
+				}, ' . $timeout . ');
 			</script>';
 	} 
 ?>
