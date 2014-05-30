@@ -25,18 +25,11 @@
 			$this->tableName = $table;
 		}	
 		
-		public function getItems($query = null)
+		public function getItems($query = "")
 		{
 			$queryResult;
 			
-			if($query !== null && !empty($query))
-			{
-				$queryResult = mysql_query("Select * from " . $this->get_tableName() . $query);
-			}
-			else
-			{
-				$queryResult = mysql_query("Select * from " . $this->get_tableName());
-			}
+			$queryResult = mysql_query("Select * from " . $this->get_tableName() . $query);
 			
 			if(!$queryResult)
 			{
