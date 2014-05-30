@@ -27,10 +27,10 @@ header('location:common pages/not_allowed_admin.php');
 		<span><h4 style="display: inline;">Здравей,&nbsp<?php echo $_SESSION['SESS_FIRST_NAME'];?> !</h4></span>
 	  </div>
 	  <div class="panel-body">
-	  <p><a href="test.php" class="btn btn-info" >Тестове</a></p>
-	  <p><a href="profile.php" class="btn btn-info" >Профил</a></p>
-	  <p><a href="statistics.php" class="btn btn-info" >Статистика</a></p>
-	  <p><a href="logout.php" class="btn btn-info" >Излез</a></p>
+	  <p><a href="test" class="btn btn-info" >Тестове</a></p>
+	  <p><a href="profile" class="btn btn-info" >Профил</a></p>
+	  <p><a href="statistics" class="btn btn-info" >Статистика</a></p>
+	  <p><a href="logout" class="btn btn-info" >Излез</a></p>
 	  </div>
 </div>
 </div>
