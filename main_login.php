@@ -30,7 +30,7 @@ header('location:common pages/not_allowed_admin.php');
 	  <p><a href="test.php" class="btn btn-info" >Тестове</a></p>
 	  <p><a href="profile.php" class="btn btn-info" >Профил</a></p>
 	  <p><a href="statistics.php" class="btn btn-info" >Статистика</a></p>
-	  <p><a href="logout.php" class="btn btn-info" >Излез</a></p>
+	  <p><a href="logout" class="btn btn-info" >Излез</a></p>
 	  </div>
 </div>
 </div>
