@@ -23,14 +23,11 @@
 		$result= $user->insert();
 		if($result)
 		{
-			//header("Location: reg_success.php");
-			(new MessagePage)->show("", "Вие се регистрирахте успешно!", "success");
-			header("refresh:1;url=login");
+			(new MessagePage)->show("", "Вие се регистрирахте успешно!", "success", "login");
 			exit();
 		} 
 		else 
 		{
-			//header("Location: reg_error.php");
 			(new MessagePage)->show("Фак. Номер е зает", "Неуспешна регистрация!", "danger");
 		}
 	}
