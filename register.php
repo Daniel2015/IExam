@@ -24,13 +24,14 @@
 		if($result)
 		{
 			//header("Location: reg_success.php");
-			(new MessagePage)->show("Registration unsuccessful!", "Registration unsuccessful", "success");
+			(new MessagePage)->show("", "Вие се регистрирахте успешно!", "success");
+			header("refresh:1;url=login");
 			exit();
 		} 
 		else 
 		{
 			//header("Location: reg_error.php");
-			(new MessagePage)->show("Registration unsuccessful!", "Registration unsuccessful", "danger");
+			(new MessagePage)->show("Фак. Номер е зает", "Неуспешна регистрация!", "danger");
 		}
 	}
 ?>

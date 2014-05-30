@@ -58,7 +58,7 @@
 		{
 			if(mysql_num_rows($result) >= 1) 
 			{
-				date_default_timezone_set('UTC+2');
+				date_default_timezone_set('Europe/Sofia');
 				$member = mysql_fetch_assoc($result);
 				$_SESSION['log'] = 'in';
 				$_SESSION['SESS_ID'] = $member['ID'];
@@ -70,14 +70,13 @@
 				mysql_query("INSERT INTO logged_in_users (firstname, lastname, ID, username, loggedInTime )VALUES('".$_SESSION['SESS_FIRST_NAME']."', '".$_SESSION['SESS_LAST_NAME']."', '".$_SESSION['SESS_ID']."', '".$_SESSION['SESS_USERNAME']."', '".$_SESSION['SESS_TIME']."')" )
 				or die("Login failed: " . mysql_error());
 				
-				
-				header("location: main_login");
+				(new MessagePage)->show("", "Влязохте успешно!", "success");
+				header("refresh:2;url=main_login");
 				exit();
 			}
 			else
 			{
-				header("location: login_error.php");
-				exit();
+				(new MessagePage)->show("", "Греша Парола или Фак. Номер!", "danger");
 			}
 		}
 	}
@@ -104,47 +103,27 @@ if (b==null || b=="")
   }
 }
 </script>
-<table class="table">
+<div class="col-md-4">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+		<span><img src="images/secure.png" alt="some_text" width="21" height="21"><h4 style="display: inline;">Вход</h4></span>
+	  </div>
+	  <div class="panel-body">
 	<form name="login" onsubmit="return validateForm()" method="POST" action="" >
-		<tr><td></td></tr>
-		<tr class="top">
-			<td><b>Вход</b>
-			</td>
-		</tr>
-		<tr>
-			<td><b>Фак. Номер:</b>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<input type="text" name="username" class="textfield" id="username" />
-			</td>
-		</tr>
-			<tr>
-			<td>
-			<b>Парола:</b>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<input type="password" name="password" class="textfield" id="password" onkeydown="if (event.keyCode == 13) document.getElementById('btn').click()"/>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<input type="submit" name="submit" class="btn" value="Влез" id="btn" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<a href="index.php" class="btn" >Регистрация</a>
-			</td>
-		</tr>
-		<tr><td></td></tr>
-		<tr>
-			<td>
-			<a href="admin_login.php" class="btn" >Вход за Админи</a>
-			</td>
-		</tr>
+			 <div class="form-group">
+				<label>Фак. Номер:</label>
+				<input type="text" name="username" class="form-control" id="username" />
+			</div>
+			<div class="form-group">
+				  <label>Парола:</label>
+				  <input type="password" name="password" class="form-control" id="password" onkeydown="if (event.keyCode == 13) document.getElementById('btn').click()"/>
+			</div>
+			<input type="submit" name="submit" class="form-control btn btn-primary" value="Влез" id="btn" />
+			<a href="register" class="btn btn-info">Регистрация</a>
+			<a href="administration/admin_login.php" class="btn btn-info">Вход за Админи</a>
+
 	</form>
-</table>
+
+</div>
+</div>
+</div>

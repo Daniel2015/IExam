@@ -7,7 +7,7 @@
 		<title>Not allowed</title>
 		<script>
 			setTimeout(function () {
-				window.location.href= 'main.php';
+				window.location.href= '../login';
 				}
 				,1300);
 		</script>
