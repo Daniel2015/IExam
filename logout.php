@@ -3,7 +3,7 @@
 
 	if(isset($_SESSION['SESS_ADMIN_USERNAME'])){
 		session_destroy();
-		header('location: index.php');
+		MessagePage::show("", "Излязохте успешно!", "success", "index");
 	}
 	if(isset($_SESSION['SESS_FIRST_NAME'])){
 		mysql_query("DELETE FROM logged_in_users WHERE username='".$_SESSION['SESS_USERNAME']."'");
@@ -12,7 +12,7 @@
 		MessagePage::show("", "Излязохте успешно!", "success", "index");
 	}
 	else {
-		header('location: index.php');
+		MessagePage::show("", "Нямата достъп до тази страница!", "danger", "index");
 	}
 	mysql_close();
 ?>

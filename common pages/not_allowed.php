@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
 		<link rel="WWW Icon" href="www_icon1.ico"/>
 		<title>Not allowed</title>
 		<script>

@@ -2,11 +2,11 @@
 require_once('connection.php');
 if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in')){
 session_destroy();
-header('location:common pages/not_allowed.php');
+(new MessagePage)->show("", "Моля, влезте в системата!", "danger", "login");
    exit();
 }
 if(!isset($_SESSION['SESS_FIRST_NAME'])){
-header('location:common pages/not_allowed_admin.php');
+(new MessagePage)->show("", "Нямата достъм до тази страница!", "danger", "login");
    exit();
 }
 
