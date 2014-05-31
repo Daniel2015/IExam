@@ -23,6 +23,11 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 		<link rel="WWW Icon" href="images/www_icon1.ico"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		
+		<link rel="WWW Icon" href="../images/www_icon1.ico"/>
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
 	</head>
 	<body>
 	<header>

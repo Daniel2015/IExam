@@ -1,25 +1,21 @@
 <?php
-session_start();
-if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in')){
-session_destroy();
-header('location:not_allowed.php');
-   exit();
-}
-if(isset($_GET['log']) && ($_GET['log']=='out')){
-session_destroy();
-header('location:main.php');
-}
-if(!isset($_SESSION['SESS_ADMIN_USERNAME'])){
-header('location:not_allowed_user.php');
-   exit();
-}
-require_once('connection.php');
-mysql_query("SET NAMES 'utf8'");
-mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-$query="SELECT * FROM logged_in_users";
-$result=mysql_query($query);
-$num=mysql_numrows($result);
-mysql_close();
+	if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in'))
+	{
+		session_destroy();
+		(new MessagePage)->show("", "Моля, влезте в системата!", "danger", "../login");
+		  exit();
+	}
+
+	if(!isset($_SESSION['SESS_ADMIN_USERNAME']))
+	{
+		(new MessagePage)->show("", "Нямате достъп до тази страница!", "danger", "login");
+		exit();
+	}
+
+	$query="SELECT * FROM logged_in_users";
+	$result=mysql_query($query);
+	$num=mysql_numrows($result);
+	mysql_close();
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,87 +26,69 @@ mysql_close();
 		<link rel="WWW Icon" href="www_icon1.ico"/>
 	</head>
 	<body>
-		 <span id="navtable">
-			<table id="table_users">
-				<tr class="tr_users" style="border-bottom:3px solid #0066FF; font-weight:bold">
-					<td>
-					Име
-					</td>
-					<td>
-					Фамилия
-					</td>
-					<td>
-					ЕГН
-					</td>
-					<td>
-					Фак. Номер
-					</td>
-					<td>
-					Влязъл в
-					</td>
-				</tr>
-				<?php
-				$i=0;
-				while ($i < $num) {
-					$field1=mysql_result($result,$i,"firstname");
-					$field2=mysql_result($result,$i,"lastname");
-					$field3=mysql_result($result,$i,"ID");
-					$field4=mysql_result($result,$i,"username");
-					$field5=mysql_result($result,$i,"loggedInTime");
-				?>
-				<tr class="tr_users">
-					<td>
-					<?php echo $field1; ?>
-					</td>
-					<td>
-					<?php echo $field2; ?>
-					</td>
-					<td>
-					<?php echo $field3; ?>
-					</td>
-					<td>
-					<?php echo $field4; ?>
-					</td>
-					<td>
-					<?php echo $field5; ?>
-					</td>
-				</tr>
-				<?php
-					$i++;}
-				?>
-				</table>
-			<table class="table">
-				<tr><td></td></tr>
-				<tr class="top">
-					<td><b>Логнати</b></td>
-				</tr>
-				<tr><td></td></tr>
-				<tr>
-					<td><a href="create_test.php" class="btn" >Създай тест</a>
-					</td>
-				</tr>
-				<tr><td></td></tr>
-				<tr>
-					<td><a href="admin_users.php" class="btn" >Потребители</a>
-					</td>
-				</tr>
-				<tr><td></td></tr>
-				<tr>
-					<td><a href="admin_statistics.php" class="btn" >Обща статистика</a>
-					</td>
-				</tr>
-				<tr><td></td></tr>
-					<tr>
-						<td><a href="admin.php" class="btn" >Назад</a>
+		 <span>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span><h4 style="display: inline;">Логната</h4></span>
+					</div>
+					<div class="panel-body">
+						<p><a href="create_test" class="btn btn-info" >Създай тест</a></p>
+						<p><a href="admin_users" class="btn btn-info" >Потребители</a></p>
+						<p><a href="admin" class="btn btn-info" >Назад</a></p>
+						<p><a href="../logout" class="btn btn-info" >Излез</a></p>
+					</div>
+				</div>
+			</div>
+			<table class="table table-bordered table-hover table-condensed">
+				<tbody>
+					<tr class="active table-hover">
+						<td>
+						Име
+						</td>
+						<td>
+						Фамилия
+						</td>
+						<td>
+						ЕГН
+						</td>
+						<td>
+						Фак. Номер
+						</td>
+						<td>
+						Влязъл в
 						</td>
 					</tr>
-				<tr><td></td></tr>
-				<tr>
-					<td>
-					<a href="?log=out" class="btn" >Излез</a>
-					</td>
-				</tr>
-				<tr><td></td></tr>
+					<?php
+					$i=0;
+					while ($i < $num) {
+						$field1=mysql_result($result,$i,"firstname");
+						$field2=mysql_result($result,$i,"lastname");
+						$field3=mysql_result($result,$i,"ID");
+						$field4=mysql_result($result,$i,"username");
+						$field5=mysql_result($result,$i,"loggedInTime");
+					?>
+					<tr class="success table-hover ">
+						<td>
+						<?php echo $field1; ?>
+						</td>
+						<td>
+						<?php echo $field2; ?>
+						</td>
+						<td>
+						<?php echo $field3; ?>
+						</td>
+						<td>
+						<?php echo $field4; ?>
+						</td>
+						<td>
+						<?php echo $field5; ?>
+						</td>
+					</tr>
+					<?php
+						$i++;}
+					?>
+				</tbody>
 			</table>
 		</span>
 	</body>

@@ -6,16 +6,7 @@ body {
 	background-repeat:repeat;
 	background-position:center top;
 	}
-.table{
-	float:left;
-	text-align:center;
-	margin-top:82px;
-	margin-left:10px;
-	width:178px;
-	border-style:double;
-	border-color:#80b5ea;
-	border-spacing:5px;	
-	}
+
 tr.top td{
 	border-style:double;
 	border-color:#0066FF;

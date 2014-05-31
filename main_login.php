@@ -1,5 +1,4 @@
 <?php
-require_once('connection.php');
 if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in')){
 session_destroy();
 (new MessagePage)->show("", "Моля, влезте в системата!", "danger", "login");

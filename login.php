@@ -1,12 +1,12 @@
 <?php
 	if(isset($_SESSION['SESS_FIRST_NAME']))
 	{
-		header('location: main_login');
+		(new MessagePage)->show("", "Вече сте се логнали!", "info", "main_login");
 		exit();
 	}
 	if(isset($_SESSION['SESS_ADMIN_USERNAME']))
 	{
-		header('location:admin.php');
+		(new MessagePage)->show("", "Вече сте се логнали!", "info", "administration/admin");
 		exit();
 	}
 	if(isset($_POST['submit']))
