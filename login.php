@@ -119,7 +119,7 @@ if (b==null || b=="")
 			</div>
 			<input type="submit" name="submit" class="form-control btn btn-primary" value="Влез" id="btn" />
 			<a href="register" class="btn btn-info">Регистрация</a>
-			<a href="administration/admin_login.php" class="btn btn-info">Вход за Админи</a>
+			<a href="administration/admin_login" class="btn btn-info">Вход за Админи</a>
 
 	</form>
 
