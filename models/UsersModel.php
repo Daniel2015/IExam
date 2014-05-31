@@ -15,8 +15,6 @@
 		
 		public $egn;
 		
-		public $password_NEW;
-		
 		public function __construct()
 		{
 			$this->set_tableName("simple_login");
@@ -43,18 +41,13 @@
 			VALUES
 			('$this->firstName', '$this->lastName', '$this->egn', '$this->username', '".md5($this->password)."')");
 			//or die('Registration faild: ' . mysql_error());
-		}		
-		
-		
-		public function select()
-		{
-		return mysql_query("SELECT * FROM simple_login WHERE username='$this->username' AND password='".md5($this->password)."'");
 		}
 		
 		public function update()
 		{
-			return mysql_query("UPDATE simple_login (firstname, lastname, ID, password) SET (firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='$this->password_NEW', '".md5($this->password_NEW)."') WHERE username='$this->username'");
-
+			return mysql_query("UPDATE simple_login (firstname, lastname, ID, password) 
+				SET (firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='$this->password_NEW', '".md5($this->password_NEW)."')
+				WHERE username='$this->username'") or die(mysql_error());
 			
 			// TODO
 		}	

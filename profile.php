@@ -76,25 +76,13 @@ require_once("models/UsersModel.php");
 		$user->firstName = $fname;
 		$user->lastName = $lname;
 		$user->egn = $ID;
-		$user->password = $password;
-		$user->password_NEW = $password_NEW;
+		$user->password = $password_NEW;		
 		
-		
-		$result= $user->select();
-		$result2= $user->update();
-		if($result)
-		{
-			$result2= $user->update();
-				if($result2){
-					(new MessagePage)->show("", "Редактирането е успешно!", "success", "main_login");
-					exit();
-				}
-		} 
-		else 
-		{
-			(new MessagePage)->show("Грешна парола.", "Неуспешно редактиране!", "danger");
-		}
-		
+		$result= $user->update();
+		if($result){
+			(new MessagePage)->show("", "Редактирането е успешно!", "success", "main_login");
+			exit();
+		}		
 	}
 ?>
 <div class="col-md-4">
