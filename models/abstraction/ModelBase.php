@@ -5,6 +5,8 @@
 	{
 		private $tableName = "";
 		
+		public $fieldsMapping;
+		
 		public function get_tableName()
 		{
 			if(isset($tableName))

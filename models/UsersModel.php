@@ -15,21 +15,29 @@
 		
 		public $egn;
 		
+		public $fieldsMapping;
+		
 		public function __construct()
 		{
 			$this->set_tableName("simple_login");
+			
+			$this->fieldsMapping = array(
+				'id' => 'member_id',
+				'username' => 'username',
+				'password' => 'password',
+				'firstName' => 'firstname',
+				'lastName' => 'lastname',
+				'egn' => 'ID',
+				);
 		}
 		
 		protected function bindData($row)
 		{
 			$model = new UsersModel;
-				
-			$model->id = $row['member_id'];
-			$model->username = $row['username'];
-			$model->password = $row['password'];
-			$model->firstName = $row['firstname'];
-			$model->lastName = $row['lastname'];
-			$model->egn = $row['ID'];
+			
+			foreach ($this->fieldsMapping as $fieldName => $dbFiledName) {
+				$model->$fieldName = $row[$dbFiledName];
+			}
 			
 			return $model;
 		}

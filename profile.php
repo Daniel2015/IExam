@@ -72,7 +72,7 @@ require_once("models/UsersModel.php");
 		$password_NEW=$_POST['password_NEW'];
 		
 		$user = new UsersModel;
-		
+				
 		$user->firstName = $fname;
 		$user->lastName = $lname;
 		$user->egn = $ID;
