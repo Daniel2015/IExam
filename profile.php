@@ -1,5 +1,5 @@
 <?php
-
+require_once("models/UsersModel.php");
 	if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in'))
 	{
 		session_destroy();
@@ -13,55 +13,88 @@
 	}
 	if(isset($_POST['submit']))
 	{
-		$first_name_NEW = $_POST['first_name_NEW'];
-		$last_name_NEW = $_POST['last_name_NEW'];
-		$ID_NEW = $_POST['ID_NEW'];
-		$password_NEW = $_POST['password_NEW'];
-		$password = $_POST['password'];
+		// $first_name_NEW = $_POST['first_name_NEW'];
+		// $last_name_NEW = $_POST['last_name_NEW'];
+		// $ID_NEW = $_POST['ID_NEW'];
+		// $password_NEW = $_POST['password_NEW'];
+		// $password = $_POST['password'];
 		
-		if (trim($password_NEW) == '' || trim($ID_NEW) =='' || trim($last_name_NEW)=='' || trim($first_name_NEW)=='' || trim($password) =='')
-		{
-			(new MessagePage)->show("Моля, попълнете всички полета.", "Неуспешно редактиране!", "danger", "profile");
-			mysql_error();
-			exit();
-		}
+		// if (trim($password_NEW) == '' || trim($ID_NEW) =='' || trim($last_name_NEW)=='' || trim($first_name_NEW)=='' || trim($password) =='')
+		// {
+			// (new MessagePage)->show("Моля, попълнете всички полета.", "Неуспешно редактиране!", "danger", "profile");
+			// mysql_error();
+			// exit();
+		// }
+		// // public function update($this->firstName, $this->lastName, $this->egn, $this->username, $this->password);
 		
-		$check = mysql_query("SELECT * FROM simple_login WHERE username='".$_SESSION['SESS_USERNAME']."' AND password='".md5($password)."'");
 		
-		if ($check)
-		{
-			if(mysql_num_rows($check) >= 1)
-			{
-				mysql_query("DELETE FROM simple_login WHERE username='".$_SESSION['SESS_USERNAME']."'");
-				$result=mysql_query("INSERT INTO simple_login (username, firstname, lastname, ID, password) VALUES ('".$_SESSION['SESS_USERNAME']."','$first_name_NEW', '$last_name_NEW', '$ID_NEW', '".md5($password_NEW)."')");
+		// $check = mysql_query("SELECT * FROM simple_login WHERE username='".$_SESSION['SESS_USERNAME']."' AND password='".md5($password)."'");
+		
+		// if ($check)
+		// {
+			// if(mysql_num_rows($check) >= 1)
+			// {
+				// mysql_query("DELETE FROM simple_login WHERE username='".$_SESSION['SESS_USERNAME']."'");
+				// $result=mysql_query("INSERT INTO simple_login (username, firstname, lastname, ID, password) VALUES ('".$_SESSION['SESS_USERNAME']."','$first_name_NEW', '$last_name_NEW', '$ID_NEW', '".md5($password_NEW)."')");
 				
-				if($result)
-				{
-						$_SESSION['SESS_FIRST_NAME']= $_POST['first_name_NEW'];
-						$_SESSION['SESS_LAST_NAME']= $_POST['last_name_NEW'];
-						$_SESSION['SESS_ID']= $_POST['ID_NEW'];
+				// if($result)
+				// {
+						// $_SESSION['SESS_FIRST_NAME']= $_POST['first_name_NEW'];
+						// $_SESSION['SESS_LAST_NAME']= $_POST['last_name_NEW'];
+						// $_SESSION['SESS_ID']= $_POST['ID_NEW'];
 						
-						mysql_query("DELETE FROM logged_in_users WHERE username='".$_SESSION['SESS_USERNAME']."'");
-						mysql_query("INSERT INTO logged_in_users (firstname, lastname, ID, username, loggedInTime )VALUES('".$_SESSION['SESS_FIRST_NAME']."', '".$_SESSION['SESS_LAST_NAME']."', '".$_SESSION['SESS_ID']."', '".$_SESSION['SESS_USERNAME']."', '".$_SESSION['SESS_TIME']."')" );
+						// mysql_query("DELETE FROM logged_in_users WHERE username='".$_SESSION['SESS_USERNAME']."'");
+						// mysql_query("INSERT INTO logged_in_users (firstname, lastname, ID, username, loggedInTime )VALUES('".$_SESSION['SESS_FIRST_NAME']."', '".$_SESSION['SESS_LAST_NAME']."', '".$_SESSION['SESS_ID']."', '".$_SESSION['SESS_USERNAME']."', '".$_SESSION['SESS_TIME']."')" );
 						
-						mysql_close(); 
+						// mysql_close(); 
 						
-						(new MessagePage)->show("", "Редактирането е успешно!", "success", "main_login");
-				}
-				else
-				{
-					mysql_error();
-				}
-			}
-			else
-			{
-				(new MessagePage)->show("Грешна парола.", "Неуспешно редактиране!", "danger");
-			}
-		}
-		else
+						// (new MessagePage)->show("", "Редактирането е успешно!", "success", "main_login");
+				// }
+				// else
+				// {
+					// mysql_error();
+				// }
+			// }
+			// else
+			// {
+				// (new MessagePage)->show("Грешна парола.", "Неуспешно редактиране!", "danger");
+			// }
+		// }
+		// else
+		// {
+			// mysql_error();
+		// }
+		
+		$fname=$_POST['first_name_NEW'];
+		$lname=$_POST['last_name_NEW'];
+		$ID=$_POST['ID_NEW'];
+		$password=$_POST['password'];
+		$password_NEW=$_POST['password_NEW'];
+		
+		$user = new UsersModel;
+		
+		$user->firstName = $fname;
+		$user->lastName = $lname;
+		$user->egn = $ID;
+		$user->password = $password;
+		$user->password_NEW = $password_NEW;
+		
+		
+		$result= $user->select();
+		$result2= $user->update();
+		if($result)
 		{
-			mysql_error();
+			$result2= $user->update();
+				if($result2){
+					(new MessagePage)->show("", "Редактирането е успешно!", "success", "main_login");
+					exit();
+				}
+		} 
+		else 
+		{
+			(new MessagePage)->show("Грешна парола.", "Неуспешно редактиране!", "danger");
 		}
+		
 	}
 ?>
 <div class="col-md-4">

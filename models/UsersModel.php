@@ -5,7 +5,7 @@
 	{	
 		public $id;
 		
-		public $username;
+		public $username; // Fakulteten Nomer
 		
 		public $password;
 		
@@ -13,7 +13,9 @@
 		
 		public $lastName;
 		
-		public $fn; // Fakulteten nomer
+		public $egn;
+		
+		public $password_NEW;
 		
 		public function __construct()
 		{
@@ -23,13 +25,13 @@
 		protected function bindData($row)
 		{
 			$model = new UsersModel;
-			
+				
 			$model->id = $row['member_id'];
 			$model->username = $row['username'];
 			$model->password = $row['password'];
 			$model->firstName = $row['firstname'];
 			$model->lastName = $row['lastname'];
-			$model->fn = $row['ID'];
+			$model->egn = $row['ID'];
 			
 			return $model;
 		}
@@ -39,12 +41,21 @@
 			return mysql_query("INSERT INTO simple_login
 			(firstname, lastname, ID, username, password)
 			VALUES
-			('$this->firstName', '$this->lastName', '$this->fn', '$this->username', '".md5($this->password)."')");
+			('$this->firstName', '$this->lastName', '$this->egn', '$this->username', '".md5($this->password)."')");
 			//or die('Registration faild: ' . mysql_error());
 		}		
 		
+		
+		public function select()
+		{
+		return mysql_query("SELECT * FROM simple_login WHERE username='$this->username' AND password='".md5($this->password)."'");
+		}
+		
 		public function update()
 		{
+			return mysql_query("UPDATE simple_login (firstname, lastname, ID, password) SET (firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='$this->password_NEW', '".md5($this->password_NEW)."') WHERE username='$this->username'");
+
+			
 			// TODO
 		}	
 	}

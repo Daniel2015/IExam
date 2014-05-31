@@ -13,8 +13,8 @@
 		
 		$user->firstName = $fname;
 		$user->lastName = $lname;
-		$user->fn = $ID;
-		$user->username = $username;
+		$user->egn = $ID;
+		$user->username = $username; // Fakulteten Nomer !!
 		$user->password = $password;
 		
 		$result= $user->insert();

@@ -55,7 +55,7 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 				}
 			}
 			else
-			{			
+			{
 			//(new MessagePage)->show("Login success", "Login success", "profile");
 		?>
 			<h2>Index</h2>
