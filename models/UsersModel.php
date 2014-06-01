@@ -18,20 +18,15 @@
 		public function __construct()
 		{
 			$this->set_tableName("simple_login");
-		}
-		
-		protected function bindData($row)
-		{
-			$model = new UsersModel;
-				
-			$model->id = $row['member_id'];
-			$model->username = $row['username'];
-			$model->password = $row['password'];
-			$model->firstName = $row['firstname'];
-			$model->lastName = $row['lastname'];
-			$model->egn = $row['ID'];
 			
-			return $model;
+			$this->fieldsMapping = array(
+				'id' => 'member_id',
+				'username' => 'username',
+				'password' => 'password',
+				'firstName' => 'firstname',
+				'lastName' => 'lastname',
+				'egn' => 'ID',
+				);
 		}
 		
 		public function insert()
@@ -45,9 +40,10 @@
 		
 		public function update()
 		{
-			return mysql_query("UPDATE simple_login (firstname, lastname, ID, password) 
-				SET 'firstname'='$this->firstName', 'lastname'='$this->lastName', 'ID'='$this->egn', 'password'='$this->password' 
-				WHERE 'username'='$this->username'") or die(mysql_error());
+
+			return mysql_query("UPDATE simple_login
+				SET firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='" . $this->password . "'
+				WHERE username='$this->username'") or die(mysql_error());
 			
 			// TODO
 		}	
