@@ -46,8 +46,8 @@
 		public function update()
 		{
 			return mysql_query("UPDATE simple_login (firstname, lastname, ID, password) 
-				SET (firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='$this->password_NEW', '".md5($this->password_NEW)."')
-				WHERE username='$this->username'") or die(mysql_error());
+				SET 'firstname'='$this->firstName', 'lastname'='$this->lastName', 'ID'='$this->egn', 'password'='$this->password' 
+				WHERE 'username'='$this->username'") or die(mysql_error());
 			
 			// TODO
 		}	
