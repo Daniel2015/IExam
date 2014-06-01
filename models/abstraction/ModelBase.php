@@ -31,7 +31,7 @@
 		{
 			$queryResult;
 			
-			$queryResult = mysql_query("Select * from " . $this->get_tableName() . $query);
+			$queryResult = mysql_query("Select * from " . $this->get_tableName() . " " . $query);
 			
 			if(!$queryResult)
 			{

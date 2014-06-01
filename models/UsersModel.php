@@ -15,8 +15,6 @@
 		
 		public $egn;
 		
-		public $fieldsMapping;
-		
 		public function __construct()
 		{
 			$this->set_tableName("simple_login");
@@ -42,8 +40,8 @@
 		
 		public function update()
 		{
-			return mysql_query("UPDATE simple_login (firstname, lastname, ID, password) 
-				SET (firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='" . md5($this->password_NEW) . "'
+			return mysql_query("UPDATE simple_login
+				SET firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='" . $this->password . "'
 				WHERE username='$this->username'") or die(mysql_error());
 			
 			// TODO

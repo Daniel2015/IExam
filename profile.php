@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once("models/UsersModel.php");
 	if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in'))
 	{
@@ -72,11 +72,15 @@ require_once("models/UsersModel.php");
 		$password_NEW=$_POST['password_NEW'];
 		
 		$user = new UsersModel;
-				
+		$user = $user->getItems("WHERE username='" . $_SESSION['SESS_USERNAME'] . "'")[0];
+		
 		$user->firstName = $fname;
 		$user->lastName = $lname;
 		$user->egn = $ID;
-		$user->password = $password_NEW;		
+		if($password_NEW !== null && !empty($password_NEW))
+		{
+			$user->password = md5($password_NEW);   
+		}
 		
 		$result= $user->update();
 		if($result){
