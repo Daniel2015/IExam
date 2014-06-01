@@ -47,7 +47,16 @@
 			return $result;
 		}
 		
-		abstract protected function bindData($row);
+                private function bindData($row)
+		{
+			$model = new UsersModel;
+			
+			foreach ($this->fieldsMapping as $fieldName => $dbFiledName) {
+				$model->$fieldName = $row[$dbFiledName];
+			}
+			
+			return $model;
+		}
 		
 		abstract public function insert();
 		

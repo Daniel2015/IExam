@@ -31,17 +31,6 @@
 				);
 		}
 		
-		protected function bindData($row)
-		{
-			$model = new UsersModel;
-			
-			foreach ($this->fieldsMapping as $fieldName => $dbFiledName) {
-				$model->$fieldName = $row[$dbFiledName];
-			}
-			
-			return $model;
-		}
-		
 		public function insert()
 		{
 			return mysql_query("INSERT INTO simple_login
@@ -54,7 +43,7 @@
 		public function update()
 		{
 			return mysql_query("UPDATE simple_login (firstname, lastname, ID, password) 
-				SET (firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='$this->password_NEW', '".md5($this->password_NEW)."')
+				SET (firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='" . md5($this->password_NEW) . "'
 				WHERE username='$this->username'") or die(mysql_error());
 			
 			// TODO
