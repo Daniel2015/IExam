@@ -51,32 +51,15 @@
 		mysql_query("SET NAMES 'utf8'");
 		mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 		
-		$qry="SELECT * FROM simple_login WHERE username='$login' AND password='".md5($_POST['password'])."'";
-		$result=mysql_query($qry);
-		
-		if($result) 
+		$logged = Authentication::Login($login, $password);
+		if($logged)
 		{
-			if(mysql_num_rows($result) >= 1) 
-			{
-				date_default_timezone_set('Europe/Sofia');
-				$member = mysql_fetch_assoc($result);
-				$_SESSION['log'] = 'in';
-				$_SESSION['SESS_ID'] = $member['ID'];
-				$_SESSION['SESS_FIRST_NAME'] = $member['firstname'];
-				$_SESSION['SESS_LAST_NAME'] = $member['lastname'];
-				$_SESSION['SESS_USERNAME'] = $member['username'];
-				$_SESSION['SESS_TIME'] = date("Y-m-d H:i:s");
-				
-				mysql_query("INSERT INTO logged_in_users (firstname, lastname, ID, username, loggedInTime )VALUES('".$_SESSION['SESS_FIRST_NAME']."', '".$_SESSION['SESS_LAST_NAME']."', '".$_SESSION['SESS_ID']."', '".$_SESSION['SESS_USERNAME']."', '".$_SESSION['SESS_TIME']."')" )
-				or die("Login failed: " . mysql_error());
-				
-				(new MessagePage)->show("", "Влязохте успешно!", "success", "main_login");
-				exit();
-			}
-			else
-			{
-				(new MessagePage)->show("", "Греша Парола или Фак. Номер!", "danger");
-			}
+			MessagePage::show("", "Влязохте успешно!", "success", "main_login");
+			exit();
+		}
+		else
+		{
+			MessagePage::show("", "Греша Парола или Фак. Номер!", "danger");
 		}
 	}
 ?>
