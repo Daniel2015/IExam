@@ -35,17 +35,13 @@
 			(firstname, lastname, ID, username, password)
 			VALUES
 			('$this->firstName', '$this->lastName', '$this->egn', '$this->username', '".md5($this->password)."')");
-			//or die('Registration faild: ' . mysql_error());
 		}
 		
 		public function update()
 		{
-
 			return mysql_query("UPDATE simple_login
 				SET firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='" . $this->password . "'
 				WHERE username='$this->username'") or die(mysql_error());
-			
-			// TODO
 		}	
 	}
 ?>

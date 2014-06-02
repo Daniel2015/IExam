@@ -35,8 +35,13 @@ class Authentication {
         return true;
     }
 
-    public static function Logout() {
+    public static function Logout() {        
+        if(Authentication::IsAuthenticated())
+        {
+            mysql_query("DELETE FROM logged_in_users WHERE username='".$_SESSION['SESS_USERNAME']."'");
+        }
         
+        session_destroy();
     }
 
     public static function IsAuthenticated() {
@@ -46,14 +51,6 @@ class Authentication {
     public static function IsAdmin() {
         return isset($_SESSION['SESS_ADMIN_USERNAME']);
     }
-
-    public static function AllowOnlyAdmins() {
-        if (!$this->IsAdmin()) {
-            new MessagePage("You aren't admin");
-            exit();
-        }
-    }
-
 }
 
 ?>

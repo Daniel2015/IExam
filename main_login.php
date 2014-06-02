@@ -1,14 +1,5 @@
 <?php
-if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in')){
-session_destroy();
-(new MessagePage)->show("", "Моля, влезте в системата!", "danger", "login");
-   exit();
-}
-if(!isset($_SESSION['SESS_FIRST_NAME'])){
-(new MessagePage)->show("", "Нямата достъм до тази страница!", "danger", "login");
-   exit();
-}
-
+Permissions::OnlyAuthenticated();
 ?>
 <!DOCTYPE html>
 <html>
