@@ -21,7 +21,7 @@ if(isset($_POST['submit']))
 	$message = $_POST['message'];
 	$time = date("Y-m-d H:i:s");
 	mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('".$_SESSION['SESS_USERNAME']."', '$user', '$message', '$time')");
-	MessagePage::show("", "Съобщението е изпратено!", "success");
+	MessagePage::show("", "Съобщението е изпратено!", "success","../mailUser");
 	mysql_close();
 	
 }
@@ -35,7 +35,10 @@ echo mysql_error();
 <head>
 </head>
 <body>	
-
+<div class="panel panel-success">
+<div class="panel-heading">
+<span><h4 style="display: inline;">Напиши съобщение</h4></span>
+</div>
 <div class="col-md-13">
 	<div class="panel panel-default">
 <div class="panel-body">
@@ -70,6 +73,7 @@ echo mysql_error();
   <p><a href="../mailUser" class="btn btn-info" >Назад</a></p>
   <p><a href="../logout" class="btn btn-info" >Излез</a></p>
 </form>
+</div>
 </div>
 </div>
 </div>
