@@ -114,6 +114,17 @@ INSERT INTO `test` (`test_id`, `question`, `answer1`, `answer2`, `answer3`, `ans
 (96, 'd', 'd', 'd', 'd', 'd', 'A'),
 (97, 'gsg', 'gs', 'gs', 'gs', 'gs', 'D');
 
+CREATE TABLE IF NOT EXISTS `messages` (
+	`ID` int(11) NOT NULL AUTO_INCREMENT,
+	`fromUser` varchar(150) NOT NULL,
+	`toUser` varchar(150) NOT NULL,
+	`message` varchar(1000) NOT NULL,
+	`dateCreated` varchar(150) NOT NULL,
+	`readed` int(1) NOT NULL,
+	`deleted` int(1) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
