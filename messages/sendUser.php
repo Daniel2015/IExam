@@ -17,13 +17,19 @@
 	
 if(isset($_POST['submit']))
 {
+	if(!empty($_POST['message'])){
+	
 	$user = $_POST['user'];
 	$message = $_POST['message'];
-	mysql_query("INSERT INTO $user (fromUser, messages)VALUES('".$_SESSION['SESS_USERNAME']."', '$message')");
-	mysql_query("INSERT INTO ".$_SESSION['SESS_USERNAME']." (toUser, messagesUser)VALUES('$user', '$message')");
-	MessagePage::show("", "Съобщението е изпратено!", "success");
+	$time = date("Y-m-d H:i:s");
+	mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('".$_SESSION['SESS_USERNAME']."', '$user', '$message', '$time')");
+	MessagePage::show("", "Съобщението е изпратено!", "success","../mailUser");
+	exit();
 	mysql_close();
-	
+	}
+	else{
+	MessagePage::show("Моля, попълнете полето.", "Съобщението е празно!", "danger");
+	}
 }
 else
 {
@@ -35,9 +41,12 @@ echo mysql_error();
 <head>
 </head>
 <body>	
+<div class="panel panel-success">
+<div class="panel-heading">
+<span><h4 style="display: inline;">Напиши съобщение</h4></span>
+</div>
 
-<div class="col-md-13">
-	<div class="panel panel-default">
+
 <div class="panel-body">
 <form class="form-horizontal" role="form" method="POST" action="">
   <div class="form-group">
@@ -59,18 +68,17 @@ echo mysql_error();
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Съобщение</label>
     <div class="col-sm-10">
-      <input name="message" type="text" class="form-control input-lg" id="inputPassword3" placeholder="Съобщение">
+      <textarea style="resize: none;" rows="10" name="message" type="text" class="form-control input-lg" maxlength="1000" id="inputPassword3" placeholder="Съобщение"></textarea>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
 		<input type="submit" name="submit" class="btn btn-success btn-lg" value="Изпрати" />
+		<a href="../mailUser" class="btn btn-info btn-lg" >Назад</a>
+		<a href="../logout" class="btn btn-info btn-lg" >Излез</a>
     </div>
   </div>
-  <p><a href="mailUser" class="btn btn-info" >Назад</a></p>
-  <p><a href="logout" class="btn btn-info" >Излез</a></p>
 </form>
-</div>
 </div>
 </div>
 </body>
