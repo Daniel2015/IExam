@@ -29,6 +29,7 @@ if(!isset($_SESSION['SESS_FIRST_NAME'])){
 	  <p><a href="test" class="btn btn-info" >Тестове</a></p>
 	  <p><a href="profile" class="btn btn-info" >Профил</a></p>
 	  <p><a href="statistics" class="btn btn-info" >Статистика</a></p>
+	   <p><a href="mailUser" class="btn btn-info" >Поща</a></p>
 	  <p><a href="logout" class="btn btn-info" >Излез</a></p>
 	  </div>
 </div>

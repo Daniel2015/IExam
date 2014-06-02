@@ -29,6 +29,7 @@
 	  <p><a href="create_test" class="btn btn-info" >Създай тест</a></p>
 	  <p><a href="logged_in" class="btn btn-info" >Логнати</a></p>
 	  <p><a href="admin_users" class="btn btn-info" >Потребители</a></p>
+	  <p><a href="mailAdmin" class="btn btn-info" >Поща</a></p>
 	  <p><a href="../logout" class="btn btn-info" >Излез</a></p>
 	  </div>
 </div>
