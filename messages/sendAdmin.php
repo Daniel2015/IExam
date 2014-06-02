@@ -22,8 +22,8 @@ if(isset($_POST['submit']))
 	{
 	$user = $_POST['user'];
 	$message = $_POST['message'];
-	mysql_query("INSERT INTO $user (fromUser, messages)VALUES('".$_SESSION['SESS_ADMIN_USERNAME']."', '$message')");
-	mysql_query("INSERT INTO ".$_SESSION['SESS_ADMIN_USERNAME']." (toUser, messagesUser)VALUES('$user', '$message')");
+	$time = date("Y-m-d H:i:s");
+	mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('".$_SESSION['SESS_ADMIN_USERNAME']."', '$user', '$message', '$time')");
 	MessagePage::show("", "Съобщението е изпратено!", "success");
 	mysql_close();
 	}
@@ -31,7 +31,8 @@ if(isset($_POST['submit']))
 	{
 	$user = $_POST['user'];
 	$message = $_POST['message'];
-	mysql_query("INSERT INTO $user (fromUser, messages)VALUES('Админ', '$message')");
+	$time = date("Y-m-d H:i:s");
+	mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('Админ', '$user', '$message', '$time')");
 	MessagePage::show("", "Съобщението е изпратено!", "success");
 	mysql_close();
 	}
@@ -88,7 +89,7 @@ echo mysql_error();
 		<input type="submit" name="submit" class="btn btn-success btn-lg" value="Изпрати" />
     </div>
   </div>
-  <p><a href="admin" class="btn btn-info" >Назад</a></p>
+  <p><a href="../administration/mailAdmin" class="btn btn-info" >Назад</a></p>
   <p><a href="../logout" class="btn btn-info" >Излез</a></p>
 </form>
 </div>

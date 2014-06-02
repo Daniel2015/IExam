@@ -20,7 +20,6 @@
 		$result= $user->insert();
 		if($result)
 		{
-			mysql_query("CREATE TABLE $username(fromUser VARCHAR(150),messages VARCHAR(1000),toUser VARCHAR(150), messagesUser VARCHAR(1000))");
 			(new MessagePage)->show("", "Вие се регистрирахте успешно!", "success", "login");
 			exit();
 		} 

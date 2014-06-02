@@ -9,7 +9,7 @@ if(!isset($_SESSION['SESS_FIRST_NAME'])){
    exit();
 }
 
-$query="SELECT * FROM ".$_SESSION['SESS_USERNAME']."";
+$query="SELECT * FROM messages WHERE toUser='".$_SESSION['SESS_USERNAME']."'";
 $result=mysql_query($query);
 $num=mysql_numrows($result);
 
@@ -23,12 +23,16 @@ $num=mysql_numrows($result);
 <td>
 Съобщениe
 </td>
+<td>
+Дата
+</td>
 </tr>
 <?php
 					$i=0;
 					while ($i < $num) {
-						$field1=mysql_result($result,$i,"toUser");
-						$field2=mysql_result($result,$i,"messagesUser");
+						$field1=mysql_result($result,$i,"fromUser");
+						$field2=mysql_result($result,$i,"message");
+						$field3=mysql_result($result,$i,"dateCreated");
 					?>
 <tr class="success table-hover ">
 <td>
@@ -37,10 +41,13 @@ $num=mysql_numrows($result);
 <td>
 <?php echo $field2; ?>
 </td>
+<td>
+<?php echo $field3; ?>
+</td>
 </tr>
 <?php
 						$i++;}
 					?>
 </table>
-<p><a href="mailUser" class="btn btn-info" >Назад</a></p>
-<p><a href="logout" class="btn btn-info" >Излез</a></p>
+<p><a href="../mailUser" class="btn btn-info" >Назад</a></p>
+<p><a href="../logout" class="btn btn-info" >Излез</a></p>
