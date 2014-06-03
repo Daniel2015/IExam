@@ -12,14 +12,15 @@
 		exit();
 	}
 
-$query="SELECT * FROM messages WHERE toUser='".$_SESSION['SESS_ADMIN_USERNAME']."' AND readed='1' AND deleted='0'";
+$query="SELECT * FROM messages WHERE toUser='".$_SESSION['SESS_ADMIN_USERNAME']."' AND readedAdmin='1' AND deletedAdmin='0'";
 $result=mysql_query($query);
 $num=mysql_numrows($result);
 
 
 if(isset($_POST['delete'])){
 $ID= $_POST['delete'];
-mysql_query("Update messages SET deleted='1' WHERE ID='$ID'");
+mysql_query("Update messages SET deletedAdmin='1' WHERE ID='$ID'");
+mysql_query("DELETE FROM messages WHERE deleted='1' AND deletedAdmin='1' ");
 (new MessagePage)->show("", "Съобщението e изтрито!", "danger","readedAdmin","800");
 mysql_close();
 }

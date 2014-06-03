@@ -12,10 +12,36 @@
 		exit();
 	}
 
+	
 	$query="SELECT * FROM simple_login";
 	$result=mysql_query($query);
 	$num=mysql_numrows($result);
-	mysql_close();
+	
+	if(isset($_POST['submit']))
+	{
+		$username= $_POST['submit'];
+		$querys="SELECT * FROM simple_login WHERE username='$username'";
+		$results=mysql_query($querys);
+		$password=mysql_result($results,0,"password");
+		mysql_query("DELETE FROM simple_login WHERE username='$username'");
+		// mysql_query("DELETE FROM logged_in_users WHERE username='$username'");
+		mysql_query("INSERT INTO admin (username, password) VALUES ('$username', '$password') ");
+		mysql_close();
+		MessagePage::show("", "Потребителят е направен Админ!", "success", "admin_users");
+		exit();
+		mysql_close();
+	}
+
+	if(isset($_POST['delete']))
+	{
+		$username= $_POST['delete'];
+		mysql_query("DELETE FROM simple_login WHERE username='$username'");
+		// mysql_query("DELETE FROM logged_in_users WHERE username='$username'");
+		mysql_query("DELETE FROM messages WHERE fromUser='$username' OR toUser='$username'");
+		MessagePage::show("", "Потребителят е Изтрит!", "success", "admin_users");
+		exit();
+		mysql_close();
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,20 +50,17 @@
 		<title>Вход</title>
 	</head>
 	<body>
-		<span>
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
+	<div class="panel panel-success">
+	<div class="panel-heading">
+		
 						<span><h4 style="display: inline;">Потребители</h4></span>
 					</div>
 					<div class="panel-body">
-						<p><a href="create_test" class="btn btn-info" >Създай тест</a></p>
-						<p><a href="logged_in" class="btn btn-info" >Логнати</a></p>
-						<p><a href="admin" class="btn btn-info" >Назад</a></p>
-						<p><a href="../logout" class="btn btn-info" >Излез</a></p>
+						<div class="btn-group">
+						<a href="admin" class="btn btn-info" >Назад</a>
+						</div>
 					</div>
-				</div>
-			</div>
+			
 				<table class="table table-bordered table-hover table-condensed">
 				<tbody>
 					<tr class="active table-hover">
@@ -55,6 +78,9 @@
 						</td>
 						<td>
 						Направи Админ
+						</td>
+						<td>
+						Изтрий Потребител
 						</td>
 					</tr>
 					<?php
@@ -79,14 +105,21 @@
 						<?php echo $field4; ?>
 						</td>
 						<td>
-						TO DO
+						<form name="login" onsubmit="" method="POST" action="" >
+						<button type="submit" name="submit" class="form-control btn btn-success" onclick="" value="<?php echo $field4; ?>"/>Админ</button>
+						</form>
+						</td>
+						<td>
+						<form name="login" onsubmit="" method="POST" action="" >
+						<button type="submit" name="delete" class="form-control btn btn-danger" onclick="" value="<?php echo $field4; ?>"/>Изтрий</button>
+						</form>
 						</td>
 					</tr>
 					<?php
 						$i++;}
 					?>
 					</tbody>
-				</table>
-		</span>
+				</table>				
+		</div>
 	</body>
 </html>

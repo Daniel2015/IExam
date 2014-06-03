@@ -24,6 +24,7 @@ mysql_close();
 if(isset($_POST['delete'])){
 $ID = $_POST['delete'];
 mysql_query("Update messages SET deleted='1' WHERE ID='$ID'");
+mysql_query("DELETE FROM messages WHERE deleted='1' AND deletedAdmin='1' ");
 (new MessagePage)->show("", "Съобщението e изтрито!", "danger","incomingUser","800");
 mysql_close();
 }

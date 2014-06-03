@@ -20,12 +20,12 @@
 			$this->set_tableName("simple_login");
 			
 			$this->fieldsMapping = array(
-				'id' => 'member_id',
+				'id' => 'member_id',         // <- ne ni trqbva
 				'username' => 'username',
 				'password' => 'password',
 				'firstName' => 'firstname',
 				'lastName' => 'lastname',
-				'egn' => 'ID',
+				'egn' => 'ID',         // <- egn = id
 				);
 		}
 		

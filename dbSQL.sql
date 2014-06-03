@@ -122,6 +122,8 @@ CREATE TABLE IF NOT EXISTS `messages` (
 	`dateCreated` varchar(150) NOT NULL,
 	`readed` int(1) NOT NULL,
 	`deleted` int(1) NOT NULL,
+	`readedADMIN` int(1) NOT NULL,
+	`deletedADMIN` int(1) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 

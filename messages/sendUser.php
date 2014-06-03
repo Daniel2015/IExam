@@ -17,7 +17,7 @@
 	
 if(isset($_POST['submit']))
 {
-	if(!empty($_POST['message'])){
+	if(!empty($_POST['message']) && !empty($_POST['user'])){
 	
 	$user = $_POST['user'];
 	$message = $_POST['message'];
@@ -53,6 +53,7 @@ echo mysql_error();
     <label for="inputEmail3" class="col-sm-2 control-label">Потребител</label>
     <div class="col-sm-10">
       <select class="dropdown input-lg form-control" name="user" id="user">
+					<option value="" >Изберете Админ</option>
 					<?php $p=0;
 							while ($p < $num) {
 							$field=mysql_result($result,$p,"username");

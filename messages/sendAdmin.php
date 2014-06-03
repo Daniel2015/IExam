@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 	if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in'))
 	{
@@ -15,29 +16,30 @@
 	$query="SELECT * FROM simple_login";
 	$result=mysql_query($query);
 	$num=mysql_numrows($result);
-	
 if(isset($_POST['submit']))
 {
-	if(!empty($_POST['message'])){
+	if(!empty($_POST['message']) && !empty($_POST['user']))
 	{
-	$user = $_POST['user'];
-	$message = $_POST['message'];
-	$time = date("Y-m-d H:i:s");
-	mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('".$_SESSION['SESS_ADMIN_USERNAME']."', '$user', '$message', '$time')");
-	MessagePage::show("", "Съобщението е изпратено!", "success", "../administration/mailAdmin");
-	exit();
-	mysql_close();
-	}
-	if(isset($_POST['who']))
-	{
-	$user = $_POST['user'];
-	$message = $_POST['message'];
-	$time = date("Y-m-d H:i:s");
-	mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('Админ', '$user', '$message', '$time')");
-	MessagePage::show("", "Съобщението е изпратено!", "success", "../administration/mailAdmin");
-	exit();
-	mysql_close();
-	}
+		if(!isset($_POST['who']))
+		{
+			$user = $_POST['user'];
+			$message = $_POST['message'];
+			$time = date("Y-m-d H:i:s");
+			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('".$_SESSION['SESS_ADMIN_USERNAME']."', '$user', '$message', '$time')");
+			MessagePage::show("", "Съобщението е изпратено!", "success", "../administration/mailAdmin");
+			exit();
+			mysql_close();
+		}
+		if(isset($_POST['who']))
+		{
+			$user = $_POST['user'];
+			$message = $_POST['message'];
+			$time = date("Y-m-d H:i:s");
+			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('Админ', '$user', '$message', '$time')");
+			MessagePage::show("", "Съобщението е изпратено!", "success", "../administration/mailAdmin");
+			exit();
+			mysql_close();
+		}
 	}
 	else{
 	MessagePage::show("Моля, попълнете полето.", "Съобщението е празно!", "danger");
@@ -64,6 +66,7 @@ echo mysql_error();
     <label for="inputEmail3" class="col-sm-2 control-label">Потребител</label>
     <div class="col-sm-10">
       <select class="dropdown input-lg form-control" name="user" id="user">
+					<option value="" >Изберете Потребител</option>
 					<?php $p=0;
 							while ($p < $num) {
 							$field=mysql_result($result,$p,"username");
@@ -73,7 +76,8 @@ echo mysql_error();
 					<?php
 					}
 					?>
-				</select>
+				</select> 
+				
     </div>
   </div>
   <div class="form-group">

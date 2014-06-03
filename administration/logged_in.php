@@ -26,20 +26,15 @@
 		<link rel="WWW Icon" href="www_icon1.ico"/>
 	</head>
 	<body>
-		 <span>
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
+			<div class="panel panel-success">
+	<div class="panel-heading">
 						<span><h4 style="display: inline;">Логната</h4></span>
 					</div>
 					<div class="panel-body">
-						<p><a href="create_test" class="btn btn-info" >Създай тест</a></p>
-						<p><a href="admin_users" class="btn btn-info" >Потребители</a></p>
-						<p><a href="admin" class="btn btn-info" >Назад</a></p>
-						<p><a href="../logout" class="btn btn-info" >Излез</a></p>
+						<div class="btn-group">
+							<a href="admin" class="btn btn-info" >Назад</a>
+						</div>
 					</div>
-				</div>
-			</div>
 			<table class="table table-bordered table-hover table-condensed">
 				<tbody>
 					<tr class="active table-hover">
@@ -90,6 +85,5 @@
 					?>
 				</tbody>
 			</table>
-		</span>
 	</body>
 </html>
