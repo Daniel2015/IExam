@@ -8,10 +8,15 @@ session_start();
    // exit();
 // }
 
-require('connection.php');
+require_once("utilities/SecurityManager.php");
+$securityManager = new SecurityManager;
+$securityManager->escapeAll();
+
+require_once('connection.php');
 require_once("Authentication.php");
 require_once("Permissions.php");
-require('utilities/MessagePage.php');
+require_once('utilities/MessagePage.php');
+
 mysql_query("SET NAMES 'utf8'");
 mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 ?>
