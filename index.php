@@ -31,11 +31,9 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 		<h1 class="col-md-offset-1"><span class="glyphicon glyphicon-pencil"></span>IExam</h1>
 	</header>
 	<nav id="navigation" class="col-md-2">
-		<ul class="nav nav-pills nav-stacked">
-			<li><a href="index"/>Home</a></li>
-			<li><a href="login"/>Login</a></li>
-			<li><a href="register"/>Register</a></li>
-		</ul>
+		<?php
+			include('navigation.php');
+		?>
 	</nav>
 		<section class="container col-md-8">
 		<?php
