@@ -10,7 +10,7 @@ class Authentication {
         }
 
         $userEntity = new UsersModel;
-        $query = $userEntity->getItems("WHERE username='$user' AND password='" . md5($password) . "'");
+        $query = $userEntity->getItems("WHERE username='$user' AND password='$password'");
 
         if (empty($query)) {
             return false;

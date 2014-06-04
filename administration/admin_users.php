@@ -23,9 +23,10 @@
 		$querys="SELECT * FROM simple_login WHERE username='$username'";
 		$results=mysql_query($querys);
 		$password=mysql_result($results,0,"password");
+		$salt=mysql_result($results,0,"salt");
 		mysql_query("DELETE FROM simple_login WHERE username='$username'");
 		// mysql_query("DELETE FROM logged_in_users WHERE username='$username'");
-		mysql_query("INSERT INTO admin (username, password) VALUES ('$username', '$password') ");
+		mysql_query("INSERT INTO admin (username, password, salt) VALUES ('$username', '$password', '$salt') ");
 		mysql_close();
 		MessagePage::show("", "Потребителят е направен Админ!", "success", "admin_users");
 		exit();

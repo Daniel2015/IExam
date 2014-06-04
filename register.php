@@ -7,7 +7,9 @@
 		$lname=$_POST['lname'];
 		$ID=$_POST['ID'];
 		$username=$_POST['username'];
-		$password=$_POST['password'];
+		
+		$salt = substr( hash('sha256', (mt_rand())), 0, 22);
+		$password = crypt($_POST['password'], '$2a$10$' . $salt);
 		
 		$user = new UsersModel;
 		
@@ -16,6 +18,7 @@
 		$user->egn = $ID;
 		$user->username = $username; // Fakulteten Nomer !!
 		$user->password = $password;
+		$user->salt = $salt;
 		
 		$result= $user->insert();
 		if($result)

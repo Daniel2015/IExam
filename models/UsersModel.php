@@ -26,15 +26,16 @@
 				'firstName' => 'firstname',
 				'lastName' => 'lastname',
 				'egn' => 'ID',         // <- egn = id
+				'salt' => 'salt',
 				);
 		}
 		
 		public function insert()
 		{
 			return mysql_query("INSERT INTO simple_login
-			(firstname, lastname, ID, username, password)
+			(firstname, lastname, ID, username, password, salt)
 			VALUES
-			('$this->firstName', '$this->lastName', '$this->egn', '$this->username', '".md5($this->password)."')");
+			('$this->firstName', '$this->lastName', '$this->egn', '$this->username', '$this->password', '$this->salt')");
 		}
 		
 		public function update()

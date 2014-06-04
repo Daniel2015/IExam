@@ -17,7 +17,6 @@ $errmsg_arr = array();
 	
 	$errflag = false;
 	
-
 	function clean($str) {
 		$str = @trim($str);
 		if(get_magic_quotes_gpc()) {
@@ -27,10 +26,14 @@ $errmsg_arr = array();
 	}
 
 	$login = clean($_POST['username']);
-	$password = clean($_POST['password']);
-
 	
-	 if(isset($_POST['btn']))
+	$query = mysql_query("SELECT salt FROM admin WHERE username='$login'");
+	$salt = mysql_result($query, 0);
+	$password = crypt(clean($_POST['password']), '$2a$10$' . $salt);
+	
+
+
+	if(isset($_POST['btn']))
 
 	if($login == '') {
 		$errmsg_arr[] = 'Login ID missing';
@@ -51,7 +54,7 @@ $errmsg_arr = array();
 	mysql_query("SET NAMES 'utf8'");
 	mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 	
-	$qry="SELECT * FROM admin WHERE username='$login' AND password='".md5($_POST['password'])."'";
+	$qry="SELECT * FROM admin WHERE username='$login' AND password='$password'" ;
 	$result=mysql_query($qry);
 	
 
@@ -71,6 +74,7 @@ $errmsg_arr = array();
 	}else {
 		die("Query failed");
 	}
+
 }
 ?>
 

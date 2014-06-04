@@ -15,7 +15,17 @@
 		
 		$errflag = false;
 		
-		
+
+
+$asd = $_POST['username'];
+
+if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $asd))
+{
+
+MessagePage::show("", "невъзможна данни", "warning");
+}
+else
+{
 		//sanitize funct. no sql inj allowd here.
 		function clean($str) {
 			$str = @trim($str);
@@ -23,13 +33,11 @@
 				$str = stripslashes($str);
 			}
 			return mysql_real_escape_string($str);
-		}
-		
+		}				
 		$login = clean($_POST['username']);
-		$password = clean($_POST['password']);
 		
-		//inputs validation
-		
+		$salt = mysql_result(mysql_query("SELECT salt FROM simple_login WHERE username='$login'"), 0);
+		$password = crypt(clean($_POST['password']), '$2a$10$' . $salt);
 		
 		
 		if($login == '') {
@@ -45,7 +53,7 @@
 		if($errflag) {
 			$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 			session_write_close();
-			header("location: main.php");
+			MessagePage::show("", "Моля попълнете полетата!", "danger", "login");
 			exit();
 		}
 		mysql_query("SET NAMES 'utf8'");
@@ -62,6 +70,7 @@
 			MessagePage::show("", "Греша Парола или Фак. Номер!", "danger");
 		}
 	}
+}
 ?>
 <script type="text/javascript" charset="utf-8">
 function validateForm()
