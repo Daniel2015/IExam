@@ -27,7 +27,7 @@ $errmsg_arr = array();
 
 	$login = clean($_POST['username']);
 	
-	$query = mysql_query("SELECT salt FROM admin WHERE username='$login'");
+	$query = mysql_query("SELECT salt FROM simple_login WHERE username='$login'");
 	$salt = mysql_result($query, 0);
 	$password = crypt(clean($_POST['password']), '$2a$10$' . $salt);
 	
@@ -54,7 +54,7 @@ $errmsg_arr = array();
 	mysql_query("SET NAMES 'utf8'");
 	mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 	
-	$qry="SELECT * FROM admin WHERE username='$login' AND password='$password'" ;
+	$qry="SELECT * FROM simple_login WHERE username='$login' AND password='$password' AND isAdmin='1'" ;
 	$result=mysql_query($qry);
 	
 
@@ -63,7 +63,7 @@ $errmsg_arr = array();
 			
 			$member = mysql_fetch_assoc($result);
 			$_SESSION['log'] = 'in';
-			$_SESSION['SESS_ADMIN_USERNAME'] = $member['username'];
+			$_SESSION['SESS_USERNAME'] = $member['username'];
 			
 			(new MessagePage)->show("", "Влязохте успешно!", "success", "admin");
 			exit();

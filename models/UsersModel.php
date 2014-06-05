@@ -40,8 +40,9 @@
 		
 		public function update()
 		{
+			//$this->password = crypt($this->password);
 			return mysql_query("UPDATE simple_login
-				SET firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='" . $this->password . "'
+				SET firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='$this->password'
 				WHERE username='$this->username'") or die(mysql_error());
 		}	
 	}

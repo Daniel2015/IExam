@@ -1,32 +1,33 @@
 <?php
-	if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in'))
-	{
-		session_destroy();
-		(new MessagePage)->show("", "Моля, влезте в системата!", "danger", "../login");
-		  exit();
-	}
+	// if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in'))
+	// {
+		// session_destroy();
+		// (new MessagePage)->show("", "Моля, влезте в системата!", "danger", "../login");
+		  // exit();
+	// }
 
-	if(!isset($_SESSION['SESS_ADMIN_USERNAME']))
-	{
-		(new MessagePage)->show("", "Нямате достъп до тази страница!", "danger", "login");
-		exit();
-	}
+	// if(!isset($_SESSION['SESS_ADMIN_USERNAME']))
+	// {
+		// (new MessagePage)->show("", "Нямате достъп до тази страница!", "danger", "login");
+		// exit();
+	// }
 
 	
-	$query="SELECT * FROM simple_login";
+	$query="SELECT * FROM simple_login WHERE isAdmin='0'";
 	$result=mysql_query($query);
 	$num=mysql_numrows($result);
 	
 	if(isset($_POST['submit']))
 	{
 		$username= $_POST['submit'];
-		$querys="SELECT * FROM simple_login WHERE username='$username'";
-		$results=mysql_query($querys);
-		$password=mysql_result($results,0,"password");
-		$salt=mysql_result($results,0,"salt");
-		mysql_query("DELETE FROM simple_login WHERE username='$username'");
-		// mysql_query("DELETE FROM logged_in_users WHERE username='$username'");
-		mysql_query("INSERT INTO admin (username, password, salt) VALUES ('$username', '$password', '$salt') ");
+		mysql_query("UPDATE simple_login SET isAdmin='1' WHERE username='$username'");
+		// $querys="SELECT * FROM simple_login WHERE username='$username'";
+		// $results=mysql_query($querys);
+		// $password=mysql_result($results,0,"password");
+		// $salt=mysql_result($results,0,"salt");
+		// mysql_query("DELETE FROM simple_login WHERE username='$username'");
+		// // mysql_query("DELETE FROM logged_in_users WHERE username='$username'");
+		// mysql_query("INSERT INTO admin (username, password, salt) VALUES ('$username', '$password', '$salt') ");
 		mysql_close();
 		MessagePage::show("", "Потребителят е направен Админ!", "success", "admin_users");
 		exit();

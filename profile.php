@@ -1,16 +1,11 @@
 ﻿<?php
-require_once("models/UsersModel.php");
-	if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in'))
-	{
-		session_destroy();
-		(new MessagePage)->show("", "Моля, влезте в системата!", "danger", "login");
-		 exit();
-	}
-	if(!isset($_SESSION['SESS_FIRST_NAME']))
-	{
-		(new MessagePage)->show("", "Нямата достъм до тази страница!", "danger", "login");
-		exit();
-	}
+	require_once("models/UsersModel.php");
+	
+	Permissions::OnlyAuthenticated();
+	
+	$user = new UsersModel;
+	$user = $user->getItems("WHERE username='" . $_SESSION['SESS_USERNAME'] . "'")[0];
+	
 	if(isset($_POST['submit']))
 	{
 		// $first_name_NEW = $_POST['first_name_NEW'];
@@ -70,10 +65,7 @@ require_once("models/UsersModel.php");
 		$ID=$_POST['ID_NEW'];
 		$password=$_POST['password'];
 		$password_NEW=$_POST['password_NEW'];
-		
-		$user = new UsersModel;
-		$user = $user->getItems("WHERE username='" . $_SESSION['SESS_USERNAME'] . "'")[0];
-		
+				
 		$user->firstName = $fname;
 		$user->lastName = $lname;
 		$user->egn = $ID;
@@ -86,7 +78,7 @@ require_once("models/UsersModel.php");
 		if($result){
 			(new MessagePage)->show("", "Редактирането е успешно!", "success", "main_login");
 			exit();
-		}		
+		}
 	}
 ?>
 <div class="col-md-4">
@@ -96,10 +88,10 @@ require_once("models/UsersModel.php");
 		</div>
 		<div class="panel-body">
 			<form name="submit" method="POST" action="" >
-				<p><label>Фак. Номер: <?php echo $_SESSION['SESS_USERNAME'];?></label></p>
-				<p><label>Име:<input type="text" name="first_name_NEW" class="form-control" id="first_name_NEW" value="<?php echo $_SESSION['SESS_FIRST_NAME'];?>"/></label></p>
-				<p><label>Фамилия: <input type="text" name="last_name_NEW" class="form-control" id="last_name_NEW" value="<?php echo $_SESSION['SESS_LAST_NAME'];?>"/></label></p>
-				<p><label>ЕГН: <input type="text" name="ID_NEW" class="form-control" id="ID_NEW" value="<?php echo $_SESSION['SESS_ID'];?>"/></label></p>
+				<p><label>Фак. Номер: <?= $user->username ?></label></p>
+				<p><label>Име:<input type="text" name="first_name_NEW" class="form-control" id="first_name_NEW" value="<?= $user->firstName ?>"/></label></p>
+				<p><label>Фамилия: <input type="text" name="last_name_NEW" class="form-control" id="last_name_NEW" value="<?= $user->lastName ?>"/></label></p>
+				<p><label>ЕГН: <input type="text" name="ID_NEW" class="form-control" id="ID_NEW" value="<?= $user->egn ?>"/></label></p>
 				<p><label>Текуща парола: <input type="password" name="password" class="form-control" id="password" /></label></p>
 				<p><label>Нова парола: <input type="password" name="password_NEW" class="form-control" id="password_NEW" /></label></p>
 				<p><input name="submit" type="submit" value="Редактирай" class="form-control btn btn-primary"/></p>

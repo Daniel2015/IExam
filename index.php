@@ -45,9 +45,9 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 			if(isset($_GET['page']))
 			{
 				$filePath = $_GET['page'];
-				if(file_exists($filePath))
+				if(file_exists($filePath . ".php"))
 				{
-					require($filePath);
+					require($filePath . ".php");
 				}
 				else
 				{
