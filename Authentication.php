@@ -49,7 +49,9 @@ class Authentication {
     }
 
     public static function IsAdmin() {
-        return isset($_SESSION['SESS_ADMIN_USERNAME']);
+		$user = new UsersModel;
+		$user = $user->getItems("Where username='$_SESSION[SESS_USERNAME]'")[0];
+        return $user->isAdmin;
     }
 }
 

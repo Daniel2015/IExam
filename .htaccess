@@ -5,4 +5,4 @@ RewriteRule ^index$ index.php [NC,L]
 RewriteRule (/(css|js|images|fonts))(.*)$ $2$3 [NC,L]
 
 RewriteCond %{QUERY_STRING} ^(.*)$
-RewriteRule ^(([^\.])+)?$ index.php?page=$1&%1 [NC,L]
+RewriteRule ^(([^\.])+)/?$ index.php?page=$1&%1 [NC,L]

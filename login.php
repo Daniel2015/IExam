@@ -1,12 +1,7 @@
 <?php
-	if(isset($_SESSION['SESS_FIRST_NAME']))
+	if(Authentication::IsAuthenticated())
 	{
-		(new MessagePage)->show("", "Вече сте се логнали!", "info", "main_login");
-		exit();
-	}
-	if(isset($_SESSION['SESS_ADMIN_USERNAME']))
-	{
-		(new MessagePage)->show("", "Вече сте се логнали!", "info", "administration/admin");
+		MessagePage::show("", "Вече сте се логнали!", "info", "main_login");
 		exit();
 	}
 	if(isset($_POST['submit']))
