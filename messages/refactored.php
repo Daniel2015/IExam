@@ -226,7 +226,7 @@
 					while ($i < $num) {
 						$field0=mysql_result($result,$i,"fromUser");
 						$field1=mysql_result($result,$i,"toUser");
-						$field2=htmlspecialchars(mysql_result($result,$i,"message"));
+						$field2=mysql_result($result,$i,"message");
 						$field3=mysql_result($result,$i,"dateCreated");
 						$field4=mysql_result($result,$i,"ID");
 					?>

@@ -18,9 +18,9 @@ if(isset($_POST['submit']))
 			$user = $_POST['user'];
 			$message = $_POST['message'];
 			$time = date("Y-m-d H:i:s");
-			$message = mysql_real_escape_string($message);
-			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('".$_SESSION['SESS_ADMIN_USERNAME']."', '$user', '$message', '$time')");
-			MessagePage::show("", "Съобщението е изпратено!", "success", "../administration/mailAdmin");
+			// $message = mysql_real_escape_string($message);
+			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('$logged', '$user', '$message', '$time')");
+			MessagePage::show("", "Съобщението е изпратено!", "success", "refactored");
 			exit();
 			mysql_close();
 		}
@@ -29,9 +29,9 @@ if(isset($_POST['submit']))
 			$user = $_POST['user'];
 			$message = $_POST['message'];
 			$time = date("Y-m-d H:i:s");
-			$message = mysql_real_escape_string($message);
+			// $message = mysql_real_escape_string($message);
 			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('Админ', '$user', '$message', '$time')");
-			MessagePage::show("", "Съобщението е изпратено!", "success", "../administration/mailAdmin");
+			MessagePage::show("", "Съобщението е изпратено!", "success", "refactored");
 			exit();
 			mysql_close();
 		}
@@ -58,9 +58,9 @@ if(isset($_POST['submit']))
 	$user = $_POST['user'];
 	$message = $_POST['message'];
 	$time = date("Y-m-d H:i:s");
-	$message = mysql_real_escape_string($message);
-	mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('".$_SESSION['SESS_USERNAME']."', '$user', '$message', '$time')");
-	MessagePage::show("", "Съобщението е изпратено!", "success","../mailUser");
+	// $message = mysql_real_escape_string($message);
+	mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('$logged', '$user', '$message', '$time')");
+	MessagePage::show("", "Съобщението е изпратено!", "success","refactored");
 	exit();
 	mysql_close();
 	}
