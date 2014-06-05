@@ -10,9 +10,7 @@ class SecurityManager
 		else 
 		{ 
 			$value = addslashes($value); 
-			$value = htmlspecialchars($value, ENT_NOQUOTES); 
-
-			return $value;
+			return htmlspecialchars($value, ENT_NOQUOTES);
 		} 
 	}
 	
