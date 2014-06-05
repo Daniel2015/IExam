@@ -27,6 +27,7 @@
 				'lastName' => 'lastname',
 				'egn' => 'ID',         // <- egn = id
 				'salt' => 'salt',
+				'isAdmin' => 'isAdmin'
 				);
 		}
 		
@@ -35,14 +36,15 @@
 			return mysql_query("INSERT INTO simple_login
 			(firstname, lastname, ID, username, password, salt)
 			VALUES
-			('$this->firstName', '$this->lastName', '$this->egn', '$this->username', '$this->password', '$this->salt')");
+			('$this->firstName', '$this->lastName', '$this->egn', '$this->username', '$this->password', '$this->salt')") or die(mysql_error());
 		}
 		
 		public function update()
 		{
 			//$this->password = crypt($this->password);
 			return mysql_query("UPDATE simple_login
-				SET firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='$this->password'
+				SET firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='$this->password',
+				isAdmin='$this->isAdmin'
 				WHERE username='$this->username'") or die(mysql_error());
 		}	
 	}
