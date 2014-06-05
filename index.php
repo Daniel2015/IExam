@@ -12,6 +12,8 @@ require_once("utilities/SecurityManager.php");
 $securityManager = new SecurityManager;
 $securityManager->escapeAll();
 
+$ProjectName = "IExam";
+
 require_once('connection.php');
 require_once("Authentication.php");
 require_once("Permissions.php");
