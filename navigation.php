@@ -1,6 +1,6 @@
  <div class="panel panel-default">
 	   <div class="panel-heading">
-		 <span><h4 style="display: inline;">Здравей, <?php echo $_SESSION["SESS_FIRST_NAME"]; ?>!</h4></span>
+		 <span><h4 style="display: inline;">Здравей, <?php if(isset($_SESSION["SESS_FIRST_NAME"])) echo $_SESSION["SESS_FIRST_NAME"] ?>!</h4></span>
 	   </div>
 	<div class="panel-body">
 	<p><a href="index" class="btn btn-info">Home</a></p>

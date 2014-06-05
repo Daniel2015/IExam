@@ -10,7 +10,7 @@ class Authentication {
         }
 
         $userEntity = new UsersModel;
-        $query = $userEntity->getItems("WHERE username='$user' AND password='$password' AND isAdmin='0'");
+        $query = $userEntity->getItems("WHERE username='$user' AND password='$password'");
 
         if (empty($query)) {
             return false;

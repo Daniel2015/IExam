@@ -13,9 +13,11 @@
 	// }
 
 	
-	$query="SELECT * FROM simple_login WHERE isAdmin='0'";
-	$result=mysql_query($query);
-	$num=mysql_numrows($result);
+	//$query="SELECT * FROM simple_login";
+	$usersModel = new UsersModel;
+	$usersModel->getItems();
+	$result=$usersModel->getItems();
+	//$num=mysql_numrows($result);
 	
 	if(isset($_POST['submit']))
 	{
@@ -86,39 +88,35 @@
 						</td>
 					</tr>
 					<?php
-					$i=0;
-					while ($i < $num) {
-						$field1=mysql_result($result,$i,"firstname");
-						$field2=mysql_result($result,$i,"lastname");
-						$field3=mysql_result($result,$i,"ID");
-						$field4=mysql_result($result,$i,"username");
+					foreach($result as $user)
+					{
 					?>
 					<tr class="success table-hover ">
 						<td>
-						<?php echo $field1; ?>
+						<?= $user->firstName; ?>
 						</td>
 						<td>
-						<?php echo $field2; ?>
+						<?= $user->lastName; ?>
 						</td>
 						<td>
-						<?php echo $field3; ?>
+						<?= $user->egn; ?>
 						</td>
 						<td>
-						<?php echo $field4; ?>
+						<?= $user->username; ?>
 						</td>
 						<td>
 						<form name="login" onsubmit="" method="POST" action="" >
-						<button type="submit" name="submit" class="form-control btn btn-success" onclick="" value="<?php echo $field4; ?>"/>Админ</button>
+						<button type="submit" name="submit" class="form-control btn btn-success <?php if($user->isAdmin) echo 'disabled' ?>" onclick="" value="<?= $user->username; ?>"/>Админ</button>
 						</form>
 						</td>
 						<td>
 						<form name="login" onsubmit="" method="POST" action="" >
-						<button type="submit" name="delete" class="form-control btn btn-danger" onclick="" value="<?php echo $field4; ?>"/>Изтрий</button>
+						<button type="submit" name="delete" class="form-control btn btn-danger" onclick="" value="<?= $user->username; ?>"/>Изтрий</button>
 						</form>
 						</td>
 					</tr>
 					<?php
-						$i++;}
+					}
 					?>
 					</tbody>
 				</table>				
