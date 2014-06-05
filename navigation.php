@@ -12,9 +12,17 @@ if(Authentication::IsAuthenticated())
    <p><a href="profile" class="btn btn-info" >Профил</a></p>
    <p><a href="statistics" class="btn btn-info" >Статистика</a></p>
    <p><a href="mailUser" class="btn btn-info" >Поща</a></p>
-   <p><a href="logout" class="btn btn-info" >Излез</a></p>
 <?php
-}
+	if(Authentication::IsAdmin())
+	{ ?>
+		<p><a href="administration/create_test" class="btn btn-warning" >Създай тест</a></p>
+		<p><a href="administration/logged_in" class="btn btn-warning" >Логнати</a></p>
+		<p><a href="administration/admin_users" class="btn btn-warning" >Потребители</a></p>
+		<p><a href="../messages/refactored" class="btn btn-warning" >Поща</a></p>
+	<?php } ?>
+		<p><a href="logout" class="btn btn-info" >Излез</a></p>
+	<?php
+	}
 else
 {
 ?>
