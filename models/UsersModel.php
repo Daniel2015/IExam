@@ -43,7 +43,7 @@
 		private function encryptPassword()
 		{
 			$this->salt = substr( hash('sha256', (mt_rand())), 0, 22);
-			$password = crypt($this->password, '$2a$10$' . $this->salt);
+			$this->password = crypt($this->password, '$2a$10$' . $this->salt);
 		}
 		
 		public function update()
