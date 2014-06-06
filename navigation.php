@@ -11,14 +11,13 @@ if(Authentication::IsAuthenticated())
    <p><a href="/<?=$ProjectName?>/test" class="btn btn-info" >Тестове</a></p>
    <p><a href="/<?=$ProjectName?>/profile" class="btn btn-info" >Профил</a></p>
    <p><a href="/<?=$ProjectName?>/statistics" class="btn btn-info" >Статистика</a></p>
-   <p><a href="/<?=$ProjectName?>/mailUser" class="btn btn-info" >Поща</a></p>
+   <p><a href="/<?=$ProjectName?>/messages/mail" class="btn btn-info" >Поща</a></p>
 <?php
 	if(Authentication::IsAdmin())
 	{ ?>
 		<p><a href="/<?=$ProjectName?>/administration/create_test" class="btn btn-warning" >Създай тест</a></p>
 		<p><a href="/<?=$ProjectName?>/administration/logged_in" class="btn btn-warning" >Логнати</a></p>
 		<p><a href="/<?=$ProjectName?>/administration/admin_users" class="btn btn-warning" >Потребители</a></p>
-		<p><a href="/<?=$ProjectName?>/messages/mail" class="btn btn-warning" >Поща</a></p>
 	<?php } ?>
 		<p><a href="/<?=$ProjectName?>/logout" class="btn btn-info" >Излез</a></p>
 	<?php
