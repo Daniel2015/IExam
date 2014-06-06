@@ -28,7 +28,7 @@ if(isset($_POST['submit']))
 			$user = $_POST['user'];
 			$message = $_POST['message'];
 			$time = date("Y-m-d H:i:s");
-			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('Админ', '$user', '$message', '$time')");
+			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('" . 'Админ (' . $logged . ')' . "', '$user', '$message', '$time')");
 			MessagePage::show("", "Съобщението е изпратено!", "success", "mail?sent=0");
 			exit();
 			mysql_close();

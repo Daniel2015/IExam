@@ -73,7 +73,7 @@
 			}
 			if(isset($_GET['sent']) && $_GET['sent'] == 0) // Outgoing messages
 			{
-				$query = $query . "fromUser = '" . $logged . "' AND deletedAdmin='0' ";
+				$query = "SELECT * FROM messages WHERE fromUser IN ('$logged', '" . 'Админ (' . $logged . ')' . "') AND deletedAdmin='0'" ;
 			}
 		}
 
@@ -182,6 +182,10 @@ function reloadDeleted()
 					$i=0;
 					while ($i < $num) {
 						$field0=mysql_result($result,$num-1,"fromUser");
+						if (strpos ($field0,'Админ (') !== false)
+						{
+						$field0 = '*Админ*';
+						}
 						$field1=mysql_result($result,$num-1,"toUser");
 						$field2=mysql_result($result,$num-1,"message");
 						$field3=mysql_result($result,$num-1,"dateCreated");
