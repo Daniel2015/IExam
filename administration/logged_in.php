@@ -1,17 +1,4 @@
 <?php
-	if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in'))
-	{
-		session_destroy();
-		(new MessagePage)->show("", "Моля, влезте в системата!", "danger", "../login");
-		  exit();
-	}
-
-	if(!isset($_SESSION['SESS_ADMIN_USERNAME']))
-	{
-		(new MessagePage)->show("", "Нямате достъп до тази страница!", "danger", "login");
-		exit();
-	}
-
 	$query="SELECT * FROM logged_in_users";
 	$result=mysql_query($query);
 	$num=mysql_numrows($result);
@@ -26,15 +13,12 @@
 		<link rel="WWW Icon" href="www_icon1.ico"/>
 	</head>
 	<body>
-			<div class="panel panel-success">
-	<div class="panel-heading">
-						<span><h4 style="display: inline;">Логната</h4></span>
-					</div>
-					<div class="panel-body">
-						<div class="btn-group">
-							<a href="admin" class="btn btn-info" >Назад</a>
-						</div>
-					</div>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<span><h4 style="display: inline;">Логнати</h4></span>
+			</div>
+			<div class="panel-body">
+			</div>
 			<table class="table table-bordered table-hover table-condensed">
 				<tbody>
 					<tr class="active table-hover">
@@ -85,5 +69,6 @@
 					?>
 				</tbody>
 			</table>
+		</div>	
 	</body>
 </html>

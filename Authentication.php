@@ -24,11 +24,12 @@ class Authentication {
         date_default_timezone_set('Europe/Sofia');
 
         $_SESSION['log'] = 'in';
-        $_SESSION['SESS_ID'] = $loggedInUser->id;
+        $_SESSION['SESS_ID'] = $loggedInUser->egn;
         $_SESSION['SESS_FIRST_NAME'] = $loggedInUser->firstName;
         $_SESSION['SESS_LAST_NAME'] = $loggedInUser->lastName;
         $_SESSION['SESS_USERNAME'] = $loggedInUser->username;
         $_SESSION['SESS_TIME'] = date("Y-m-d H:i:s");
+		// $_SESSION['SESS_TIMEOUT'] = time();
 
         mysql_query("INSERT INTO logged_in_users (firstname, lastname, ID, username, loggedInTime )VALUES('" . $_SESSION['SESS_FIRST_NAME'] . "', '" . $_SESSION['SESS_LAST_NAME'] . "', '" . $_SESSION['SESS_ID'] . "', '" . $_SESSION['SESS_USERNAME'] . "', '" . $_SESSION['SESS_TIME'] . "')") or die("Login failed: " . mysql_error());
 

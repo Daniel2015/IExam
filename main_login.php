@@ -1,6 +1,10 @@
 <?php
 Permissions::OnlyAuthenticated();
+  // if ($_SESSION['SESS_TIMEOUT'] + 30 * 60 < time()) {
+     // header('location:logout');
+  // } 
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>

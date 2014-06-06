@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <?php
 	//Permissions::OnlyAuthenticated();
-
+	
 	$logged = $_SESSION['SESS_USERNAME'];
 	$results = mysql_query("SELECT isAdmin FROM simple_login WHERE username='$logged'");
-	$his = mysql_result($results, 0, "isAdmin");
+	$isAdmin = mysql_result($results, 0, "isAdmin");
 	
-	if($his == 0)
+	if($isAdmin == 0)
 	{
 
 		$query = "SELECT * FROM messages WHERE ";
@@ -40,57 +40,17 @@
 		{
 			$ID = $_POST['submit'];
 			mysql_query("Update messages SET readed='1' WHERE ID='$ID'");
-			if(!isset($_GET['received']) && !isset($_GET['readedOnly']) && !isset($_GET['sent']))
-			{
-				header('location:refactored');
-			}		
-			if(isset($_GET['received']) && $_GET['received'] == 0)
-			{
-				header('location:refactored?received=0');
-			}
-			if(isset($_GET['received']) && $_GET['received'] == 1)
-			{
-				header('location:refactored?received=1');
-			}
-			if(isset($_GET['readedOnly']) && $_GET['readedOnly'] == 1)
-			{
-				header('location:refactored?readedOnly=1');
-			}
-			if(isset($_GET['sent']) && $_GET['sent'] == 0)
-			{
-				header('location:refactored?sent=0');
-			}
-			mysql_close();
+			reloadReaded();
 		}
 
 		if(isset($_POST['delete'])){
 			$ID = $_POST['delete'];
 			mysql_query("Update messages SET deleted='1' WHERE ID='$ID'");
 			mysql_query("DELETE FROM messages WHERE deleted='1' AND deletedAdmin='1' ");
-			if(!isset($_GET['received']) && !isset($_GET['readedOnly']) && !isset($_GET['sent']))
-			{			
-			(new MessagePage)->show("", "Съобщението e изтрито!", "danger","refactored","800");		
-			}
-			if(isset($_GET['received']) && $_GET['received'] == 0)
-			{			
-			(new MessagePage)->show("", "Съобщението e изтрито!", "danger","refactored?received=0","800");		
-			}
-			if(isset($_GET['received']) && $_GET['received'] == 1)
-			{			
-			(new MessagePage)->show("", "Съобщението e изтрито!", "danger","refactored?received=1","800");		
-			}
-			if(isset($_GET['readedOnly']) && $_GET['readedOnly'] == 1)
-			{			
-			(new MessagePage)->show("", "Съобщението e изтрито!", "danger","refactored?readedOnly=1","800");		
-			}
-			if(isset($_GET['sent']) && $_GET['sent'] == 0)
-			{			
-			(new MessagePage)->show("", "Съобщението e изтрито!", "danger","refactored?sent=0","800");		
-			}	
-			mysql_close();
+			reloadDeleted();
 		}
 	}
-	else
+	if($isAdmin == 1)
 	{
 		$query = "SELECT * FROM messages WHERE ";
 		if(!isset($_GET['received']) && !isset($_GET['readedOnly']) && !isset($_GET['sent']))
@@ -123,56 +83,67 @@
 		{
 			$ID = $_POST['submit'];
 			mysql_query("Update messages SET readedAdmin='1' WHERE ID='$ID'");
-			if(!isset($_GET['received']) && !isset($_GET['readedOnly']) && !isset($_GET['sent']))
-			{
-				header('location:refactored');
-			}		
-			if(isset($_GET['received']) && $_GET['received'] == 0)
-			{
-				header('location:refactored?received=0');
-			}
-			if(isset($_GET['received']) && $_GET['received'] == 1)
-			{
-				header('location:refactored?received=1');
-			}
-			if(isset($_GET['readedOnly']) && $_GET['readedOnly'] == 1)
-			{
-				header('location:refactored?readedOnly=1');
-			}
-			if(isset($_GET['sent']) && $_GET['sent'] == 0)
-			{
-				header('location:refactored?sent=0');
-			}
-			mysql_close();
+			reloadReaded();
 		}
 		if(isset($_POST['delete']))
 		{
 			$ID = $_POST['delete'];
 			mysql_query("Update messages SET deletedAdmin='1' WHERE ID='$ID'");
 			mysql_query("DELETE FROM messages WHERE deleted='1' AND deletedAdmin='1' ");
+			reloadDeleted();
+
+		}
+	}
+	
+function reloadReaded()
+{			
+			if(!isset($_GET['received']) && !isset($_GET['readedOnly']) && !isset($_GET['sent']))
+			{
+				header('location:mail');
+			}		
+			if(isset($_GET['received']) && $_GET['received'] == 0)
+			{
+				header('location:mail?received=0');
+			}
+			if(isset($_GET['received']) && $_GET['received'] == 1)
+			{
+				header('location:mail?received=1');
+			}
+			if(isset($_GET['readedOnly']) && $_GET['readedOnly'] == 1)
+			{
+				header('location:mail?readedOnly=1');
+			}
+			if(isset($_GET['sent']) && $_GET['sent'] == 0)
+			{
+				header('location:mail?sent=0');
+			}
+				mysql_close();
+}
+
+function reloadDeleted()
+{
 			if(!isset($_GET['received']) && !isset($_GET['readedOnly']) && !isset($_GET['sent']))
 			{			
-			(new MessagePage)->show("", "Съобщението e изтрито!", "danger","refactored","800");		
+				(new MessagePage)->show("", "Съобщението e изтрито!", "danger","mail","800");		
 			}
 			if(isset($_GET['received']) && $_GET['received'] == 0)
 			{			
-			(new MessagePage)->show("", "Съобщението e изтрито!", "danger","refactored?received=0","800");		
+				(new MessagePage)->show("", "Съобщението e изтрито!", "danger","mail?received=0","800");		
 			}
 			if(isset($_GET['received']) && $_GET['received'] == 1)
 			{			
-			(new MessagePage)->show("", "Съобщението e изтрито!", "danger","refactored?received=1","800");		
+				(new MessagePage)->show("", "Съобщението e изтрито!", "danger","mail?received=1","800");		
 			}
 			if(isset($_GET['readedOnly']) && $_GET['readedOnly'] == 1)
 			{			
-			(new MessagePage)->show("", "Съобщението e изтрито!", "danger","refactored?readedOnly=1","800");		
+				(new MessagePage)->show("", "Съобщението e изтрито!", "danger","mail?readedOnly=1","800");		
 			}
 			if(isset($_GET['sent']) && $_GET['sent'] == 0)
 			{			
-			(new MessagePage)->show("", "Съобщението e изтрито!", "danger","refactored?sent=0","800");		
+				(new MessagePage)->show("", "Съобщението e изтрито!", "danger","mail?sent=0","800");		
 			}			
-			mysql_close();
-		}
-	}
+				mysql_close();
+}
 ?>
 <div class="panel panel-success">
 
@@ -180,28 +151,14 @@
 						<span><h4 style="display: inline;">Поща</h4></span>
 					</div>
 					<div class="panel-body">
-						<a href="send" class="btn btn-success" >Изпрати</a>
+						<input type="button" class="btn btn-success" value="Изпрати" onClick="window.location.href='send'">
 						<div class="btn-group">
-						
-				<!--		<select class="btn btn-default selectpicker" onchange="window.location.href=this.value;">
-						<option value="?received=0">Входящи</option>
-						<option value="?received=1">Непрочетени</option>
-						<option value="?readedOnly=1">Прочетени</option>
-						</select>													-->
-						
-						<a href="?received=0" class="btn btn-primary" >Входящи</a>
-						<a href="?received=1" class="btn btn-info" >Непрочетени</a>
-						<a href="?readedOnly=1" class="btn btn-info" >Прочетени</a>  
-						<a href="?sent=0" class="btn btn-primary" >Изходящи</a>
+						<input <?php if ((isset($_GET['received']) && $_GET['received'] == 0) || (!isset($_GET['received']) && !isset($_GET['readedOnly']) && !isset($_GET['sent']))){ echo "disabled"; } ?> type="button" class="btn btn-primary" value="Входящи" onClick="window.location.href='?received=0'">
+						<input <?php if (isset($_GET['received']) && $_GET['received'] == 1){ echo "disabled"; } ?> type="button" class="btn btn-info" value="Непрочетени" onClick="window.location.href='?received=1'">
+						<input <?php if (isset($_GET['readedOnly']) && $_GET['readedOnly'] == 1){ echo "disabled"; } ?> type="button" class="btn btn-info" value="Прочетени" onClick="window.location.href='?readedOnly=1'">
 						</div>
-						<?php if($his == 0) { ?>
-						<a href="../main_login" class="btn btn-warning">Назад</a>
-						<?php } ?>
-						<?php if($his == 1) { ?>
-						<a href="../administration/admin" class="btn btn-warning">Назад</a>
-						<?php } ?>
+						<input <?php if (isset($_GET['sent']) && $_GET['sent'] == 0){ echo "disabled"; } ?> type="button" class="btn btn-primary" value="Изходящи" onClick="window.location.href='?sent=0'">
 					</div>
-
 
 <table class="table table-bordered table-hover table-condensed">
 <tr class="active table-hover">
@@ -224,12 +181,13 @@
 <?php
 					$i=0;
 					while ($i < $num) {
-						$field0=mysql_result($result,$i,"fromUser");
-						$field1=mysql_result($result,$i,"toUser");
-						$field2=mysql_result($result,$i,"message");
-						$field3=mysql_result($result,$i,"dateCreated");
-						$field4=mysql_result($result,$i,"ID");
+						$field0=mysql_result($result,$num-1,"fromUser");
+						$field1=mysql_result($result,$num-1,"toUser");
+						$field2=mysql_result($result,$num-1,"message");
+						$field3=mysql_result($result,$num-1,"dateCreated");
+						$field4=mysql_result($result,$num-1,"ID");
 					?>
+
 <tr class="success table-hover ">
 <td>
 <?php echo $field0; ?>
@@ -244,13 +202,13 @@
 <?php echo $field3; ?>
 </td>
 <td>
+
 <?php
 if((isset($_GET['received']) && $_GET['received'] == 1) || (isset($_GET['received']) && $_GET['received'] == 0) || (!isset($_GET['received']) && !isset($_GET['readedOnly']) && !isset($_GET['sent'])) ) { ?>
 
-<form name="login" onsubmit="" method="POST" action="" >
-<button type="submit" name="submit" class="form-control btn btn-warning" onclick="" value="<?php echo $field4; ?>"/>Прочетено</button>
+<form  name="login" onsubmit="" method="POST" action="" >
+<button type="submit" name="submit" class="form-control btn btn-warning" value="<?php echo $field4; ?>"/>Прочетено</button>
 </form>
-
 <?php } ?>
 <form name="login" onsubmit="" method="POST" action="" >
 <button type="submit" name="delete" class="form-control btn btn-danger" onclick="" value="<?php echo $field4; ?>"/>Изтрий</button>
@@ -258,7 +216,7 @@ if((isset($_GET['received']) && $_GET['received'] == 1) || (isset($_GET['receive
 </td>
 </tr>
 <?php
-$i++;}
+$num--;}
 ?>
 </table>
 </div>

@@ -59,13 +59,12 @@
 		// {
 			// mysql_error();
 		// }
-		
 		$fname=$_POST['first_name_NEW'];
 		$lname=$_POST['last_name_NEW'];
 		$ID=$_POST['ID_NEW'];
 		$password=$_POST['password'];
 		$password_NEW=$_POST['password_NEW'];
-				
+		
 		$user->firstName = $fname;
 		$user->lastName = $lname;
 		$user->egn = $ID;
@@ -76,7 +75,7 @@
 		
 		$result= $user->update();
 		if($result){
-			(new MessagePage)->show("", "Редактирането е успешно!", "success", "main_login");
+			(new MessagePage)->show("", "Редактирането е успешно!", "success", "index");
 			exit();
 		}
 	}
@@ -88,8 +87,9 @@
 		</div>
 		<div class="panel-body">
 			<form name="submit" method="POST" action="" >
-				<p><label>Фак. Номер: <?= $user->username ?></label></p>
-				<p><label>Име:<input type="text" name="first_name_NEW" class="form-control" id="first_name_NEW" value="<?= $user->firstName ?>"/></label></p>
+										
+				<p><label>Фак. Номер: <input type="text" name="username_NEW" class="form-control" id="username_NEW" value="<?= $user->username ?>" <?php if(!$user->isAdmin) echo "disabled" ?> /></label></p>
+				<p><label>Име: <input type="text" name="first_name_NEW" class="form-control" id="first_name_NEW" value="<?= $user->firstName ?>"/></label></p>
 				<p><label>Фамилия: <input type="text" name="last_name_NEW" class="form-control" id="last_name_NEW" value="<?= $user->lastName ?>"/></label></p>
 				<p><label>ЕГН: <input type="text" name="ID_NEW" class="form-control" id="ID_NEW" value="<?= $user->egn ?>"/></label></p>
 				<p><label>Текуща парола: <input type="password" name="password" class="form-control" id="password" /></label></p>

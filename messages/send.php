@@ -2,9 +2,9 @@
 <?php
 	$logged = $_SESSION['SESS_USERNAME'];
 	$results = mysql_query("SELECT isAdmin FROM simple_login WHERE username='$logged'");
-	$his = mysql_result($results, 0, "isAdmin");
+	$isAdmin = mysql_result($results, 0, "isAdmin");
 	
-	if($his == 1)
+	if($isAdmin == 1)
 	{
 	$query="SELECT * FROM simple_login WHERE isAdmin='0'";
 	$result=mysql_query($query);
@@ -18,9 +18,8 @@ if(isset($_POST['submit']))
 			$user = $_POST['user'];
 			$message = $_POST['message'];
 			$time = date("Y-m-d H:i:s");
-			// $message = mysql_real_escape_string($message);
 			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('$logged', '$user', '$message', '$time')");
-			MessagePage::show("", "Съобщението е изпратено!", "success", "refactored");
+			MessagePage::show("", "Съобщението е изпратено!", "success", "mail?sent=0");
 			exit();
 			mysql_close();
 		}
@@ -29,9 +28,8 @@ if(isset($_POST['submit']))
 			$user = $_POST['user'];
 			$message = $_POST['message'];
 			$time = date("Y-m-d H:i:s");
-			// $message = mysql_real_escape_string($message);
 			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('Админ', '$user', '$message', '$time')");
-			MessagePage::show("", "Съобщението е изпратено!", "success", "refactored");
+			MessagePage::show("", "Съобщението е изпратено!", "success", "mail?sent=0");
 			exit();
 			mysql_close();
 		}
@@ -45,7 +43,7 @@ else
 echo mysql_error();
 }
 }
-else
+if($isAdmin == 0)
 {
 $query="SELECT * FROM simple_login WHERE isAdmin='1'";
 	$result=mysql_query($query);
@@ -58,9 +56,8 @@ if(isset($_POST['submit']))
 	$user = $_POST['user'];
 	$message = $_POST['message'];
 	$time = date("Y-m-d H:i:s");
-	// $message = mysql_real_escape_string($message);
 	mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('$logged', '$user', '$message', '$time')");
-	MessagePage::show("", "Съобщението е изпратено!", "success","refactored");
+	MessagePage::show("", "Съобщението е изпратено!", "success","mail?sent=0");
 	exit();
 	mysql_close();
 	}
@@ -72,6 +69,9 @@ else
 {
 echo mysql_error();
 }
+}
+else{
+echo mysql_error();
 }
 ?>		
 			
@@ -85,20 +85,14 @@ echo mysql_error();
 </div>
 
 <div class="panel-body">
-<a href="send" class="btn btn-success disabled" >Изпрати</a>
+<input type="button" class="btn btn-success" value="Изпрати" onClick="window.location.href='send'" disabled>
 <div class="btn-group">
 						
-						<a href="refactored?received=0" class="btn btn-primary" >Входящи</a>
-						<a href="refactored?received=1" class="btn btn-info" >Непрочетени</a>
-						<a href="refactored?readedOnly=1" class="btn btn-info" >Прочетени</a>  
-						<a href="refactored?sent=0" class="btn btn-primary" >Изходящи</a>
+						<a href="mail?received=0" class="btn btn-primary" >Входящи</a>
+						<a href="mail?received=1" class="btn btn-info" >Непрочетени</a>
+						<a href="mail?readedOnly=1" class="btn btn-info" >Прочетени</a> 
 						</div>
-						<?php if($his == 0) { ?>
-						<a href="../main_login" class="btn btn-warning">Назад</a>
-						<?php } ?>
-						<?php if($his == 1) { ?>
-						<a href="../administration/admin" class="btn btn-warning">Назад</a>
-						<?php } ?>
+						<a href="mail?sent=0" class="btn btn-primary" >Изходящи</a>
 </div>
 <form class="form-horizontal" role="form" method="POST" action="">
   <div class="form-group">
@@ -127,7 +121,7 @@ echo mysql_error();
     </div>
   </div>
 <?php
-if($his == 1){ ?>
+if($isAdmin == 1){ ?>
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <div class="checkbox">
@@ -142,7 +136,6 @@ if($his == 1){ ?>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
 		<input type="submit" name="submit" class="btn btn-success btn-lg" value="Изпрати" />
-		<a href="../messages/refactored" class="btn btn-info btn-lg" >Назад</a>
     </div>
   </div>
 </form>
