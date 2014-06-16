@@ -32,6 +32,7 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 		<link rel="WWW Icon" href="images/www_icon1.ico"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	</head>
 	<body>
 	<header>

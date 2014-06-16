@@ -6,7 +6,7 @@
 	
 	if($isAdmin == 1)
 	{
-	$query="SELECT * FROM simple_login WHERE isAdmin='0'";
+	$query="SELECT * FROM simple_login WHERE isAdmin='0' ORDER BY username";
 	$result=mysql_query($query);
 	$num=mysql_numrows($result);
 if(isset($_POST['submit']))
@@ -45,7 +45,7 @@ echo mysql_error();
 }
 if($isAdmin == 0)
 {
-$query="SELECT * FROM simple_login WHERE isAdmin='1'";
+$query="SELECT * FROM simple_login WHERE isAdmin='1' ORDER BY username";
 	$result=mysql_query($query);
 	$num=mysql_numrows($result);
 	

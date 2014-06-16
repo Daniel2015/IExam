@@ -32,6 +32,7 @@
 			if(isset($_GET['sent']) && $_GET['sent'] == 0) // Outgoing messages
 			{
 				$query = $query . "fromUser = '" . $logged . "' AND deleted='0' ";
+				// $query = "SELECT * FROM messages WHERE fromUser IN ('$logged', '" . 'Админ (' . $logged . ')' . "') AND deleted='0'" ;
 			}
 		}
 		$result=mysql_query($query);
@@ -191,8 +192,7 @@ function reloadDeleted()
 						$field3=mysql_result($result,$num-1,"dateCreated");
 						$field4=mysql_result($result,$num-1,"ID");
 					?>
-
-<tr class="success table-hover ">
+<tr class="success table-hover" >
 <td>
 <?php echo $field0; ?>
 </td>

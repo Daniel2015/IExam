@@ -64,9 +64,9 @@
 </td>
 </tr>
 </table> 
-					
+						
 					</div>
-			
+				
 				<table class="table table-bordered table-hover table-condensed">
 				<tbody>
 					<tr class="active table-hover">
