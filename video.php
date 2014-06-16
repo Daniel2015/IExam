@@ -1,41 +1,129 @@
 <?php
-require_once('connection.php');
-$i = 0;
-$query = mysql_query("SELECT name FROM videos");
-$num = mysql_num_rows($query);
-// $url = mysql_query("SELECT url FROM videos WHERE name='$result'");
 
-// $ID= mysql_query("SELECT ID FROM videos WHERE name='$name'");
-if(isset($_GET['video']) )
+	$logged = $_SESSION['SESS_USERNAME'];
+	$results = mysql_query("SELECT isAdmin FROM simple_login WHERE username='$logged'");
+	$isAdmin = mysql_result($results, 0, "isAdmin");
+	
+if(!empty($_POST['videoName']) && !empty($_POST['videoUrl']))
 {
-echo '<iframe width="420" height="315" src="//www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>';
+$name = $_POST['videoName'];
+$url = $_POST['videoUrl'];	
+
+mysql_query("INSERT INTO videos (name, link) VALUES ('$name', '$url')");
+MessagePage::show("", "Видеото е Създадено", "success", "video");
+}
+	
+$i = 0;
+$query = mysql_query("SELECT ID FROM videos");
+$num = mysql_num_rows($query);
+if(isset($_POST['submit']))
+{
+	if(!empty($_POST['message']))
+	{
+		$message = $_POST['message'];
+		$user= $logged;
+		mysql_query("INSERT INTO videos (name, link, comments, fromUser) VALUES ('$name', '$url','$message', '$user')");
+	}
+}
+
+if(isset($_POST['delete']) && !empty($_POST['delete']))
+{
+$id = $_POST['delete'];
+
+mysql_query("DELETE FROM videos WHERE ID='$id'");
+header('location:video');
 }
 ?>
 
-<table class="table">
-<tr>
-<td>
-Име на Видео
-</td>
-</tr>
-<?php 
-while ($i < $num){
-$result = mysql_result($query, $i); 
-$url = mysql_query("SELECT url FROM videos WHERE name='$result'");
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<span><h4 style="display: inline;">Видеота</h4></span>
+				
+			</div>
+			<?php if($isAdmin == 1) { ?>
+			<div class="panel-heading">
+				<form action="" method="post">
+				<label>Име: <input type="text" name="videoName"><br></label>
+				<label>URL: <input type="text" name="videoUrl"><br></label>
+				<label><input type="submit" class="btn btn-success btn-lg" value="Създай Видео" /></label>
+				</form>
 
-?>
-<tr>
-<td>
-<!-- <form name="<?php echo $result; ?>" action="watch_video.php" method="POST">
-<?php echo $result; ?>
-<input value="<?php echo $result; ?>" type="hidden" />
-</form> -->
-<form name="video" action="" method="POST">
-<?php echo $result; ?>
-<input nam value="<?php echo $url; ?>" type="hidden" />
-<input type="button" onClick="window.location.href='?video'" />
+				
+			</div>
+			<?php } ?>
+			<div class="panel-body">
+
+<table class="table-sm">
+
+		<?php 
+		while ($i < $num){
+		$result = mysql_result($query, $i); 
+		$url = mysql_result(mysql_query("SELECT link FROM videos WHERE id='$result'"),0); 
+		$name= mysql_result(mysql_query("SELECT name FROM videos WHERE id='$result'"),0);
+		?>
+	<tr>
+		<td>
+
+		<form name="video" action="" method="POST" >
+		<input style="float:left;" class="btn btn-info" value="<?php echo $name; ?>" type="button" onClick="window.location.href='?URL=<?php echo $url; ?>'" />
+		</form>
+				<?php if($isAdmin == 1) { ?>
+
+			<form name="delete" onsubmit="" method="POST" action="" >
+			<button style="float:right;" type="submit" name="delete" class=" btn btn-danger" onclick="" value="<?php echo $result; ?>"/>Изтрий</button>
+			</form>
+
+			<?php }	?>
+		</td>
+	</tr>
+		
+	<tr>
+	<td>
+	<?php
+	if(isset($_GET['URL']) && $_GET['URL'] == $url)
+{
+echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php echo $url;?><?php echo'" frameborder="0" allowfullscreen></iframe>';
+}
+	?>
+	
+	</td>
+	<td style="width:500px;">
+		<?php
+	if(isset($_GET['URL']) && $_GET['URL'] == $url){ ?>
+	
+	<table class="table">
+	<tr><td>Потребител</td><td>Коментар</td></tr>
+		<tr><?php
+		$p=0;
+		$query2=mysql_query("SELECT fromUser FROM videos WHERE link='$url'");
+		$query3=mysql_query("SELECT comments FROM videos WHERE link='$url'");
+		$numUsers = mysql_num_rows($query2);
+		while ($p < $numUsers){
+		$result2 = mysql_result($query2, $p);
+		$result3 = mysql_result($query3, $p);
+		
+			?>
+			<td>
+			<?php 
+			echo $result2;
+			?>
+			</td>
+			<td>
+			<?php 
+			echo $result3;
+			?>
+			</td>
+		</tr>
+		<?php $p++; } ?>
+	</table>
+<form>
+<textarea style="resize: none;" rows="4" name="message" type="text" class="form-control input-lg" maxlength="1000" id="" placeholder="Коментар"></textarea>
+<input type="submit" name="submit" class="btn btn-success btn-lg" value="Изпрати" />
 </form>
-</td>
-</tr>
-<?php $i++ ; } ?>
+	<?php } ?>
+	</td>
+	</tr>
+	<?php		$i++ ; } ?>
 </table>
+</div>
+</div>

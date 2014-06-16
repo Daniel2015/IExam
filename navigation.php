@@ -19,7 +19,6 @@ if(Authentication::IsAuthenticated())
 		<p><a href="/<?=$ProjectName?>/administration/create_test" class="btn btn-warning" >Създай тест</a></p>
 		<p><a href="/<?=$ProjectName?>/administration/logged_in" class="btn btn-warning" >Логнати</a></p>
 		<p><a href="/<?=$ProjectName?>/administration/admin_users" class="btn btn-warning" >Потребители</a></p>
-		<p><a href="/<?=$ProjectName?>/addvideo" class="btn btn-warning" >Добавяне на видео</a></p>
 	<?php } ?>
 		<p><a href="/<?=$ProjectName?>/logout" class="btn btn-info" >Излез</a></p>
 	<?php
