@@ -7,24 +7,28 @@
 if(!empty($_POST['videoName']) && !empty($_POST['videoUrl']))
 {
 $name = $_POST['videoName'];
-$url = $_POST['videoUrl'];	
-
-mysql_query("INSERT INTO videos (name, link) VALUES ('$name', '$url')");
-MessagePage::show("", "Видеото е Създадено", "success", "video");
+$url = $_POST['videoUrl'];
+$video = mysql_query("INSERT INTO videos (name, link) VALUES ('$name', '$url')");
+if($video){
+MessagePage::show("", "Видеото е създадено!", "success", "");
+}
+else{
+MessagePage::show("", "Видеото вече съществува!", "danger", "");
+}
 }
 	
 $i = 0;
-$query = mysql_query("SELECT ID FROM videos");
+$query = mysql_query("SELECT ID FROM videos ORDER BY ID");
 $num = mysql_num_rows($query);
 if(isset($_POST['submit']))
 {
-	if(!empty($_POST['message'])&&!empty($_POST['url']))
+	if(!empty($_POST['message']) && !empty($_POST['url']))
 	{
 		$message = $_POST['message'];
 		$user= $logged;
 		$url= $_POST['url'];
 		mysql_query("INSERT INTO comments (link, message, user) VALUES ('$url','$message', '$user')");
-		//mysql_query("INSERT INTO videos (name, link, comments, fromUser) VALUES ('$name', '$url','$message', '$user')");
+		MessagePage::show("", "Коментарът е изпратен", "success", "video?URL=$url");
 	}
 }
 
@@ -36,6 +40,13 @@ mysql_query("DELETE FROM videos WHERE ID='$id'");
 header('location:video');
 }
 ?>
+<style>
+.scrollable{
+overflow:scroll;
+height:360px;
+width:400px;
+}
+</style>
 
 		<div class="panel panel-success">
 			<div class="panel-heading">
@@ -64,17 +75,17 @@ header('location:video');
 		$name= mysql_result(mysql_query("SELECT name FROM videos WHERE id='$result'"),0);
 		?>
 	<tr>
-		<td>
-
+		<td style="width:400px;">
+<span>
 		<form name="video" action="" method="POST" >
 		<input style="float:left;" class="btn btn-info" value="<?php echo $name; ?>" type="button" onClick="window.location.href='?URL=<?php echo $url; ?>'" />
 		</form>
-				<?php if($isAdmin == 1) { ?>
+			<?php if($isAdmin == 1) { ?>
 
-			<form name="delete" onsubmit="" method="POST" action="" >
-			<button style="float:right;" type="submit" name="delete" class=" btn btn-danger" onclick="" value="<?php echo $result; ?>"/>Изтрий</button>
-			</form>
-
+		<form name="delete" onsubmit="" method="POST" action="" >
+		<button style="float:left;" type="submit" name="delete" class=" btn btn-danger" onclick="" value="<?php echo $result; ?>"/>Изтрий</button>
+		</form>
+</span>
 			<?php }	?>
 		</td>
 	</tr>
@@ -85,26 +96,24 @@ header('location:video');
 	if(isset($_GET['URL']) && $_GET['URL'] == $url)
 {
 echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php echo $url;?><?php echo'" frameborder="0" allowfullscreen></iframe>';
-if(isset($_POST['submit']))
-{
-	if(!empty($_POST['message']))
-	{
-		$message = $_POST['message'];
-		$user= $logged;
-		mysql_query("INSERT INTO videos (name, link, comments, fromUser) VALUES ('$name', '$url','$message', '$user')");
-	}
-}
 }
 	?>
 	
 	</td>
-	<td style="width:500px;">
+	<td rowspan="<?php echo $num;?>" style="width:500px;">
+	<?php 
+	if(isset($_GET['URL']) && $_GET['URL'] == $url)
+	{
+	echo '<div class="scrollable">';
+	}
+	?>
 		<?php
 	if(isset($_GET['URL']) && $_GET['URL'] == $url){ ?>
 	
-	<table class="table" style="margin-left:5px; ">
+	<table class="table">
 	<tr><td>Потребител</td><td>Коментар</td></tr>
-		<tr><?php
+		<tr>
+		<?php
 		$p=0;
 		$query2=mysql_query("SELECT user FROM comments WHERE link='$url'");
 		$query3=mysql_query("SELECT message FROM comments WHERE link='$url'");
@@ -128,11 +137,12 @@ if(isset($_POST['submit']))
 		<?php $p++; } ?>
 	</table>
 <form action="" method="POST">
-<textarea style="resize: none;" rows="4" name="message" type="text" class="form-control input-lg" maxlength="1000" id="" placeholder="Коментар"></textarea>
+<textarea style="resize: none;" rows="4" name="message" type="text" class="form-control input-lg" maxlength="1000" placeholder="Коментар"></textarea>
 <input type="hidden" name="url" value="<?php echo $url; ?>">
 <input type="submit" name="submit" class="btn btn-success btn-lg" value="Изпрати" />
 </form>
 	<?php } ?>
+	</div>
 	</td>
 	</tr>
 	<?php		$i++ ; } ?>

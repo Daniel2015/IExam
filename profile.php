@@ -62,7 +62,6 @@
 		$fname=$_POST['first_name_NEW'];
 		$lname=$_POST['last_name_NEW'];
 		$ID=$_POST['ID_NEW'];
-		$password=$_POST['password'];
 		$password_NEW=$_POST['password_NEW'];
 		
 		$user->firstName = $fname;
@@ -78,6 +77,7 @@
 		$result= $user->update();
 		if($result){
 			(new MessagePage)->show("", "Редактирането е успешно!", "success", "index");
+			$_SESSION['SESS_FIRST_NAME']= $_POST['first_name_NEW'];
 			exit();
 		}
 	}
@@ -94,7 +94,6 @@
 				<p><label>Име: <input type="text" name="first_name_NEW" class="form-control" id="first_name_NEW" value="<?= $user->firstName ?>"/></label></p>
 				<p><label>Фамилия: <input type="text" name="last_name_NEW" class="form-control" id="last_name_NEW" value="<?= $user->lastName ?>"/></label></p>
 				<p><label>ЕГН: <input type="text" name="ID_NEW" class="form-control" id="ID_NEW" value="<?= $user->egn ?>"/></label></p>
-				<p><label>Текуща парола: <input type="password" name="password" class="form-control" id="password" /></label></p>
 				<p><label>Нова парола: <input type="password" name="password_NEW" class="form-control" id="password_NEW" /></label></p>
 				<p><input name="submit" type="submit" value="Редактирай" class="form-control btn btn-primary"/></p>
 				<p><a href="main_login" class="form-control btn btn-info" >Назад</a></p>
