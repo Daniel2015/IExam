@@ -16,6 +16,8 @@
 		$user->username = $username; // Fakulteten Nomer !!
 		$user->password = $_POST['password'];
 		
+		$user->encryptPassword();
+		
 		$result= $user->insert();
 		if($result)
 		{

@@ -68,9 +68,11 @@
 		$user->firstName = $fname;
 		$user->lastName = $lname;
 		$user->egn = $ID;
+		
 		if($password_NEW !== null && !empty($password_NEW))
 		{
-			$user->password = md5($password_NEW);   
+			$user->password = $password_NEW;
+			$user->encryptPassword();
 		}
 		
 		$result= $user->update();

@@ -85,6 +85,15 @@ header('location:video');
 	if(isset($_GET['URL']) && $_GET['URL'] == $url)
 {
 echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php echo $url;?><?php echo'" frameborder="0" allowfullscreen></iframe>';
+if(isset($_POST['submit']))
+{
+	if(!empty($_POST['message']))
+	{
+		$message = $_POST['message'];
+		$user= $logged;
+		mysql_query("INSERT INTO videos (name, link, comments, fromUser) VALUES ('$name', '$url','$message', '$user')");
+	}
+}
 }
 	?>
 	

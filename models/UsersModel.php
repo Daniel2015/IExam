@@ -33,14 +33,13 @@
 		
 		public function insert()
 		{
-			$this->encryptPassword();
 			return mysql_query("INSERT INTO simple_login
 			(firstname, lastname, ID, username, password, salt)
 			VALUES
 			('$this->firstName', '$this->lastName', '$this->egn', '$this->username', '$this->password', '$this->salt')") or die(mysql_error());
 		}
 		
-		private function encryptPassword()
+		public function encryptPassword()
 		{
 			$this->salt = substr( hash('sha256', (mt_rand())), 0, 22);
 			$this->password = crypt($this->password, '$2a$10$' . $this->salt);
@@ -48,7 +47,6 @@
 		
 		public function update()
 		{
-			$this->encryptPassword();
 			return mysql_query("UPDATE simple_login
 				SET firstname='$this->firstName', lastname='$this->lastName', ID='$this->egn', password='$this->password',
 				salt='$this->salt', isAdmin='$this->isAdmin'
