@@ -87,6 +87,7 @@ var table = document.getElementById("create_table_test");
 	<input id="true_answer" type="radio" name="true_answer" value="B">B<br>
 	<input id="true_answer" type="radio" name="true_answer" value="C">C<br>
 	<input id="true_answer" type="radio" name="true_answer" value="D">D<br>
+	<button type="submit" class="submitBtn">Add</button>
 	</td>
 	</tr>
 	</table>
@@ -97,7 +98,25 @@ var table = document.getElementById("create_table_test");
 	
 	<!-- <input type="button" onclick="createTable()" value="CreateTable"/>   -->
 	</span>
-		
 	</body>
+	
+	<script>
+		$(function() {
+			$('form').on('submit', function(e) {
+				e.preventDefault();
+				var formData = $(this).serializeArray();
+				
+				$.ajax({
+					url: '/<?= $ProjectName ?>/api/questions/insert',
+					data: formData,
+					method: 'POST'
+				}).done(function (data) {
+					alert('Success: ' + data);
+				}).fail(function () {
+					alert('Fail');				
+				});
+			});
+		});
+	</script>
 	
 </html>

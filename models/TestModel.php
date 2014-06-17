@@ -20,25 +20,24 @@
 		public function __construct()
 		{
 			$this->set_tableName("test");
-		}
-		
-		protected function bindData($row)
-		{
-			$model = new UsersModel;
 			
-			$model->id = $row['test_id'];
-			$model->answer1 = $row['answer1'];
-			$model->answer2 = $row['answer2'];
-			$model->answer3 = $row['answer3'];
-			$model->answer4 = $row['answer4'];
-			$model->trueAnswer = $row['trueAnswer'];
-			
-			return $model;
+			$this->fieldsMapping = array(
+				'id' => 'test_id',
+				'question' => 'question',
+				'answer1' => 'answer1',
+				'answer2' => 'answer2',
+				'answer3' => 'answer3',
+				'answer4' => 'answer4',
+				'trueAnswer' => 'trueAnswer'
+			);
 		}
 		
 		public function insert()
 		{
-			// TODO
+			return mysql_query("INSERT INTO test 
+			(question, answer1, answer2, answer3, answer4, true_answer)
+			VALUES
+			('$this->question', '$this->answer1', '$this->answer2', '$this->answer3', '$this->answer4', '$this->true_answer')" );
 		}		
 		
 		public function update()

@@ -1,5 +1,5 @@
 <?php
-	require_once("models/abstraction/IModel.php");
+	require_once("IModel.php");
 
 	abstract class ModelBase implements IModel
 	{
