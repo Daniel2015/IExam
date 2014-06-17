@@ -18,11 +18,13 @@ $query = mysql_query("SELECT ID FROM videos");
 $num = mysql_num_rows($query);
 if(isset($_POST['submit']))
 {
-	if(!empty($_POST['message']))
+	if(!empty($_POST['message'])&&!empty($_POST['url']))
 	{
 		$message = $_POST['message'];
 		$user= $logged;
-		mysql_query("INSERT INTO videos (name, link, comments, fromUser) VALUES ('$name', '$url','$message', '$user')");
+		$url= $_POST['url'];
+		mysql_query("INSERT INTO comments (link, message, user) VALUES ('$url','$message', '$user')");
+		//mysql_query("INSERT INTO videos (name, link, comments, fromUser) VALUES ('$name', '$url','$message', '$user')");
 	}
 }
 
@@ -95,8 +97,8 @@ echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php ec
 	<tr><td>Потребител</td><td>Коментар</td></tr>
 		<tr><?php
 		$p=0;
-		$query2=mysql_query("SELECT fromUser FROM videos WHERE link='$url'");
-		$query3=mysql_query("SELECT comments FROM videos WHERE link='$url'");
+		$query2=mysql_query("SELECT user FROM comments WHERE link='$url'");
+		$query3=mysql_query("SELECT message FROM comments WHERE link='$url'");
 		$numUsers = mysql_num_rows($query2);
 		while ($p < $numUsers){
 		$result2 = mysql_result($query2, $p);
@@ -116,8 +118,9 @@ echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php ec
 		</tr>
 		<?php $p++; } ?>
 	</table>
-<form>
+<form action="" method="POST">
 <textarea style="resize: none;" rows="4" name="message" type="text" class="form-control input-lg" maxlength="1000" id="" placeholder="Коментар"></textarea>
+<input type="hidden" name="url" value="<?php echo $url; ?>">
 <input type="submit" name="submit" class="btn btn-success btn-lg" value="Изпрати" />
 </form>
 	<?php } ?>
