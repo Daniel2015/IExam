@@ -46,7 +46,7 @@ header('location:video');
 			<div class="panel-heading">
 				<form action="" method="post">
 				<label>Име: <input type="text" name="videoName"><br></label>
-				<label>URL: <input type="text" name="videoUrl"><br></label>
+				<label>URL: <input maxlength="12" type="text" name="videoUrl"><br></label>
 				<label><input type="submit" class="btn btn-success btn-lg" value="Създай Видео" /></label>
 				</form>
 
@@ -93,7 +93,7 @@ echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php ec
 		<?php
 	if(isset($_GET['URL']) && $_GET['URL'] == $url){ ?>
 	
-	<table class="table">
+	<table class="table" style="margin-left:5px; ">
 	<tr><td>Потребител</td><td>Коментар</td></tr>
 		<tr><?php
 		$p=0;
