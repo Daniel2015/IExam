@@ -42,9 +42,14 @@ header('location:video');
 ?>
 <style>
 .scrollable{
-overflow:scroll;
-height:360px;
-width:400px;
+	overflow-y:scroll;
+	height:250px;
+	width:400px;
+	}
+	
+.videoHeader {
+    white-space: normal;
+    width: 250px;
 }
 </style>
 
@@ -78,7 +83,7 @@ width:400px;
 		<td style="width:400px;">
 <span>
 		<form name="video" action="" method="POST" >
-		<input style="float:left;" class="btn btn-info" value="<?php echo $name; ?>" type="button" onClick="window.location.href='?URL=<?php echo $url; ?>'" />
+		<input style="float:left;" class="btn btn-info videoHeader" value="<?php echo $name; ?>" type="button" onClick="window.location.href='?URL=<?php echo $url; ?>'" />
 		</form>
 			<?php if($isAdmin == 1) { ?>
 
@@ -104,16 +109,20 @@ echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php ec
 	<?php 
 	if(isset($_GET['URL']) && $_GET['URL'] == $url)
 	{
-	echo '<div class="scrollable">';
+		echo '<table class="table"><tr><td style="width:40%">Потребител</td><td style="width:60%">Коментар</td></tr></table>';
+		//echo "<span style='float: left; margin-left: 8px;'>Potebitel</span>";
+		//echo "<span style='float: right'>Komentar</span>";
+		echo '<div class="scrollable">';
 	}
 	?>
 		<?php
 	if(isset($_GET['URL']) && $_GET['URL'] == $url){ ?>
 	
 	<table class="table">
-	<tr><td>Потребител</td><td>Коментар</td></tr>
+	
 		<tr>
 		<?php
+		
 		$p=0;
 		$query2=mysql_query("SELECT user FROM comments WHERE link='$url'");
 		$query3=mysql_query("SELECT message FROM comments WHERE link='$url'");
@@ -123,12 +132,12 @@ echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php ec
 		$result3 = mysql_result($query3, $p);
 		
 			?>
-			<td>
+			<td style="width:40%">
 			<?php 
 			echo $result2;
 			?>
 			</td>
-			<td>
+			<td style="width:60%">
 			<?php 
 			echo $result3;
 			?>
@@ -136,6 +145,7 @@ echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php ec
 		</tr>
 		<?php $p++; } ?>
 	</table>
+	</div>
 <form action="" method="POST">
 <textarea style="resize: none;" rows="4" name="message" type="text" class="form-control input-lg" maxlength="1000" placeholder="Коментар"></textarea>
 <input type="hidden" name="url" value="<?php echo $url; ?>">
