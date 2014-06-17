@@ -1,16 +1,6 @@
 <?php
-	if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in'))
-	{
-		session_destroy();
-		(new MessagePage)->show("", "Моля, влезте в системата!", "danger", "../login");
-		  exit();
-	}
-
-	if(!isset($_SESSION['SESS_ADMIN_USERNAME']))
-	{
-		(new MessagePage)->show("", "Нямате достъп до тази страница!", "danger", "login");
-		exit();
-	}
+	Permissions::OnlyAdmins();
+	
 	if(isset($_POST['submit']))
 	{
 	
@@ -56,22 +46,7 @@ var table = document.getElementById("create_table_test");
 		</script>
 	</head>
 	<body>
-	<span>
-	<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<span><h4 style="display: inline;">Потребители</h4></span>
-					</div>
-					<div class="panel-body">
-						<p><a href="logged_in" class="btn btn-info" >Логнати</a></p>
-						<p><a href="admin_users" class="btn btn-info" >Потребители</a></p>
-						<p><a href="admin" class="btn btn-info" >Назад</a></p>
-						<p><a href="../logout" class="btn btn-info" >Излез</a></p>
-					</div>
-				</div>
-			</div>
-	
-	
+	<span>	
 		<table id="create_table_test" class="repeat_table">
 				<tr class="tr_test" style="border-bottom:3px solid #0066FF; font-weight:bold">
 					<td id="Question">
