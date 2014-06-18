@@ -61,7 +61,20 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 			{
 			//(new MessagePage)->show("Login success", "Login success", "profile");
 		?>
-			<h2>Index</h2>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<p><h2 style="display: inline;">Система за тестове!</h2></p>
+				<br>
+				<p><b>Изготвили: </b><br>
+						  Даниел Копев, ф.н. 61599 <br>
+						  Диана Касаветова, ф.н. 61568 <br>
+						  Здравко Петков, ф.н. 61598 <br>
+						  Мариан Грауров, ф.н. 61567 <br>
+						  Симеон Ненов, ф.н. 61577 <br>
+						  Спас Кючучов, ф.н. 61578 <br>
+						  </p>
+				<p>Приятно прекарване в компанията на тестовете!</p>
+
 		<?php }  ?>
 		</section>
 	</body>
