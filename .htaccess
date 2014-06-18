@@ -6,4 +6,6 @@ RewriteRule (/(css|js|images|fonts))(.*)$ $2$3 [NC,L]
 
 RewriteCond %{QUERY_STRING} ^(.*)$
 RewriteRule ^api/(.*)/(.*)/?$ api/$1.php?action=$2&%1 [NC,L]
+
+RewriteCond %{QUERY_STRING} ^(.*)$
 RewriteRule ^(([^\.])+)/?$ index.php?page=$1&%1 [NC,L]
