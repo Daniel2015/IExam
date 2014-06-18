@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('connection.php');
 if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in')){
 session_destroy();
@@ -102,34 +101,6 @@ mysql_close();
 					$i++;}
 				?>
 				<!-- ДА ОПРАВЯ ФОРМАТА. "ГОТОВО" ВКАРВА ВСИЧКИ questions В db -->
-				</table>
-		<table class="table">
-					<tr><td></td></tr>
-					<tr class="top">
-						<td><b>Тестове</b></td>
-					</tr>
-					<tr><td></td></tr>
-					<tr>
-						<td><a href="profile.php" class="btn" >Профил</a>
-						</td>
-					</tr>
-					<tr><td></td></tr>
-					<tr>
-						<td><a href="statistics.php" class="btn" >Статистика</a>
-						</td>
-					</tr>
-					<tr><td></td></tr>
-					<tr>
-						<td><a href="main_login.php" class="btn" >Назад</a>
-						</td>
-					</tr>
-					<tr><td></td></tr>
-					<tr>
-						<td>
-						<a href="?log=out" class="btn" >Излез</a>
-						</td>
-					</tr>
-					<tr><td></td></tr>
 				</table>
 			</span> 
 
