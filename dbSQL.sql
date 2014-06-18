@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2014 at 12:12 PM
+-- Generation Time: Jun 18, 2014 at 12:29 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -77,14 +77,7 @@ CREATE TABLE IF NOT EXISTS `logged_in_users` (
   `ID` varchar(150) NOT NULL,
   `loggedInTime` varchar(150) NOT NULL,
   PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=103 ;
-
---
--- Dumping data for table `logged_in_users`
---
-
-INSERT INTO `logged_in_users` (`member_id`, `username`, `firstname`, `lastname`, `ID`, `loggedInTime`) VALUES
-(102, '111111', 'Потребител', 'Първи', '1111111111', '2014-06-18 13:02:02');
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=104 ;
 
 -- --------------------------------------------------------
 
