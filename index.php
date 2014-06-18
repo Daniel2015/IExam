@@ -37,7 +37,7 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 		
 		<script src="js/jquery.2.1.1.min.js" ></script>
 		<script src="js/bootstrap.min.js" ></script>
-		<script src="js/jquery.protos.ui.min.js" ></script>
+		<script src="js/jquery.protos-ui.min.js" ></script>
 	</head>
 	<body>
 	<header>
