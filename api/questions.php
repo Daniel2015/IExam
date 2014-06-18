@@ -2,14 +2,14 @@
 require_once('../models/QuestionModel.php');
 require_once('APIBase.php');
 
-function get()
+function getByTest()
 {
 	Permissions::OnlyAuthenticated();
 	
-	//Ne triabva li da se escapne? A require na UserModel?
-	$username = $_GET['username'];
-	$user = (new UsersModel)->getItems("Where username='$username'");
-	return $user;
+	$testId = $_GET['testId'];
+	$questions = (new QuestionModel)->getItems("Where test_Id='$testId'");
+	
+	return $questions;
 }
 
 function insert()
@@ -24,6 +24,7 @@ function insert()
 	}
 	
 	$question->question = $_POST['question'];
+	$question->testId = $_POST['test_id'];
 	$question->answer1 = $_POST['answer1'];
 	$question->answer2 = $_POST['answer2'];
 	$question->answer3 = $_POST['answer3'];

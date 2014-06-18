@@ -5,7 +5,9 @@
 	{
 		private $tableName = "";
 		
-		public $fieldsMapping;
+		protected $fieldsMapping;
+		
+		protected $selectQuery = "Select * from ";
 		
 		public function get_tableName()
 		{
@@ -31,7 +33,7 @@
 		{
 			$queryResult;
 			
-			$queryResult = mysql_query("Select * from " . $this->get_tableName() . " " . $query);
+			$queryResult = mysql_query($this->selectQuery . $this->get_tableName() . " " . $query);
 			
 			if(!$queryResult)
 			{
@@ -47,9 +49,10 @@
 			return $result;
 		}
 		
-                private function bindData($row)
+		private function bindData($row)
 		{
-			$model = new UsersModel;
+			$currentModelName = get_class($this);
+			$model = new $currentModelName;
 			
 			foreach ($this->fieldsMapping as $fieldName => $dbFiledName) {
 				$model->$fieldName = $row[$dbFiledName];

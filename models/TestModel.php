@@ -5,39 +5,31 @@
 	{	
 		public $id;
 		
-		public $question;
+		public $description;
 		
-		public $answer1;
+		public $hasImage;
 		
-		public $answer2;
+		public $imageTileSize;
 		
-		public $answer3;
-		
-		public $answer4;
-		
-		public $trueAnswer;
+		public $imageFileNames;
 		
 		public function __construct()
 		{
-			$this->set_tableName("test");
+			$this->set_tableName("tests");
 			
 			$this->fieldsMapping = array(
-				'id' => 'test_id',
-				'question' => 'question',
-				'answer1' => 'answer1',
-				'answer2' => 'answer2',
-				'answer3' => 'answer3',
-				'answer4' => 'answer4',
-				'trueAnswer' => 'trueAnswer'
+				'id' => 'id',
+				'description' => 'description',
+				'hasImage' => 'has_image',
+				'imageTileSize' => 'image_tile_size',
+				'imageFileNames' => 'image_filenames',
 			);
 		}
 		
 		public function insert()
 		{
-			return mysql_query("INSERT INTO test 
-			(question, answer1, answer2, answer3, answer4, true_answer)
-			VALUES
-			('$this->question', '$this->answer1', '$this->answer2', '$this->answer3', '$this->answer4', '$this->true_answer')" );
+			return mysql_query("INSERT INTO tests
+			VALUES ('', '$this->description', '$this->hasImage', '$this->imageTileSize', '$this->imageFileNames')" );
 		}		
 		
 		public function update()

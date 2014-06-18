@@ -1,0 +1,110 @@
+.p-popUp {
+    background-color: white;
+    -webkit-box-shadow: rgba(0,0,0,0.7) 2px 2px 20px;
+    box-shadow: rgba(0,0,0,0.7) 2px 2px 20px;
+}
+
+.p-closePopUpButton {
+    display: inline-block;
+	text-decoration: none;
+    float: right;
+    margin-top: -8px;
+    margin-right: -8px;
+    width: 21px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: grey;
+    color: white;
+    text-align: center;
+    -moz-transition: background-color 0.2s;
+    -moz-transition: color 0.2s;
+    -o-transition: background-color 0.2s;
+    -o-transition: color 0.2s;
+    -webkit-transition: background-color 0.2s;
+    -webkit-transition: color 0.2s;
+    transition: background-color 0.2s;
+    transition: color 0.2s;
+}
+
+    .p-closePopUpButton:hover {
+        background-color: white;
+        color: black;
+    }
+
+.p-popUpContent {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    background-color: white;
+}
+
+.p-darkLayer {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.p-popUpTitle{
+	display: block;
+	text-align: center;
+	background-color: #EEEEEE;
+	border-bottom: 1px solid grey;
+}
+
+#nextImg {
+	display: inline-block;
+	float: right;
+	text-align: right;
+	font-size: xx-large;
+	-webkit-transition: opacity 1s linear;
+    -moz-transition: opacity 1s linear;
+    -o-transition: opacity 1s linear;
+    transition: opacity 1s linear;
+}
+	#nextImg:hover {
+		background: rgba(0,0,0,0.05);
+	}
+
+#prevImg {
+	display: inline-block;
+	float: left;
+	text-align: left;
+	font-size: xx-large;
+	-webkit-transition: opacity 1s linear;
+    -moz-transition: opacity 1s linear;
+    -o-transition: opacity 1s linear;
+    transition: opacity 1s linear;
+}
+
+	#prevImg:hover {
+		background: rgba(0,0,0,0.05);
+	}
+
+.listViewItem {
+	display: inline-block;
+}
+
+.pageNumber{
+	display: inline-block;
+	margin-right: 5px;
+	cursor: pointer;
+	border-radius: 20px;
+	background-color: #00AAAA;
+	width: 20px;
+	text-align: center;
+	color: white;
+	-webkit-transition: background-color 0.4s;
+    -moz-transition: background-color 0.4s;
+    -o-transition: background-color 0.4s;
+    transition: background-color 0.4s;
+}
+
+	.pageNumber:hover{
+		background-color: #006767;
+	}
+	
+.selectedPage{
+	background-color: #006767;
+}
