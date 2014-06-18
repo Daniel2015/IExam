@@ -23,7 +23,7 @@ header('location:not_allowed_admin.php');
 require_once('connection.php');
 mysql_query("SET NAMES 'utf8'");
 mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-$query="SELECT * FROM test";
+$query="SELECT * FROM test_questions";
 $result=mysql_query($query);
 $num=mysql_numrows($result);
 mysql_close();

@@ -15,7 +15,7 @@
 	$answer4 = $_POST['answer4'];
 	$true_answer = $_POST['true_answer'];
 
-	$result= mysql_query("INSERT INTO test (question, answer1, answer2, answer3, answer4, true_answer)VALUES('$question', '$answer1', '$answer2', '$answer3', '$answer4', '$true_answer')" );
+	$result= mysql_query("INSERT INTO test_questions (question, answer1, answer2, answer3, answer4, true_answer)VALUES('$question', '$answer1', '$answer2', '$answer3', '$answer4', '$true_answer')" );
 	if($result){
 			(new MessagePage)->show("", "Тестът е изпратен успешно!", "success", "admin");
 			exit();

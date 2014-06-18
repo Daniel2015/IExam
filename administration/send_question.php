@@ -27,7 +27,7 @@ $true_answer = $_POST['true_answer'];
 
 mysql_query("SET NAMES 'utf8'");
 mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-$result= mysql_query("INSERT INTO test (question, answer1, answer2, answer3, answer4, true_answer)VALUES('$question', '$answer1', '$answer2', '$answer3', '$answer4', '$true_answer')" );
+$result= mysql_query("INSERT INTO test_questions (question, answer1, answer2, answer3, answer4, true_answer)VALUES('$question', '$answer1', '$answer2', '$answer3', '$answer4', '$true_answer')" );
 if($result){
 		header("Location: test_send_success.php");
 		} 

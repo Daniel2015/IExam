@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.9
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: 
--- Версия на сървъра: 5.6.16
--- PHP Version: 5.5.9
+-- Host: 127.0.0.1
+-- Generation Time: Jun 18, 2014 at 12:12 PM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,25 +17,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `simple_login`
+-- Database: `iexam`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` varchar(100) NOT NULL,
-  `message` text NOT NULL,
-  `link` varchar(100) NOT NULL,
+  `user` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `message` text CHARACTER SET latin1 NOT NULL,
+  `link` varchar(100) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=129 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=129 ;
 
 --
--- Схема на данните от таблица `comments`
+-- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `user`, `message`, `link`) VALUES
@@ -66,7 +66,7 @@ INSERT INTO `comments` (`id`, `user`, `message`, `link`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `logged_in_users`
+-- Table structure for table `logged_in_users`
 --
 
 CREATE TABLE IF NOT EXISTS `logged_in_users` (
@@ -77,16 +77,19 @@ CREATE TABLE IF NOT EXISTS `logged_in_users` (
   `ID` varchar(150) NOT NULL,
   `loggedInTime` varchar(150) NOT NULL,
   PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=103 ;
 
 --
--- Схема на данните от таблица `logged_in_users`
+-- Dumping data for table `logged_in_users`
 --
+
+INSERT INTO `logged_in_users` (`member_id`, `username`, `firstname`, `lastname`, `ID`, `loggedInTime`) VALUES
+(102, '111111', 'Потребител', 'Първи', '1111111111', '2014-06-18 13:02:02');
 
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `messages`
+-- Table structure for table `messages`
 --
 
 CREATE TABLE IF NOT EXISTS `messages` (
@@ -103,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=101 ;
 
 --
--- Схема на данните от таблица `messages`
+-- Dumping data for table `messages`
 --
 
 INSERT INTO `messages` (`ID`, `fromUser`, `toUser`, `message`, `dateCreated`, `readed`, `deleted`, `readedAdmin`, `deletedAdmin`) VALUES
@@ -117,7 +120,7 @@ INSERT INTO `messages` (`ID`, `fromUser`, `toUser`, `message`, `dateCreated`, `r
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `simple_login`
+-- Table structure for table `simple_login`
 --
 
 CREATE TABLE IF NOT EXISTS `simple_login` (
@@ -131,10 +134,10 @@ CREATE TABLE IF NOT EXISTS `simple_login` (
   `ID` varchar(10) NOT NULL,
   PRIMARY KEY (`member_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=195 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=199 ;
 
 --
--- Схема на данните от таблица `simple_login`
+-- Dumping data for table `simple_login`
 --
 
 INSERT INTO `simple_login` (`member_id`, `username`, `isAdmin`, `password`, `salt`, `firstname`, `lastname`, `ID`) VALUES
@@ -163,38 +166,43 @@ INSERT INTO `simple_login` (`member_id`, `username`, `isAdmin`, `password`, `sal
 (189, 'v', 0, '$2a$10$60e611323c6537cac8ddcu36WuJZHvws8UqFJid4wlilNiHsKF6RW', '60e611323c6537cac8ddc7', 'v', 'v', 'v'),
 (190, 'n', 0, '$2a$10$15bf106def5eea8a9724aOGMB1ZuWXVVD9jdOWzJ2duM6TEg1CjTq', '15bf106def5eea8a9724ac', 'n', 'n', 'n'),
 (191, 'm', 0, '$2a$10$df78438fe8ce5e19283f7uFXJnXa5rsZE6LvLMEzIu/sxuIoMcliy', 'df78438fe8ce5e19283f75', 'm', 'm', 'm'),
-(194, 'po', 1, '$2a$10$e2bbf97d70eee4a230b6euI.kHGSD1sfN6.VOtmgWf/o8EUx6FgOe', 'e2bbf97d70eee4a230b6e3', 'po', 'po', 'po');
+(194, 'po', 1, '$2a$10$e2bbf97d70eee4a230b6euI.kHGSD1sfN6.VOtmgWf/o8EUx6FgOe', 'e2bbf97d70eee4a230b6e3', 'po', 'po', 'po'),
+(195, 'admin1', 1, '$2a$10$51928205d3381e940632dunsyE/EeQ2crdrkFBKreYopBk93bRmIO', '51928205d3381e940632d0', 'Администратор', 'Първи', '1010101010'),
+(196, 'admin2', 1, '$2a$10$b77be2b16caab9bf1f24dOOBJpjCCAjnumiDTIw6eWUWHnyq42GYm', 'b77be2b16caab9bf1f24dc', 'Администратор', 'Втори', '0202020202'),
+(197, '111111', 0, '$2a$10$422e0e9acf94d0c8df1d5uG3Xlh4rR3PTKOjumQHjm/d5iEHmcJQ6', '422e0e9acf94d0c8df1d52', 'Потребител', 'Първи', '1111111111'),
+(198, '222222', 0, '$2a$10$cbe3373776151d19512dbuNhgEZOE2AE6FaDPFaF8phj9yTSekj0q', 'cbe3373776151d19512db8', 'Потребител', 'Втори', '2222222222');
 
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `test`
+-- Table structure for table `test_questions`
 --
 
-CREATE TABLE IF NOT EXISTS `test` (
-  `test_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `test_questions` (
+  `question_id` int(11) NOT NULL AUTO_INCREMENT,
   `question` varchar(1000) NOT NULL,
   `answer1` varchar(1000) NOT NULL,
   `answer2` varchar(1000) NOT NULL,
   `answer3` varchar(1000) NOT NULL,
   `answer4` varchar(1000) NOT NULL,
   `true_answer` varchar(30) NOT NULL,
-  PRIMARY KEY (`test_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  PRIMARY KEY (`question_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
--- Схема на данните от таблица `test`
+-- Dumping data for table `test_questions`
 --
 
-INSERT INTO `test` (`test_id`, `question`, `answer1`, `answer2`, `answer3`, `answer4`, `true_answer`) VALUES
+INSERT INTO `test_questions` (`question_id`, `question`, `answer1`, `answer2`, `answer3`, `answer4`, `true_answer`) VALUES
 (4, '?', '.', '!', '?', 'PH', 'D'),
-(5, 'asdddddddddddddddddddddddddddasdddddddddddddddddddddddddddasdddddddddddddddddddddddddddasdddddddddddddddddddddddddddasddddddddddddddddddddddddddd', 'dsaasddddddddddddddddddddddddddd', 'asddddddddddddddddddddddddddd', 'asddddddddddddddddddddddddddd', 'asddddddddddddddddddddddddddd', 'A'),
-(6, 'asdddddddddddddddddddddddddddasdddddddddddddddddddddddddddasddddddasdddddddddddddddddddddddddddasdddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddasddddddddddddddddddddddddddd', 'dsaasddddddddddddddddddddddddddd', 'asddddddddddddddddddddddddddd', 'asddddddddddddddddddddddddddd', 'asddddddddddddddddddddddddddd', 'A');
+(5, 'Дълги въпроси чупят UI?', 'Да!', 'Да бе да!', 'Не.', 'Само некогаш.', 'A'),
+(6, 'Въпрос2.', 'Грешен отговор1.', 'Грешен отговор2.', 'Верен отговор.', 'Грешен отговор3.', 'C'),
+(11, 'Kirlicata maj ne raboti. Ð¢Ð•Ð¡Ð¢.', 'Ne.', 'Navun vali.', 'Mechka.', 'Bachka si be.', 'A');
 
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `videos`
+-- Table structure for table `videos`
 --
 
 CREATE TABLE IF NOT EXISTS `videos` (
@@ -203,17 +211,15 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `link` varchar(100) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `link` (`link`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=96 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=97 ;
 
 --
--- Схема на данните от таблица `videos`
+-- Dumping data for table `videos`
 --
 
 INSERT INTO `videos` (`ID`, `name`, `link`) VALUES
-(91, 'vcvcvc', 'vcvcvc'),
-(93, 'dsadasdasdadsda', 'sdasdsadasds'),
-(94, 'dsadsadsa', 'dsadsadsadsa'),
-(95, 'dsadsadsa', 'dsadasdsa');
+(95, 'Minecraft shit', 'SJbP0YFRYYs'),
+(96, 'Chalga shit', '0WN79cA4Cds');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
