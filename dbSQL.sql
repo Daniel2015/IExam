@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2014 at 12:29 PM
+-- Generation Time: Jun 18, 2014 at 05:55 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -77,7 +77,37 @@ CREATE TABLE IF NOT EXISTS `logged_in_users` (
   `ID` varchar(150) NOT NULL,
   `loggedInTime` varchar(150) NOT NULL,
   PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=104 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=107 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `map_tests_questions`
+--
+
+CREATE TABLE IF NOT EXISTS `map_tests_questions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `test_id` int(11) NOT NULL,
+  `question_number` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `has_image` tinyint(1) NOT NULL,
+  `image_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `question_id` (`question_id`),
+  KEY `test_id` (`test_id`,`question_number`,`has_image`),
+  KEY `image_id` (`image_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `map_tests_questions`
+--
+
+INSERT INTO `map_tests_questions` (`id`, `test_id`, `question_number`, `question_id`, `has_image`, `image_id`) VALUES
+(1, 1, 1, 4, 1, 1),
+(2, 1, 2, 5, 1, 2),
+(3, 1, 3, 6, 1, 3),
+(4, 1, 4, 11, 1, 4),
+(5, 1, 5, 12, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -127,20 +157,18 @@ CREATE TABLE IF NOT EXISTS `simple_login` (
   `ID` varchar(10) NOT NULL,
   PRIMARY KEY (`member_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=199 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=199 ;
 
 --
 -- Dumping data for table `simple_login`
 --
 
 INSERT INTO `simple_login` (`member_id`, `username`, `isAdmin`, `password`, `salt`, `firstname`, `lastname`, `ID`) VALUES
-(172, 'i', 1, '$2a$10$e9088e0900a56ec910388uNWuyUi3MgcYrOKM0KQYuVKwF/TUls0S', 'e9088e0900a56ec9103888', 'i', 'i', 'i'),
-(173, 'q', 1, '$2a$10$71a7463d5dca4c74391f2uwPEFnqGPHmHYc6D.EdJQ8IgxTe5/.VO', '71a7463d5dca4c74391f23', 'xxxxx', 'xxx', 'xxx'),
-(171, 'r', 0, '$2a$10$dc46dae8e9134970d53efuzEDI/bXPMvJJQf0ELo3qX.sjsjjSccW', 'dc46dae8e9134970d53ef5', 'r', 'r', 'r'),
-(193, 'asd', 0, '$2a$10$3b34b112f1d138094ee3buhGAYZUNoCPXu3zUTG8tFCya3mbF1pYW', '3b34b112f1d138094ee3b4', 'xxx', 'xxx', '222'),
-(192, 'dsasa', 0, '$2a$10$780872a029063dd5a3d81OiroTJ2Im.7xx0kAc48QQiPgSxKoV1KO', '780872a029063dd5a3d81a', 'dasdsa', 'dsada', 'dasdasa'),
 (169, 'c', 0, '$2a$10$c7ddcdadedaae3aed2183uuXq3oZfUjFh.LutjYDiS4Fwg7nTjjDq', 'c7ddcdadedaae3aed21837', '123', 'c', 'c'),
 (170, 'g', 1, '$2a$10$632ca54bc36c98306da73ezBv326O9ipi5XkYeXfpGJxYkFtdFxO.', '632ca54bc36c98306da73f', 'g', 'g', 'g'),
+(171, 'r', 0, '$2a$10$dc46dae8e9134970d53efuzEDI/bXPMvJJQf0ELo3qX.sjsjjSccW', 'dc46dae8e9134970d53ef5', 'r', 'r', 'r'),
+(172, 'i', 1, '$2a$10$e9088e0900a56ec910388uNWuyUi3MgcYrOKM0KQYuVKwF/TUls0S', 'e9088e0900a56ec9103888', 'i', 'i', 'i'),
+(173, 'q', 1, '$2a$10$71a7463d5dca4c74391f2uwPEFnqGPHmHYc6D.EdJQ8IgxTe5/.VO', '71a7463d5dca4c74391f23', 'xxxxx', 'xxx', 'xxx'),
 (174, 'w', 0, '$2a$10$26c56223281e45bdea7a4OoLLXErsVRNqDaHdw7f0P33mU5YkH35K', '26c56223281e45bdea7a4c', 'w', 'w', 'w'),
 (175, 'e', 0, '$2a$10$0289a53d580f46e62d238u5/c/kjRU4PD9jmjd8Id8hVubWrY9gr.', '0289a53d580f46e62d2382', 'e', 'e', 'e'),
 (176, 't', 0, '$2a$10$5da1456e1071e163f340dO.Anploi8IYzin2EzgGHXYviqrowSEoi', '5da1456e1071e163f340da', 't', 't', 't'),
@@ -159,11 +187,59 @@ INSERT INTO `simple_login` (`member_id`, `username`, `isAdmin`, `password`, `sal
 (189, 'v', 0, '$2a$10$60e611323c6537cac8ddcu36WuJZHvws8UqFJid4wlilNiHsKF6RW', '60e611323c6537cac8ddc7', 'v', 'v', 'v'),
 (190, 'n', 0, '$2a$10$15bf106def5eea8a9724aOGMB1ZuWXVVD9jdOWzJ2duM6TEg1CjTq', '15bf106def5eea8a9724ac', 'n', 'n', 'n'),
 (191, 'm', 0, '$2a$10$df78438fe8ce5e19283f7uFXJnXa5rsZE6LvLMEzIu/sxuIoMcliy', 'df78438fe8ce5e19283f75', 'm', 'm', 'm'),
+(192, 'dsasa', 0, '$2a$10$780872a029063dd5a3d81OiroTJ2Im.7xx0kAc48QQiPgSxKoV1KO', '780872a029063dd5a3d81a', 'dasdsa', 'dsada', 'dasdasa'),
+(193, 'asd', 0, '$2a$10$3b34b112f1d138094ee3buhGAYZUNoCPXu3zUTG8tFCya3mbF1pYW', '3b34b112f1d138094ee3b4', 'xxx', 'xxx', '222'),
 (194, 'po', 1, '$2a$10$e2bbf97d70eee4a230b6euI.kHGSD1sfN6.VOtmgWf/o8EUx6FgOe', 'e2bbf97d70eee4a230b6e3', 'po', 'po', 'po'),
 (195, 'admin1', 1, '$2a$10$51928205d3381e940632dunsyE/EeQ2crdrkFBKreYopBk93bRmIO', '51928205d3381e940632d0', 'Администратор', 'Първи', '1010101010'),
 (196, 'admin2', 1, '$2a$10$b77be2b16caab9bf1f24dOOBJpjCCAjnumiDTIw6eWUWHnyq42GYm', 'b77be2b16caab9bf1f24dc', 'Администратор', 'Втори', '0202020202'),
 (197, '111111', 0, '$2a$10$422e0e9acf94d0c8df1d5uG3Xlh4rR3PTKOjumQHjm/d5iEHmcJQ6', '422e0e9acf94d0c8df1d52', 'Потребител', 'Първи', '1111111111'),
 (198, '222222', 0, '$2a$10$cbe3373776151d19512dbuNhgEZOE2AE6FaDPFaF8phj9yTSekj0q', 'cbe3373776151d19512db8', 'Потребител', 'Втори', '2222222222');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tests`
+--
+
+CREATE TABLE IF NOT EXISTS `tests` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` tinytext NOT NULL,
+  `has_images` tinyint(1) NOT NULL,
+  `image_tile_size` int(3) NOT NULL,
+  `image_filenames` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tests`
+--
+
+INSERT INTO `tests` (`id`, `description`, `has_images`, `image_tile_size`, `image_filenames`) VALUES
+(1, 'Първи тест. Тест по География за 7 клас.', 1, 10, '''test30x30.png'', ''chovka.png'', ''koliba.jpg'', ''nos.jpg'', ''cveke.png'', ''badHeightNos.jpg'', ''badWidthNos.jpg'', ''badFormatNos.bmp''');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_images`
+--
+
+CREATE TABLE IF NOT EXISTS `test_images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `number_of_tiles` int(11) NOT NULL,
+  `css_file` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `test_images`
+--
+
+INSERT INTO `test_images` (`id`, `number_of_tiles`, `css_file`) VALUES
+(1, 9, 'css/imageCSS/image0.css'),
+(2, 300, 'css/imageCSS/image1.css'),
+(3, 182, 'css/imageCSS/image2.css'),
+(4, 575, 'css/imageCSS/image3.css'),
+(5, 460, 'css/imageCSS/image4.css');
 
 -- --------------------------------------------------------
 
@@ -180,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `test_questions` (
   `answer4` varchar(1000) NOT NULL,
   `true_answer` varchar(30) NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `test_questions`
@@ -190,7 +266,8 @@ INSERT INTO `test_questions` (`question_id`, `question`, `answer1`, `answer2`, `
 (4, '?', '.', '!', '?', 'PH', 'D'),
 (5, 'Дълги въпроси чупят UI?', 'Да!', 'Да бе да!', 'Не.', 'Само некогаш.', 'A'),
 (6, 'Въпрос2.', 'Грешен отговор1.', 'Грешен отговор2.', 'Верен отговор.', 'Грешен отговор3.', 'C'),
-(11, 'Kirlicata maj ne raboti. Ð¢Ð•Ð¡Ð¢.', 'Ne.', 'Navun vali.', 'Mechka.', 'Bachka si be.', 'A');
+(11, 'Kirlicata maj ne raboti. Ð¢Ð•Ð¡Ð¢.', 'Ne.', 'Navun vali.', 'Mechka.', 'Bachka si be.', 'A'),
+(12, 'Къде се намира колибата?', 'ПРАВИЛЕН', 'Там', 'Тук', 'Нейде другаде', 'A');
 
 -- --------------------------------------------------------
 
@@ -213,6 +290,18 @@ CREATE TABLE IF NOT EXISTS `videos` (
 INSERT INTO `videos` (`ID`, `name`, `link`) VALUES
 (95, 'Minecraft shit', 'SJbP0YFRYYs'),
 (96, 'Chalga shit', '0WN79cA4Cds');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `map_tests_questions`
+--
+ALTER TABLE `map_tests_questions`
+  ADD CONSTRAINT `map_tests_questions_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `tests` (`id`),
+  ADD CONSTRAINT `map_tests_questions_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `test_questions` (`question_id`),
+  ADD CONSTRAINT `map_tests_questions_ibfk_3` FOREIGN KEY (`image_id`) REFERENCES `test_images` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

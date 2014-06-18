@@ -1,5 +1,6 @@
 ﻿<?php
 require_once 'Authentication.php';
+require_once('utilities/MessagePage.php');
 class Permissions
 {
     public static function OnlyAdmins() {
