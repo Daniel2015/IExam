@@ -22,7 +22,7 @@ require_once('utilities/MessagePage.php');
 mysql_query("SET NAMES 'utf8'");
 mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html>	
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
@@ -77,11 +77,38 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 
 		<?php }  ?>
 		</section>
+
+		<script type="text/javascript">
+function GetClock(){
+d = new Date();
+nday   = d.getDay();
+nmonth = d.getMonth();
+ndate  = d.getDate();
+nyear = d.getYear();
+nhour  = d.getHours();
+nmin   = d.getMinutes();
+nsec   = d.getSeconds();
+
+if(nyear<1000) nyear=nyear+1900;
+
+     if(nhour ==  0) {ap = " AM";nhour = 12;} 
+else if(nhour <= 11) {ap = " AM";} 
+else if(nhour == 12) {ap = " PM";} 
+else if(nhour >= 13) {ap = " PM";nhour -= 12;}
+
+if(nmin <= 9) {nmin = "0" +nmin;}
+if(nsec <= 9) {nsec = "0" +nsec;}
+
+document.getElementById('clockbox').innerHTML=""+(nmonth+1)+"/"+ndate+"/"+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+setTimeout("GetClock()", 1000);
+}
+window.onload=GetClock;
+</script>
+ <span class="badge "><div id="clockbox"></div></span>
 	</body>
 	<script src="js/jquery.2.1.1.min.js" />
 	<script src="js/bootstrap.min.js" />
 </html>
-
 <?php
 	mysql_close($bd);
 ?>

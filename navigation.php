@@ -1,6 +1,6 @@
  <div class="panel panel-default">
 	   <div class="panel-heading">
-		 <span><h4 style="display: inline;">Здравей, <?php if(isset($_SESSION["SESS_FIRST_NAME"])) echo $_SESSION["SESS_FIRST_NAME"] ?>!</h4></span>
+		 <span><h4 style="display: inline;"><?php if(isset($_SESSION["SESS_FIRST_NAME"])){ echo 'Здравей, ' . $_SESSION["SESS_FIRST_NAME"] . '!'; } else {echo "IExam";}?></h4></span>
 	   </div>
 	<div class="panel-body">
 	<p><a href="/<?=$ProjectName?>/index" class="btn btn-info"><span class="glyphicon glyphicon-home">    Home</a></p>
