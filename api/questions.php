@@ -28,7 +28,7 @@ function insert()
 	$question->answer2 = $_POST['answer2'];
 	$question->answer3 = $_POST['answer3'];
 	$question->answer4 = $_POST['answer4'];
-	$question->trueAnswer = $_POST['trueAnswer'];
+	$question->trueAnswer = $_POST['true_answer'];
 	
 	$result = $question->insert();
 	

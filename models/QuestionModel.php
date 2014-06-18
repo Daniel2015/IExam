@@ -37,7 +37,7 @@
 			return mysql_query("INSERT INTO test_questions 
 			(question, answer1, answer2, answer3, answer4, true_answer)
 			VALUES
-			('$this->question', '$this->answer1', '$this->answer2', '$this->answer3', '$this->answer4', '$this->true_answer')" );
+			('$this->question', '$this->answer1', '$this->answer2', '$this->answer3', '$this->answer4', '$this->trueAnswer')");
 		}		
 		
 		public function update()
