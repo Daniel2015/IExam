@@ -18,20 +18,42 @@ if(isset($_POST['submit']))
 			$user = $_POST['user'];
 			$message = $_POST['message'];
 			$time = date("Y-m-d H:i:s");
+			if($user==' ')
+			{
+			$logged = ' ';
+			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated, deleted)VALUES('$logged', '$user', '$message', '$time', '1')");
+			MessagePage::show("", "Съобщението е изпратено!", "success", "mail?sent=0");
+			exit();
+			mysql_close();
+			}
+			else
+			{
 			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('$logged', '$user', '$message', '$time')");
 			MessagePage::show("", "Съобщението е изпратено!", "success", "mail?sent=0");
 			exit();
 			mysql_close();
+			}
 		}
 		if(isset($_POST['who']))
 		{
 			$user = $_POST['user'];
 			$message = $_POST['message'];
 			$time = date("Y-m-d H:i:s");
+			if($user==' ')
+			{
+			$logged = ' ';
+			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated, deleted)VALUES('" . 'Админ (' . $logged . ')' . "', '$user', '$message', '$time', '1')");
+			MessagePage::show("", "Съобщението е изпратено!", "success", "mail?sent=0");
+			exit();
+			mysql_close();
+			}
+			else
+			{
 			mysql_query("INSERT INTO messages (fromUser, toUser, message, dateCreated)VALUES('" . 'Админ (' . $logged . ')' . "', '$user', '$message', '$time')");
 			MessagePage::show("", "Съобщението е изпратено!", "success", "mail?sent=0");
 			exit();
 			mysql_close();
+			}
 		}
 	}
 	else{
@@ -100,6 +122,7 @@ echo mysql_error();
     <div class="col-sm-10">
       <select class="dropdown input-lg form-control" name="user" id="user">
 					<option value="" >Изберете Потребител</option>
+					<option value=" ">ДО ВСИЧКИ!</option>
 					<option disabled="disabled"></option>
 					<?php $p=0;
 							while ($p < $num) {

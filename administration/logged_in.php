@@ -2,7 +2,6 @@
 	$query="SELECT * FROM logged_in_users";
 	$result=mysql_query($query);
 	$num=mysql_numrows($result);
-	mysql_close();
 ?>
 <!DOCTYPE html>
 <html>
