@@ -65,7 +65,7 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 			<div class="panel-heading">
 				<p><h2 style="display: inline;">Система за тестове!</h2></p>
 				<br>
-				<p><b>Изготвили: </b><br>
+				<p><b>Изготвили: </b></p><br>
 						  Даниел Копев, ф.н. 61599 <br>
 						  Диана Касаветова, ф.н. 61568 <br>
 						  Здравко Петков, ф.н. 61598 <br>
@@ -74,7 +74,8 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 						  Спас Кючучов, ф.н. 61578 <br>
 						  </p>
 				<p>Приятно прекарване в компанията на тестовете!</p>
-
+			</div>
+		</div>
 		<?php }  ?>
 		</section>
 
