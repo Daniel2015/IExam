@@ -96,8 +96,6 @@
 				<p><label>ЕГН: <input type="text" name="ID_NEW" class="form-control" id="ID_NEW" value="<?= $user->egn ?>"/></label></p>
 				<p><label>Нова парола: <input type="password" name="password_NEW" class="form-control" id="password_NEW" /></label></p>
 				<p><input name="submit" type="submit" value="Редактирай" class="form-control btn btn-primary"/></p>
-				<p><a href="main_login" class="form-control btn btn-info" >Назад</a></p>
-				<p><a href="logout" class="form-control btn btn-info" >Излез</a></p>
 			</form>
 		</div>
 	</div>

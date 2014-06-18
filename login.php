@@ -57,7 +57,7 @@ else
 		$logged = Authentication::Login($login, $password);
 		if($logged)
 		{
-			MessagePage::show("", "Влязохте успешно!", "success", "main_login");
+			MessagePage::show("", "Влязохте успешно!", "success", "index");
 			exit();
 		}
 		else
@@ -105,8 +105,6 @@ if (b==null || b=="")
 				  <input type="password" name="password" class="form-control" id="password" onkeydown="if (event.keyCode == 13) document.getElementById('btn').click()"/>
 			</div>
 			<input type="submit" name="submit" class="form-control btn btn-primary" value="Влез" id="btn" />
-			<a href="register" class="btn btn-info">Регистрация</a>
-			<a href="administration/admin_login" class="btn btn-info">Вход за Админи</a>
 
 	</form>
 

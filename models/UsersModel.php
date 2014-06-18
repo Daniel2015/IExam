@@ -36,7 +36,7 @@
 			return mysql_query("INSERT INTO simple_login
 			(firstname, lastname, ID, username, password, salt)
 			VALUES
-			('$this->firstName', '$this->lastName', '$this->egn', '$this->username', '$this->password', '$this->salt')") or die(mysql_error());
+			('$this->firstName', '$this->lastName', '$this->egn', '$this->username', '$this->password', '$this->salt')");
 		}
 		
 		public function encryptPassword()
