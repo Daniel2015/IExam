@@ -4,7 +4,7 @@
 			<span><h3 style="display: inline;">IExam</h4></span>
 		</div>
 		<div class="panel-body">
-<div class="panel panel-primary">
+<div class="panel panel-info">
 <div class="panel-heading">		
 <label>Текущо време:</label></br>
 </div>	

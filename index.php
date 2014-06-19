@@ -57,7 +57,6 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 			}
 			else
 			{
-			//(new MessagePage)->show("Login success", "Login success", "profile");
 		?>
 		<div class="panel panel-warning">
 			<div class="panel-heading">
@@ -84,7 +83,7 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 				<ul class="nav nav-stacked">
 					<li class="active"> <a><span class="badge pull-right"><?php echo mysql_num_rows(mysql_query("SELECT * FROM simple_login")); ?></span>Брой регистрирани потребители:</a></li>
 					<li class="active"> <a><span class="badge pull-right"><?php echo mysql_num_rows(mysql_query("SELECT * FROM test_questions")); ?></span>Брой въпроси:</a></li>
-					<li class="active"> <a><span class="badge pull-right"><?php echo mysql_num_rows(mysql_query("SELECT * FROM simple_login WHERE isAdmin='1'")); ?></span>Админи:</a></li>
+					<li class="active"> <a><span class="badge pull-right"><?php echo mysql_num_rows(mysql_query("SELECT * FROM simple_login WHERE isAdmin='1'")); ?></span>Брой админи:</a></li>
 				</ul>
 				</div>
 		</div>
