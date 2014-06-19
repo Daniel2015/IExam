@@ -7,7 +7,7 @@
 		
 		protected $fieldsMapping;
 		
-		protected $selectQuery = "Select * from ";
+		public $selectQuery = "Select * from ";
 		
 		public function get_tableName()
 		{

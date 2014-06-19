@@ -4,7 +4,7 @@ require_once('APIBase.php');
 
 function getByTest()
 {
-	Permissions::OnlyAuthenticated();
+	Permissions::OnlyAdmins();
 	
 	$testId = $_GET['testId'];
 	$questions = (new QuestionModel)->getItems("Where test_Id='$testId'");

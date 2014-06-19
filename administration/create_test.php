@@ -72,30 +72,15 @@
 <script id="galleryTemplate" type="protos-tmpl">
 	<div class="panel panel-default">
 		<div class="panel-heading">#=question#</div>
-		<p>#=answer1#</p>
-		<p>#=answer2#</p>
-		<p>#=answer3#</p>
-		<p>#=answer4#</p>
+		<p class="#=trueAnswer == 'A' ? 'bg-success' : ''#">#=answer1#</p>
+		<p class="#=trueAnswer == 'B' ? 'bg-success' : ''#">#=answer2#</p>
+		<p class="#=trueAnswer == 'C' ? 'bg-success' : ''#">#=answer3#</p>
+		<p class="#=trueAnswer == 'D' ? 'bg-success' : ''#">#=answer4#</p>
 	</div>
 </script>
 
 <script>
-	$(function() {
-	var markTrueAnswers = function () {
-			$.each($("#questions_listItems li"), function(i, element) {
-				var elementId = $(element).data("uid");
-				var dataItem = dataSource.findItem(elementId);
-				
-				var answers = $(element).find("p");
-				switch(dataItem.trueAnswer) {
-					case 'A': $(answers[0]).addClass('bg-success'); break;
-					case 'B': $(answers[1]).addClass('bg-success'); break;
-					case 'C': $(answers[2]).addClass('bg-success'); break;
-					case 'D': $(answers[3]).addClass('bg-success'); break;
-				}
-			});	
-		};
-		
+	$(function() {		
 		var dataSource = new protos.dataSource({
 				data: {
 					create: function(dataItems) {
@@ -114,32 +99,29 @@
 								return;
 							}
 							
-							$("#addQuestion")[0].reset();
-							
 							dataSource.dataChanged();
+							$("#addQuestion")[0].reset();
 						}).fail(function () {
 							alert('Fail');
 						});
 					},
 					read: function(query) {
-					debugger;
-							$.ajax({
-								type: 'json',
-								contentType: "application/json; charset=utf-8",
-								type: "GET",
-								url: '/<?= $ProjectName ?>/api/questions/getByTest?testId=<?=$_GET["testId"]?>',
-								//data: query,
-								success: function(response) {
-									var data = {};
-									data.data = response;
-									data.items = response.length;
-									dataItems = data;
-									
-									dataSource.readed(data);
-									markTrueAnswers();
-								}
-							});
-							return;
+						$.ajax({
+							type: 'json',
+							contentType: "application/json; charset=utf-8",
+							type: "GET",
+							url: '/<?= $ProjectName ?>/api/questions/getByTest?testId=<?=$_GET["testId"]?>',
+							//data: query,
+							success: function(response) {
+								var data = {};
+								data.data = response;
+								data.items = response.length;
+								dataItems = data;
+								
+								dataSource.readed(data);
+							}
+						});
+						return;
 					}
 				},
 				server: {
