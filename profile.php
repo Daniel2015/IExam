@@ -82,12 +82,12 @@
 		}
 	}
 ?>
-<div class="col-md-4">
-	<div class="panel panel-default">
+	<div class="panel panel-success">
 		<div class="panel-heading">
 			<span><h4 style="display: inline;">Профил</h4></span>
 		</div>
 		<div class="panel-body">
+		<div class="col-md-3">
 			<form name="submit" method="POST" action="" >
 										
 				<p><label>Фак. Номер: <input type="text" name="username_NEW" class="form-control" id="username_NEW" value="<?= $user->username ?>" disabled="disabled" /></label></p>
@@ -97,6 +97,6 @@
 				<p><label>Нова парола: <input type="password" name="password_NEW" class="form-control" id="password_NEW" /></label></p>
 				<p><input name="submit" type="submit" value="Редактирай" class="form-control btn btn-primary"/></p>
 			</form>
+			</div>
 		</div>
 	</div>
-</div>

@@ -64,8 +64,6 @@ if($queryNews){
 		$resultNewsID = mysql_result($queryNews, $k, "ID");
 
 ?>
-
-
 <div class="alert alert-warning">
 <?php
 	if($resultNews){

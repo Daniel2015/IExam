@@ -76,7 +76,7 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 				<p>Приятно прекарване в компанията на тестовете!</p>
 			</div>
 		</div>
-		<div class="panel panel-info">
+		<div class="panel panel-warning">
 			<div class="panel-heading">
 				<h3 style="display: inline;">Статистика на <i>IExam </i>!</h3>
 				</div>

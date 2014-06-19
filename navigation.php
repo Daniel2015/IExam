@@ -3,13 +3,13 @@
 		 <span><h4 style="display: inline;"><?php if(isset($_SESSION["SESS_FIRST_NAME"])){ echo 'Здравей, ' . $_SESSION["SESS_FIRST_NAME"] . '!'; } else {echo "IExam";}?></h4></span>
 	   </div>
 	<div class="panel-body">
-	<p><a href="/<?=$ProjectName?>/index" class="btn btn-info"><span class="glyphicon glyphicon-home">    Home</a></p>
+	<p><a href="/<?=$ProjectName?>/index" class="btn btn-info"><span class="glyphicon glyphicon-home"></span>    Начална страница</a></p>
 <?php
 if(Authentication::IsAuthenticated())
 {
 ?>
-   <p><a href="/<?=$ProjectName?>/test" class="btn btn-info" ><span class="glyphicon glyphicon-list-alt"></span>    Тестове</span></a></p>
-   <p><a href="/<?=$ProjectName?>/test_interactive" class="btn btn-info" ><span class="glyphicon glyphicon-list-alt"></span>    Тест интерактивно</span></a></p>
+   <p><a href="/<?=$ProjectName?>/test" class="btn btn-info" ><span class="glyphicon glyphicon-list-alt"></span>    Тестове</a></p>
+   <p><a href="/<?=$ProjectName?>/test_interactive" class="btn btn-info" ><span class="glyphicon glyphicon-list-alt"></span>    Тест интерактивно</a></p>
    <p><a href="/<?=$ProjectName?>/profile" class="btn btn-info" ><span class="glyphicon glyphicon-user"></span>    Профил</a></p>
    <p><a href="/<?=$ProjectName?>/statistics" class="btn btn-info" ><span class="glyphicon glyphicon-stats"></span>    Статистика</a></p>
    <p><a href="/<?=$ProjectName?>/messages/mail" class="btn btn-info" ><span class="glyphicon glyphicon-envelope"></span>    Поща</a></p>
