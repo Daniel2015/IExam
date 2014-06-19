@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2014 at 01:07 PM
+-- Generation Time: Jun 19, 2014 at 04:43 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `message` text NOT NULL,
   `link` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=138 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=139 ;
 
 --
 -- Dumping data for table `comments`
@@ -70,7 +70,8 @@ INSERT INTO `comments` (`id`, `user`, `message`, `link`) VALUES
 (134, 'g', '??????', 'SJbP0YFRYYs'),
 (135, 'g', 'дасдсада', '0WN79cA4Cds'),
 (136, 'g', 'дсадсадас', 'SJbP0YFRYYs'),
-(137, '111111', 'асдсадасдса', 'SJbP0YFRYYs');
+(137, '111111', 'асдсадасдса', 'SJbP0YFRYYs'),
+(138, '111111', 'КИРИЛИЦААА', 'SJbP0YFRYYs');
 
 -- --------------------------------------------------------
 
@@ -86,15 +87,16 @@ CREATE TABLE IF NOT EXISTS `logged_in_users` (
   `ID` varchar(150) NOT NULL,
   `loggedInTime` varchar(150) NOT NULL,
   PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=118 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=122 ;
 
 --
 -- Dumping data for table `logged_in_users`
 --
 
 INSERT INTO `logged_in_users` (`member_id`, `username`, `firstname`, `lastname`, `ID`, `loggedInTime`) VALUES
-(116, '111111', 'Потребител', 'Първи', '1111111111', '2014-06-18 22:42:12'),
-(117, '111111', 'Потребител', 'Първи', '1111111111', '2014-06-19 13:48:21');
+(119, '111111', 'Потребител', 'Първи', '1111111111', '2014-06-19 14:34:52'),
+(120, '222222', 'Потребител', 'Втори', '2222222222', '2014-06-19 17:02:25'),
+(121, '111111', 'Потребител', 'Първи', '1111111111', '2014-06-19 17:40:06');
 
 -- --------------------------------------------------------
 
@@ -108,12 +110,12 @@ CREATE TABLE IF NOT EXISTS `map_tests_questions` (
   `question_number` int(11) NOT NULL,
   `question_id` int(11) NOT NULL,
   `has_image` tinyint(1) NOT NULL,
-  `image_id` int(11) NOT NULL,
+  `image_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `question_id` (`question_id`),
-  KEY `test_id` (`test_id`,`question_number`,`has_image`),
-  KEY `image_id` (`image_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  KEY `image_id` (`image_id`),
+  KEY `question_id` (`question_id`,`has_image`),
+  KEY `test_id` (`test_id`,`question_number`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `map_tests_questions`
@@ -124,7 +126,8 @@ INSERT INTO `map_tests_questions` (`id`, `test_id`, `question_number`, `question
 (2, 1, 2, 5, 1, 2),
 (3, 1, 3, 6, 1, 3),
 (4, 1, 4, 11, 1, 4),
-(5, 1, 5, 12, 1, 5);
+(5, 1, 5, 12, 1, 5),
+(7, 2, 1, 13, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -143,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `readedAdmin` int(1) NOT NULL,
   `deletedAdmin` int(1) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=105 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=106 ;
 
 --
 -- Dumping data for table `messages`
@@ -159,7 +162,8 @@ INSERT INTO `messages` (`ID`, `fromUser`, `toUser`, `message`, `dateCreated`, `r
 (101, 'Админ (g)', 'asd', 'sad', '2014-06-18 20:26:00', 0, 0, 0, 0),
 (102, '', 'admin2', 'dsadas', '2014-06-18 20:57:46', 0, 0, 0, 0),
 (103, 'ШЕФЧЕ', '111111', 'Ново, високи оценки по WWW, само ТУК!', '2014-06-19 11:15:32', 0, 0, 0, 0),
-(104, 'СПАМЕР', ' ', 'Новината на деня - слон изяде мечка, жираф го гледаше и се смееше.', '2014-06-19 11:17:42', 0, 0, 0, 0);
+(104, 'СПАМЕР', ' ', 'Новината на деня - слон изяде мечка, жираф го гледаше и се смееше.', '2014-06-19 11:17:42', 0, 0, 0, 0),
+(105, '111111', ' ', 'Съобщение до всички от 111111. Я съм трамвай.', '2014-06-19 13:13:21', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -226,17 +230,18 @@ CREATE TABLE IF NOT EXISTS `tests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` tinytext NOT NULL,
   `has_images` tinyint(1) NOT NULL,
-  `image_tile_size` int(3) NOT NULL,
-  `image_filenames` text NOT NULL,
+  `image_tile_size` int(3) NOT NULL DEFAULT '0',
+  `image_filenames` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tests`
 --
 
 INSERT INTO `tests` (`id`, `description`, `has_images`, `image_tile_size`, `image_filenames`) VALUES
-(1, 'Първи тест. Тест по География за 7 клас.', 1, 10, '''test30x30.png'', ''chovka.png'', ''koliba.jpg'', ''nos.jpg'', ''cveke.png'', ''badHeightNos.jpg'', ''badWidthNos.jpg'', ''badFormatNos.bmp''');
+(1, 'Тест с картинки "Околен свят"', 1, 10, '''test30x30.png'', ''chovka.png'', ''koliba.jpg'', ''nos.jpg'', ''cveke.png'', ''badHeightNos.jpg'', ''badWidthNos.jpg'', ''badFormatNos.bmp'''),
+(2, 'Тест 2.', 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -285,12 +290,12 @@ CREATE TABLE IF NOT EXISTS `test_questions` (
 --
 
 INSERT INTO `test_questions` (`question_id`, `test_id`, `question`, `answer1`, `answer2`, `answer3`, `answer4`, `true_answer`) VALUES
-(4, 0, '?', '.', '!', '?', 'PH', 'D'),
-(5, 0, 'Дълги въпроси чупят UI?', 'Да!', 'Да бе да!', 'Не.', 'Само некогаш.', 'A'),
-(6, 0, 'Въпрос2.', 'Грешен отговор1.', 'Грешен отговор2.', 'Верен отговор.', 'Грешен отговор3.', 'C'),
-(11, 0, 'Kirlicata maj ne raboti. Ð¢Ð•Ð¡Ð¢.', 'Ne.', 'Navun vali.', 'Mechka.', 'Bachka si be.', 'A'),
-(12, 0, 'Къде се намира колибата?', 'ПРАВИЛЕН', 'Там', 'Тук', 'Нейде другаде', 'A'),
-(13, 0, 'dasd', 'asdsad', 'sad', 'sadsa', 'dadas', 'B'),
+(4, 0, 'Какво е показано на каритнката?', 'Риба.', 'Стол.', 'Епа нема такова животно!', 'Квадратче.', 'D'),
+(5, 0, 'Кое е това животно?', 'Куркудил.', 'Динозавър.', 'Пилето Гошо.', 'Риба тресчотка.', 'C'),
+(6, 0, 'Къде се намира тази колиба?', 'На село.', 'В ЗОНА 51.', 'До Фантастико.', 'Каква колиба?', 'B'),
+(11, 0, 'Космат ли е показаният нос?', 'Тва са мустаци, бе!', 'Да.', 'Не казвам.', 'Кой ме е снимал?', 'A'),
+(12, 0, 'Какво е това цвете?', 'Фикус.', 'Теменужка.', 'Дето жената чака от 1 година за подарък.', 'Туй е бюро, бе?!', 'C'),
+(13, 0, 'От тест 2 съм.', 'asdsad', 'sad', 'sadsa', 'dadas', 'B'),
 (14, 0, 'dsada', 'dasda', 'dsa', 'da', '1231', 'B');
 
 -- --------------------------------------------------------
@@ -324,6 +329,8 @@ INSERT INTO `videos` (`ID`, `name`, `link`) VALUES
 -- Constraints for table `map_tests_questions`
 --
 ALTER TABLE `map_tests_questions`
+  ADD CONSTRAINT `map_tests_questions_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `tests` (`id`),
+  ADD CONSTRAINT `map_tests_questions_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `test_questions` (`question_id`),
   ADD CONSTRAINT `map_tests_questions_ibfk_3` FOREIGN KEY (`image_id`) REFERENCES `test_images` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

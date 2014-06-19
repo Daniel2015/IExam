@@ -1,6 +1,8 @@
-function getImageInfo(){
-	var selectedImage = $("#selectImg").val();
-	$.ajax("imageServer.php", {type: "POST", data: {"testID": "1", "questionNum": selectedImage},
+function getQuestionImage(testId, questionNumber){
+	var testID = testId;
+	var questionNum = questionNumber;
+	//var selectedImage = $("#selectImg").val();
+	$.ajax("imageServer.php", {type: "POST", data: {"testID": testID, "questionNum": questionNum},
 		success: function(inputData) {
 			var imageData = JSON.parse(inputData);
 			var tileSize = imageData["tileSize"];

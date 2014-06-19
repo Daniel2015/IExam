@@ -8,7 +8,7 @@
 </head>
 <body>
 	<p><strong>Избери изображение и виж с инспектора :D</strong></p>
-	<select id="selectImg" onchange="getImageInfo()">
+	<select id="selectImg" onchange="getQuestionImage(1, $('#selectImg').val())">
 		<option value="1">Тест</option>
 		<option value="2">Човка</option>
 		<option value="3">Колиба</option>
@@ -16,6 +16,6 @@
 		<option value="5">Цвеке</option>
 	</select>
 	<div id="imageSystem"></div>
-	<script>$(document).ready(getImageInfo());</script>
+	<script>$(document).ready(getQuestionImage(1, $('#selectImg').val()));</script>
 </body>
 </html>

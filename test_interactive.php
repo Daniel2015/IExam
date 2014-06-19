@@ -22,16 +22,22 @@
     require_once('connection.php');
     mysql_query("SET NAMES 'utf8'");
     mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-    $query="SELECT * FROM test_questions";
+    $testID=1;
+    $query="SELECT * FROM test_questions
+        INNER JOIN map_tests_questions
+            on map_tests_questions.question_id = test_questions.question_id
+        WHERE map_tests_questions.test_id=".$testID;
     $result=mysql_query($query);
     $num=mysql_numrows($result);
+    $testNameQuery = mysql_query("SELECT description FROM tests WHERE id=".$testID);// or die(mysql_error());
+    $testDescription = mysql_result($testNameQuery, 0);
     mysql_close();
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Профил</title>
+        <title>Тест</title>
         <link rel="stylesheet" type="text/css" href="css/main.css">
 		<link rel="WWW Icon" href="images/www_icon1.ico"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -40,17 +46,20 @@
 		<script src="js/jquery.2.1.1.min.js" ></script>
 		<script src="js/bootstrap.min.js" ></script>
 		<script src="js/jquery.protos-ui.min.js" ></script>
+        <script type="text/javascript" src="js/imageGetter.js"></script>
     </head>
     <body>
-        <span id="testtable">
-            <table id="table_test">
-                <tr class="tbl_test" style="border-bottom:3px solid #0066FF; font-weight:bold">
-                    <td>
-                        <canvas id="questionCanvas" width="700" height="500"></canvas>
-                    </td>
-                </tr>
-            </table>
-        </span> 
+         <h3 style="text-align:center;">
+    <?php
+        echo $testDescription
+    ?>
+        </h3>
+
+        <div id="imageSystem" style="width:704px; vertical-align:top; margin-left:auto; margin-right:auto;"></div>
+        
+        <div id="testHolder" style="width:704px; height:504px; margin-top:10px; margin-left:auto; margin-right:auto; border:2px solid #28A4C9;">
+            <canvas id="questionCanvas" width="700" height="500"></canvas>
+        </div> 
     </body>
     <script language="javascript" type="text/javascript">
         var qcanvas = document.getElementById("questionCanvas");
@@ -67,9 +76,11 @@
         var answerTo = [];
         var trueAnswer = [];
         var nextText = "Следващ";
-        var questionCount = <?php echo $num; ?> ;
-        my_gradient.addColorStop(0, "#0066FF");
-        my_gradient.addColorStop(1, "#0010a2");
+        var questionCount = <?php
+                                echo $num;
+    ?>;
+        my_gradient.addColorStop(0, "#5BC0DE");
+        my_gradient.addColorStop(1, "#2AABD2");
         ctx.fillStyle = my_gradient;
         ctx.fillRect(0, 0, 700, 500);
         ctx.fillStyle = "white";
@@ -89,6 +100,9 @@
         var ci = <?php
                     echo $i 
     ?>;
+        var testID = <?php
+                    echo $testID
+    ?>;
         cquestion[ci] = "<?php echo $field1 ;?>";
         casnwer1[ci] = "<?php echo $field2 ;?>";
         casnwer2[ci] = "<?php echo $field3 ;?>";
@@ -100,7 +114,15 @@
         $i++; 
 	}
     ?>
+
+        //$(document).ready(getQuestionImage(testID, currentQuestion));
+
         loadQuestion();
+
+        function loadQuestion(){
+            asn = answerTo[currentQuestion];
+            fillQuestion();
+        }
 
         function fillQuestion(){
             ctx.fillStyle = "white";
@@ -119,11 +141,8 @@
             ctx.fillText("B  " + casnwer2[currentQuestion], 35, 290);
             ctx.fillText("C  " + casnwer3[currentQuestion], 35, 330);
             ctx.fillText("D  " + casnwer4[currentQuestion], 35, 370);
-        }
 
-        function loadQuestion(){
-            asn = answerTo[currentQuestion];
-            fillQuestion();
+            getQuestionImage(testID, currentQuestion+1);
         }
 
         function clearSelect(){
@@ -144,6 +163,8 @@
             fillQuestion();
             asn = answerTo[currentQuestion];
             selectAsn(answerTo[currentQuestion]);
+
+            //getQuestionImage(testID, currentQuestion);
         }
 
         function nextQuestion(){
@@ -160,6 +181,8 @@
             }
 
             loadQuestion();
+
+            //getQuestionImage(testID, currentQuestion);
         }
 
         function complete(){
