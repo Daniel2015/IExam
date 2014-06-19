@@ -8,7 +8,7 @@
 if(Authentication::IsAuthenticated())
 {
 ?>
-   <p><a href="/<?=$ProjectName?>/test" class="btn btn-info" ><span class="glyphicon glyphicon-list-alt"></span>    Тестове</a></p>
+   <p><a href="/<?=$ProjectName?>/testsAll" class="btn btn-info" ><span class="glyphicon glyphicon-list-alt"></span>    Тестове</a></p>
    <p><a href="/<?=$ProjectName?>/test_interactive" class="btn btn-info" ><span class="glyphicon glyphicon-list-alt"></span>    Тест интерактивно</a></p>
    <p><a href="/<?=$ProjectName?>/profile" class="btn btn-info" ><span class="glyphicon glyphicon-user"></span>    Профил</a></p>
    <p><a href="/<?=$ProjectName?>/statistics" class="btn btn-info" ><span class="glyphicon glyphicon-stats"></span>    Статистика</a></p>
