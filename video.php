@@ -8,6 +8,12 @@ if(!empty($_POST['videoName']) && !empty($_POST['videoUrl']))
 {
 $name = $_POST['videoName'];
 $url = $_POST['videoUrl'];
+preg_match('#(\.be/|/embed/|/v/|/watch\?v=)([A-Za-z0-9_-]{5,11})#', $url, $matches);
+if(isset($matches[2]) && $matches[2] != ''){
+     $url = $matches[2];
+}
+
+
 $video = mysql_query("INSERT INTO videos (name, link) VALUES ('$name', '$url')");
 if($video){
 MessagePage::show("", "Видеото е създадено!", "success", "video");
@@ -65,7 +71,7 @@ header('location:video');
 			<div class="panel-heading">
 				<form action="" method="post">
 				<label>Име: <input type="text" name="videoName"><br></label>
-				<label>URL: <input maxlength="12" type="text" name="videoUrl"><br></label>
+				<label>URL: <input type="text" name="videoUrl"><br></label>
 				<label><input type="submit" class="btn btn-success btn-lg" value="Създай Видео" /></label>
 				</form>
 
