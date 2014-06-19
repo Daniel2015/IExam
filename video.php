@@ -10,10 +10,10 @@ $name = $_POST['videoName'];
 $url = $_POST['videoUrl'];
 $video = mysql_query("INSERT INTO videos (name, link) VALUES ('$name', '$url')");
 if($video){
-MessagePage::show("", "Видеото е създадено!", "success", "");
+MessagePage::show("", "Видеото е създадено!", "success", "video");
 }
 else{
-MessagePage::show("", "Видеото вече съществува!", "danger", "");
+MessagePage::show("", "Видеото вече съществува!", "danger", "video");
 }
 }
 	
