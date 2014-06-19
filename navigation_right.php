@@ -8,7 +8,7 @@
 <div class="panel-heading">		
 <label>Текущо време:</label></br>
 </div>	
-	<div class="panel-body">
+	<div class="panel-body"> 
 		<script type="text/javascript">
 function GetClock(){
 d = new Date();
@@ -71,10 +71,17 @@ if($queryNews){
 	}
 ?>
 </div>
+<?php
+if(isset($_SESSION['SESS_FIRST_NAME']))
+{
+	if(Authentication::IsAdmin())
+	{
+?>
 <form action="" method="POST" name="delete">
 <button type="submit" name="deleteNewsID" class="btn btn-danger" value="<?php echo $resultNewsID; ?>">Изтрий</button>
 </form>
 <br>
+<?php } }?>
 <?php
 		$k++;
 	}

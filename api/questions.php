@@ -12,6 +12,14 @@ function getByTest()
 	return $questions;
 }
 
+function getByTestUser()
+{
+	Permissions::OnlyAuthenticated();
+	$testId = $_GET['testId'];
+	$model = new QuestionModel;
+	$model ->selectQuery = "SELECT question, answer1, answer2, answer3, answer4 ";
+	$questions = (new QuestionModel)->getItems("Where test_Id='$testId'");
+}
 function insert()
 {
 	Permissions::OnlyAdmins();
