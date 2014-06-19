@@ -79,7 +79,6 @@
 		var dataSource = new protos.dataSource({
 				data: {
 					create: function(dataItems) {
-						console.log(dataItems);
 						dataItems.push({
 							name: 'test_id',
 							value: <?=$_GET["testId"]?>
