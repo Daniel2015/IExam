@@ -5,9 +5,20 @@
 	<script type="text/javascript" src="js/jquery.2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/imageGetter.js"></script>
 	<title>User of Images</title>
+	<style>
+		body{
+			padding: 25px;
+		}
+		h1{
+			margin: 50px;
+		}
+		select{
+			margin-left:50px;
+		}
+	</style>
 </head>
 <body>
-	<p><strong>Избери изображение и виж с инспектора :D</strong></p>
+	<h1>Избери изображение и виж с инспектора :D Трябва да си логнат.</h1>
 	<select id="selectImg" onchange="getQuestionImage(1, $('#selectImg').val())">
 		<option value="1">Тест</option>
 		<option value="2">Човка</option>

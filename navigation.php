@@ -13,6 +13,7 @@ if(Authentication::IsAuthenticated())
    <p><a href="/<?=$ProjectName?>/profile" class="btn btn-info" ><span class="glyphicon glyphicon-user"></span>    Профил</a></p>
    <p><a href="/<?=$ProjectName?>/statistics" class="btn btn-info" ><span class="glyphicon glyphicon-stats"></span>    Статистика</a></p>
    <p><a href="/<?=$ProjectName?>/messages/mail" class="btn btn-info" ><span class="glyphicon glyphicon-envelope"></span>    Поща</a></p>
+   <p><a href="/<?=$ProjectName?>/images" class="btn btn-info" ><span class="glyphicon glyphicon-picture"></span>    Изображения</a></p>
    <p><a href="/<?=$ProjectName?>/video" class="btn btn-info" ><span class="glyphicon glyphicon-film"></span>    Видеа</a></p>
 <?php
 	if(Authentication::IsAdmin())
