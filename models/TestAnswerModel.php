@@ -28,7 +28,7 @@
 		
 		public function update()
 		{
-			mysql_query("UPDATE test_answers
+			return mysql_query("UPDATE test_answers
 				SET answer='$this->answer' WHERE username='$this->username' AND question_id = '$this->questionId'")
 				or die(mysql_error());
 		}	

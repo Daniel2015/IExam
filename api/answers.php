@@ -26,7 +26,7 @@ function insert()
 		$answerModel->questionId = $questionId;
 		$answerModel->answer = $answer;
 		
-		$answerModel->insert();
+		$result = $answerModel->insert();
 	}
 	
 	if($result)

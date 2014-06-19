@@ -1,5 +1,6 @@
 <?php
 require_once('../models/QuestionModel.php');
+require_once('../models/QuestionViewModel.php');
 require_once('APIBase.php');
 
 function getByTest()
@@ -17,9 +18,10 @@ function getByTestUser()
 	Permissions::OnlyAuthenticated();
 	
 	$testId = $_GET['testId'];
-	$model = new QuestionModel;
-	$model->set_selectQuery("SELECT question_id, test_id, question, answer1, answer2, answer3, answer4 FROM ");
-	$items = $model->getItems("Where test_id='$testId'");
+	$model = new QuestionViewModel;
+	$model->set_selectQuery("SELECT q.question_id, test_id, question, answer1, answer2, answer3, answer4, answer FROM ");
+	$items = $model->getItems("as q LEFT JOIN (SELECT * FROM `test_answers`) as a ON q.question_id = a.question_id 
+		WHERE test_id='$testId'");
 	
 	return $items;
 	

@@ -16,10 +16,10 @@
 <script id="galleryTemplate" type="protos-tmpl">
 	<div class="panel panel-default">
 		<div class="panel-heading">#=question#</div>
-		<p><input type="radio" name="answer" data-char="A" /> #=answer1#</p>
-		<p><input type="radio" name="answer" data-char="B" /> #=answer2#</p>
-		<p><input type="radio" name="answer" data-char="C" /> #=answer3#</p>
-		<p><input type="radio" name="answer" data-char="D" /> #=answer4#</p>
+		<p class="#=answer === 'A' ? 'bg-primary': ''#"><input #=answer === 'A' ? 'checked': ''# type="radio" name="answer" data-char="A" /> #=answer1#</p>
+		<p class="#=answer === 'B' ? 'bg-primary': ''#"><input #=answer === 'B' ? 'checked': ''# type="radio" name="answer" data-char="B" /> #=answer2#</p>
+		<p class="#=answer === 'C' ? 'bg-primary': ''#"><input #=answer === 'C' ? 'checked': ''# type="radio" name="answer" data-char="C" /> #=answer3#</p>
+		<p class="#=answer === 'D' ? 'bg-primary': ''#"><input #=answer === 'D' ? 'checked': ''# type="radio" name="answer" data-char="D" /> #=answer4#</p>
 	</div>
 </script>
 
@@ -83,9 +83,10 @@
 		
 		var listView = $("#questions").data("listView");
 		$('#questions').on('click', 'input', function(e) {
-			e.preventDefault();
+			//e.preventDefault();
 			
-			var questionUID = $(this).closest('li').data('uid');
+			var answerRadio = $(this);
+			var questionUID = answerRadio.closest('li').data('uid');
 			var questionDataItem = listView.dataSource.findItem(questionUID);
 			
 			$.ajax({
@@ -96,6 +97,15 @@
 				data: {
 					questionId: questionDataItem.id,
 					answer: $(this).data('char')
+				}
+			}).done(function (data) {
+				if(data === 'Success') {
+					var pharagraphs = answerRadio.closest('li').find('p');
+					$.each(pharagraphs, function(i, p) {
+						$(p).removeClass('bg-primary');
+					});
+					
+					console.log(answerRadio.closest('p').addClass('bg-primary'));
 				}
 			});
 		});
