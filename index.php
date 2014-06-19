@@ -80,7 +80,10 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 		<?php
 			include('navigation_right.php');
 		?>
-	</aside>
+		</aside>
+		<footer>
+			FOOTER!
+		</footer>
 	</body>
 </html>
 <?php

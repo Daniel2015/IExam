@@ -15,5 +15,4 @@
 	else {
 		MessagePage::show("", "Нямата достъп до тази страница!", "danger", "index");
 	}
-	mysql_close();
 ?>

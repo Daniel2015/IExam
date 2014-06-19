@@ -9,12 +9,22 @@
 }
 #questions li.pageNumber {
 	display: inline-block
+	}
+.radio_button{
+    width: 1.5em;
+    height: 1.5em;
 }
 </style>
-
-<table id="create_table_test" class="repeat_table">
-	<tr class="tr_test" style="border-bottom:3px solid #0066FF; font-weight:bold">
-		<td id="Question">
+	<div class="panel panel-success">
+	<div class="panel-heading">
+						<span><h4 style="display: inline;">Тест</h4></span>
+					</div>
+					<div class="panel-body">
+					asd
+						</div>
+<table class="table table-bordered table-hover table-condensed">
+	<tr class="active table-hover" style="text-align:center;">
+		<td>
 		Въпрос
 		</td>
 		<td>
@@ -30,37 +40,38 @@
 		D
 		</td>
 		<td>
-		True answer
+		Отговор
 		</td>
-	</tr>
+	</tr><form method="post">
 	<tr>
-		<form method="post">
-			<td>
-				<textarea id="question" name="question" style="width:300px; height:120px;"></textarea></td>
-			<td>	
-				<textarea id="answer1" name="answer1" style="width:80px; height:120px"></textarea></td>
-			<td>
-				<textarea id="answer2" name="answer2" style="width:80px; height:120px"></textarea></td>
-			<td>
-				<textarea id="answer3" name="answer3" style="width:80px; height:120px"></textarea></td>
-			<td>
-				<textarea id="answer4" name="answer4" style="width:80px; height:120px"></textarea></td>
-			<td>
-				<input id="true_answer" type="radio" name="true_answer" value="A">A<br>
-				<input id="true_answer" type="radio" name="true_answer" value="B">B<br>
-				<input id="true_answer" type="radio" name="true_answer" value="C">C<br>
-				<input id="true_answer" type="radio" name="true_answer" value="D">D<br>
+		
+			<td class="success">
+				<textarea style="resize: none;" rows="15" class="form-control input-lg" placeholder="Въпрос" id="question" name="question"></textarea></td>
+			<td class="success">	
+				<textarea style="resize: none;" rows="20" class="form-control input-sm" placeholder="Отговор A" id="answer1" name="answer1"></textarea></td>
+			<td class="success">
+				<textarea style="resize: none;" rows="20" class="form-control input-sm" placeholder="Отговор B" id="answer2" name="answer2"></textarea></td>
+			<td class="success">
+				<textarea style="resize: none;" rows="20" class="form-control input-sm" placeholder="Отговор C" id="answer3" name="answer3"></textarea></td>
+			<td class="success">
+				<textarea style="resize: none;" rows="20" class="form-control input-sm" placeholder="Отговор D" id="answer4" name="answer4"></textarea></td>
+			<td class="danger" style="vertical-align:middle">
+			<center>
+				<input id="true_answer" type="radio" name="true_answer" class="radio_button" value="A">A<br>
+				<input id="true_answer" type="radio" name="true_answer" class="radio_button" value="B">B<br>
+				<input id="true_answer" type="radio" name="true_answer" class="radio_button" value="C">C<br>
+				<input id="true_answer" type="radio" name="true_answer" class="radio_button" value="D">D<br>
+				</center>
 			</td>
-			<td>
-				<button type="submit" class="submitBtn">Добави въпрос</button>
-			</td>
-		</form>
+		
 	</tr>
 </table>
+	<button type="submit" class="submitBtn btn btn-info">Добави въпрос</button>
+</form>
 <input name="submit" type="submit" value="Готово" class="btn btn-info"/>
 
 <script id="galleryTemplate" type="protos-tmpl">
-<div><b>#=question#</b>    - > #=answer1#</div>
+<div><b> #=question#</b>    - > #=answer1#</div>
 </script>
 
 <script>
