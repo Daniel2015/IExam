@@ -21,7 +21,7 @@ if(Authentication::IsAuthenticated())
 		<p><a href="/<?=$ProjectName?>/administration/logged_in" class="btn btn-warning" ><span class="glyphicon glyphicon-list"></span>    Логнати</a></p>
 		<p><a href="/<?=$ProjectName?>/administration/admin_users" class="btn btn-warning" ><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span>     Потребители</a></p>
 	<?php } ?>
-		<p><a href="/<?=$ProjectName?>/logout" class="btn btn-info" ><span class="glyphicon glyphicon-log-out"></span>    Излез</a></p>
+		<a href="/<?=$ProjectName?>/logout" class="btn btn-info" ><span class="glyphicon glyphicon-log-out"></span>    Излез</a>
 	<?php
 	}
 else

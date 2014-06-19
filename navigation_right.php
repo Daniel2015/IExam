@@ -3,8 +3,12 @@
 		<div class="panel-heading">
 			<span><h3 style="display: inline;">IExam</h4></span>
 		</div>
-		<div class="panel-body">		
-<label>Текущо време:</label></br>	
+		<div class="panel-body">
+<div class="panel panel-primary">
+<div class="panel-heading">		
+<label>Текущо време:</label></br>
+</div>	
+	<div class="panel-body">
 		<script type="text/javascript">
 function GetClock(){
 d = new Date();
@@ -31,55 +35,55 @@ setTimeout("GetClock()", 1000);
 }
 window.onload=GetClock;
 </script>
-<span class="badge "><div id="clockbox"></div></span>
-<hr style="border:3px solid red">
-
+<span class="badge btn-info"><div id="clockbox"></div></span>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
 <label>Новини:</label></br>
-
+</div>
+	<div class="panel-body">
 <?php
-$queryNews = mysql_query("SELECT message FROM messages WHERE toUser=' '");
+$queryNews = mysql_query("SELECT message, ID FROM messages WHERE toUser=' '");
 
 $resultNews=false;
 if($queryNews){
 	$numNews = mysql_num_rows($queryNews);
 
-	if(isset($_POST['deleteNews']))
+	if(isset($_POST['deleteNewsID']))
 	{
-	mysql_query("DELETE FROM messages WHERE fromUser=' ' AND toUser=' '");
+	$deleteNewsID = $_POST['deleteNewsID'];
+	mysql_query("DELETE FROM messages WHERE toUser=' ' AND ID='$deleteNewsID'");
+	MessagePage::show("", "Новината е Изтрита!", "danger", "/$ProjectName/index");
 	}
 
 	$k=0;
 	while($k < $numNews)
 	{
-		$resultNews = mysql_result($queryNews, $k);
+		$resultNews = mysql_result($queryNews, $k, "message");
+		$resultNewsID = mysql_result($queryNews, $k, "ID");
 
 ?>
 
-<p>
 
-<?php
-echo '<hr style="border:1px solid black">';
-?>
-
+<div class="alert alert-warning">
 <?php
 	if($resultNews){
-		echo $resultNews; 
+		echo $resultNews;
 	}
 ?>
-
-</p>
-<form action="" method="POST">
-<button name="deleteNews" class="btn btn-danger">Изтрий</button>
+</div>
+<form action="" method="POST" name="delete">
+<button type="submit" name="deleteNewsID" class="btn btn-danger" value="<?php echo $resultNewsID; ?>">Изтрий</button>
 </form>
-
+<br>
 <?php
 		$k++;
 	}
 }
 ?>
-
-<hr style="border:3px solid red">
-
+</div>
+</div>
 		</div>
 	</div>
 </span>

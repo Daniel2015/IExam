@@ -34,7 +34,7 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 	</head>
 	<body>
 	<header>
-		<h1 class="col-md-offset-1"><span class="glyphicon glyphicon-pencil"></span>IExam</h1>
+	<h1 class="col-md-offset-1"><span class="glyphicon glyphicon-pencil"></span>IExam</h1>
 	</header>
 	<nav id="navigation" class="col-md-2">
 		<?php
@@ -59,10 +59,11 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 			{
 			//(new MessagePage)->show("Login success", "Login success", "profile");
 		?>
-		<div class="panel panel-success">
+		<div class="panel panel-warning">
 			<div class="panel-heading">
-				<p><h2 style="display: inline;">Система за тестове!</h2></p>
-				<br>
+				<h3 style="display: inline;">Система за тестове <i>IExam </i>!</h3>
+				</div>
+				<div class="panel-body">
 				<p><b>Изготвили: </b></p><br>
 						  Даниел Копев, ф.н. 61599 <br>
 						  Диана Касаветова, ф.н. 61568 <br>
@@ -74,6 +75,18 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 				<p>Приятно прекарване в компанията на тестовете!</p>
 			</div>
 		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 style="display: inline;">Статистика на <i>IExam </i>!</h3>
+				</div>
+				<div class="panel-body">
+				<ul class="nav nav-stacked">
+					<li class="active"> <a><span class="badge pull-right"><?php echo mysql_num_rows(mysql_query("SELECT * FROM simple_login")); ?></span>Брой регистрирани потребители:</a></li>
+					<li class="active"> <a><span class="badge pull-right"><?php echo mysql_num_rows(mysql_query("SELECT * FROM test_questions")); ?></span>Брой въпроси:</a></li>
+					<li class="active"> <a><span class="badge pull-right"><?php echo mysql_num_rows(mysql_query("SELECT * FROM simple_login WHERE isAdmin='1'")); ?></span>Админи:</a></li>
+				</ul>
+				</div>
+		</div>
 		<?php }  ?>
 		</section>
  	<aside id="navigation2" class="col-md-2">
@@ -81,9 +94,11 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 			include('navigation_right.php');
 		?>
 		</aside>
-		<footer>
-			FOOTER!
-		</footer>
+<footer id="footer">
+<center>
+<i>Copyright © 2014 ProjectCrew</i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>Contact us: <a href="mailto:danielkopev@gmail.com">danielkopev@gmail.com</a></i>
+</center>
+</footer>
 	</body>
 </html>
 <?php
