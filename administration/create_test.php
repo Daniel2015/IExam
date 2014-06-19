@@ -14,6 +14,50 @@
     height: 1.5em;
 }
 </style>
+
+<?php
+require_once("models/TestModel.php");
+
+	if(isset($_POST['submit']))
+	{
+	if(!empty($_POST['nameTest']))
+	{
+$nameTest = $_POST['nameTest'];
+$test = new TestModel;
+$test->description = $nameTest;
+$result= $test->insert();
+		if($result)
+		{
+			(new MessagePage)->show("", "Създадохте теста успешно!", "success", "../testsAll");
+		} 
+		else 
+		{
+			(new MessagePage)->show("", "Името на теста вече съществува!", "danger");
+		}
+		}
+		else
+		{
+		(new MessagePage)->show("", "Попълнете полето!", "danger");
+		}
+}
+?>
+
+<div class="panel panel-default">
+
+	  <div class="panel-heading">
+		<span><h4 style="display: inline;">Създай тест</h4></span>
+	  </div>
+	  <div class="panel-body">
+	  <form name="submit" action="" method="POST">
+	   <div class="form-group">
+				  <label>Име:</label>
+				  <input class="form-control" type="text" name="nameTest" />
+			  </div>
+		 <input class="form-control btn btn-primary" name="submit" type="submit" value="Създай Тест"/>
+		</form>
+	  	  </div>
+		  </div>
+
 	<div class="panel panel-success">
 		<div class="panel-heading">
 			<span><h4 style="display: inline;">Тест</h4></span>

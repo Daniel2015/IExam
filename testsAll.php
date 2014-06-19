@@ -8,6 +8,12 @@ if(isset($_POST['test_id']))
 $test_id = $_POST['test_id'];
 header("location:test?testId=$test_id");
 }
+if(isset($_POST['test_id']))
+{
+$test_id = $_POST['test_id'];
+header("location:test?testId=$test_id");
+}
+
 ?>
 	<div class="panel panel-success">
 	<div class="panel-heading">
@@ -27,7 +33,16 @@ $resultID = mysql_result($query, $i, 'id');
 </form>
 <br>
 <?php
-$i++;}
+if(isset($_SESSION['SESS_FIRST_NAME']))
+{
+	if(Authentication::IsAdmin())
+	{
+?>
+<form action="" name="submit" method="POST">
+<input type="submit" name="submit" class="btn btn-warning btn-lg" value="Редактирай" />
+</form>
+<?php
+$i++;} } }
 ?>
 	</div>
 </div>
