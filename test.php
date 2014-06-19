@@ -11,15 +11,15 @@
 }
 </style>
 
-<ul id="questions" class="col-md-12" ></ul>
+<div id="questions" class="col-md-12" ></div>
 
 <script id="galleryTemplate" type="protos-tmpl">
 	<div class="panel panel-default">
 		<div class="panel-heading">#=question#</div>
-		<p>#=answer1#</p>
-		<p>#=answer2#</p>
-		<p>#=answer3#</p>
-		<p>#=answer4#</p>
+		<p><input type="radio" name="answer" data-char="A" /> #=answer1#</p>
+		<p><input type="radio" name="answer" data-char="B" /> #=answer2#</p>
+		<p><input type="radio" name="answer" data-char="C" /> #=answer3#</p>
+		<p><input type="radio" name="answer" data-char="D" /> #=answer4#</p>
 	</div>
 </script>
 
@@ -81,12 +81,23 @@
 			templateId: 'galleryTemplate'
 		});
 		
-		$('form').on('submit', function(e) {
+		var listView = $("#questions").data("listView");
+		$('#questions').on('click', 'input', function(e) {
 			e.preventDefault();
 			
-			var form = $(this)
-			, formData = form.serializeArray();
-			dataSource.addItems(formData);
+			var questionUID = $(this).closest('li').data('uid');
+			var questionDataItem = listView.dataSource.findItem(questionUID);
+			
+			$.ajax({
+				url: '/<?= $ProjectName ?>/api/answers/insert',
+				type: 'json',
+				contentType: "application/json; charset=utf-8",
+				type: "GET",
+				data: {
+					questionId: questionDataItem.id,
+					answer: $(this).data('char')
+				}
+			});
 		});
 	});
 </script>
