@@ -329,8 +329,6 @@ INSERT INTO `videos` (`ID`, `name`, `link`) VALUES
 -- Constraints for table `map_tests_questions`
 --
 ALTER TABLE `map_tests_questions`
-  ADD CONSTRAINT `map_tests_questions_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `tests` (`id`),
-  ADD CONSTRAINT `map_tests_questions_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `test_questions` (`question_id`),
   ADD CONSTRAINT `map_tests_questions_ibfk_3` FOREIGN KEY (`image_id`) REFERENCES `test_images` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
