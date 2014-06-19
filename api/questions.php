@@ -15,10 +15,14 @@ function getByTest()
 function getByTestUser()
 {
 	Permissions::OnlyAuthenticated();
+	
 	$testId = $_GET['testId'];
 	$model = new QuestionModel;
-	$model ->selectQuery = "SELECT question, answer1, answer2, answer3, answer4 ";
-	$questions = (new QuestionModel)->getItems("Where test_Id='$testId'");
+	$model->set_selectQuery("SELECT question_id, test_id, question, answer1, answer2, answer3, answer4 FROM ");
+	$items = $model->getItems("Where test_id='$testId'");
+	
+	return $items;
+	
 }
 function insert()
 {

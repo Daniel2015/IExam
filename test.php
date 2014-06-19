@@ -1,108 +1,92 @@
-<?php
-require_once('connection.php');
-if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in')){
-session_destroy();
-header('location:not_allowed.php');
-   exit();
+<style>
+#questions > ul > li{
+	width: 100%
 }
-if(isset($_GET['log']) && ($_GET['log']=='out')){
-mysql_query("SET NAMES 'utf8'");
-mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-$result =mysql_query("DELETE FROM logged_in_users WHERE username='".$_SESSION['SESS_USERNAME']."'");
-mysql_close();
-session_destroy();
-header('location:main.php');
+#questions li.pageNumber {
+	display: inline-block
 }
-if(!isset($_SESSION['SESS_FIRST_NAME'])){
-header('location:not_allowed_admin.php');
-   exit();
+.radio_button{
+    width: 1.5em;
+    height: 1.5em;
 }
-?>
-<?php
-require_once('connection.php');
-mysql_query("SET NAMES 'utf8'");
-mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-$query="SELECT * FROM test_questions";
-$result=mysql_query($query);
-$num=mysql_numrows($result);
-mysql_close();
-?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Профил</title>
-		<link rel="stylesheet" type="text/css" href="main.css">
-		<link rel="WWW Icon" href="www_icon1.ico"/>
-	</head>
-	<body>
-		 <span id="testtable">
-			<table id="table_test">
-				<tr class="tbl_test" style="border-bottom:3px solid #0066FF; font-weight:bold">
-					<td>
-					Въпрос
-					</td>
-					<td>
-					A
-					</td>
-					<td>
-					B
-					</td>
-					<td>
-					C
-					</td>
-					<td>
-					D
-					</td>
-					<td>
-					Отговор
-					</td>
-					<td>
-					</td>
-				</tr>
-				<?php
-				$i=0;
-				while ($i < $num) {
-					$field1=mysql_result($result,$i,"question");
-					$field2=mysql_result($result,$i,"answer1");
-					$field3=mysql_result($result,$i,"answer2");
-					$field4=mysql_result($result,$i,"answer3");
-					$field5=mysql_result($result,$i,"answer4");
-					$field6=mysql_result($result,$i,"true_answer");
-				?>
-				<tr class="tr_users">
-					<td>
-					<?php echo $field1; ?>
-					</td>
-					<td>
-					<?php echo $field2; ?>
-					</td>
-					<td>
-					<?php echo $field3; ?>
-					</td>
-					<td>
-					<?php echo $field4; ?>
-					</td>
-					<td>
-					<?php echo $field5; ?>
-					</td>
-					<td ><form action="submit_test" onsubmit="" name="test_form">
-					<input type="radio" name="true_answer" value="A"><?php echo $field2;?><br>
-					<input type="radio" name="true_answer" value="B"><?php echo $field3;?><br>
-					<input type="radio" name="true_answer" value="C"><?php echo $field4;?><br>
-					<input type="radio" name="true_answer" value="D"><?php echo $field5;?><br>
-					</td>
-					<td>
-					<input name="submit" type="submit" value="Готово" class="btn"/>
-					</form>
-					</td>
-				</tr>
-				<?php
-					$i++;}
-				?>
-				<!-- ДА ОПРАВЯ ФОРМАТА. "ГОТОВО" ВКАРВА ВСИЧКИ questions В db -->
-				</table>
-			</span> 
+</style>
 
-	</body>
-</html>
+<ul id="questions" class="col-md-12" ></ul>
+
+<script id="galleryTemplate" type="protos-tmpl">
+	<div class="panel panel-default">
+		<div class="panel-heading">#=question#</div>
+		<p>#=answer1#</p>
+		<p>#=answer2#</p>
+		<p>#=answer3#</p>
+		<p>#=answer4#</p>
+	</div>
+</script>
+
+<script>
+	$(function() {		
+		var dataSource = new protos.dataSource({
+				data: {
+					create: function(dataItems) {
+						dataItems.push({
+							name: 'test_id',
+							value: <?=$_GET["testId"]?>
+						});
+						
+						$.ajax({
+							url: '/<?= $ProjectName ?>/api/questions/insert',
+							data: dataItems,
+							method: 'POST'
+						}).done(function (data) {
+							if(data !== 'Success')
+							{
+								return;
+							}
+							
+							dataSource.dataChanged();
+							$("#addQuestion")[0].reset();
+						}).fail(function () {
+							alert('Fail');
+						});
+					},
+					read: function(query) {
+						$.ajax({
+							type: 'json',
+							contentType: "application/json; charset=utf-8",
+							type: "GET",
+							url: '/<?= $ProjectName ?>/api/questions/getByTestUser?testId=<?=$_GET["testId"]?>',
+							//data: query,
+							success: function(response) {
+								var data = {};
+								data.data = response;
+								data.items = response.length;
+								//dataItems = data;
+
+								dataSource.readed(data);
+							}
+						});
+						return;
+					}
+				},
+				server: {
+					paging: false,
+					filtering: false,
+					sorting: false
+				}
+			});
+		
+		$("#questions").protos().listView({
+			data: dataSource,
+			pageSize: 1,
+			templateId: 'galleryTemplate'
+		});
+		
+		$('form').on('submit', function(e) {
+			e.preventDefault();
+			
+			var form = $(this)
+			, formData = form.serializeArray();
+			dataSource.addItems(formData);
+		});
+	});
+</script>

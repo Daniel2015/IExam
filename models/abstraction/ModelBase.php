@@ -7,7 +7,12 @@
 		
 		protected $fieldsMapping;
 		
-		public $selectQuery = "Select * from ";
+		protected $selectQuery = "Select * from ";
+		
+		public function set_selectQuery($query)
+		{
+			$this->selectQuery = $query;
+		}
 		
 		public function get_tableName()
 		{
@@ -27,7 +32,7 @@
 			}
 			
 			$this->tableName = $table;
-		}	
+		}
 		
 		public function getItems($query = "")
 		{
@@ -55,7 +60,10 @@
 			$model = new $currentModelName;
 			
 			foreach ($this->fieldsMapping as $fieldName => $dbFiledName) {
-				$model->$fieldName = $row[$dbFiledName];
+				if(isset($row[$dbFiledName]))
+				{
+					$model->$fieldName = $row[$dbFiledName];
+				}
 			}
 			
 			return $model;
