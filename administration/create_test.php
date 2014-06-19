@@ -16,7 +16,11 @@
 </style>
 
 <?php
+if(!isset($_GET['testId'])) {
+
 require_once("models/TestModel.php");
+
+
 
 	if(isset($_POST['submit']))
 	{
@@ -57,6 +61,7 @@ $result= $test->insert();
 		</form>
 	  	  </div>
 		  </div>
+<?php } else { ?>
 
 	<div class="panel panel-success">
 		<div class="panel-heading">
@@ -190,3 +195,5 @@ $result= $test->insert();
 		});
 	});
 </script>
+
+<?php } ?>
