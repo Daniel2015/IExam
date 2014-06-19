@@ -58,7 +58,7 @@ header('location:video');
 
 		<div class="panel panel-success">
 			<div class="panel-heading">
-				<span><h4 style="display: inline;">Видеота</h4></span>
+				<span><h4 style="display: inline;">Видеа</h4></span>
 				
 			</div>
 			<?php if($isAdmin == 1) { ?>

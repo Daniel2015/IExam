@@ -71,6 +71,7 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 						  Мариан Грауров, ф.н. 61567 <br>
 						  Симеон Ненов, ф.н. 61577 <br>
 						  Спас Кючучов, ф.н. 61578 <br>
+						  Ралица Йоргова, ф.н. 61557 <br>
 						  </p>
 				<p>Приятно прекарване в компанията на тестовете!</p>
 			</div>
@@ -96,7 +97,7 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 		</aside>
 <footer id="footer">
 <center>
-<i>Copyright © 2014 ProjectCrew</i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>Contact us: <a href="mailto:danielkopev@gmail.com">danielkopev@gmail.com</a></i>
+<i>Copyright © 2014 ProjectCrew</i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>Contact us: <a href="mailto:projectCrew@gmail.com">projectCrew@gmail.com</a></i>
 </center>
 </footer>
 	</body>
