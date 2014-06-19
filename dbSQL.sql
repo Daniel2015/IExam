@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.9
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: 
--- Версия на сървъра: 5.6.16
--- PHP Version: 5.5.9
+-- Host: 127.0.0.1
+-- Generation Time: Jun 19, 2014 at 01:07 PM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE IF NOT EXISTS `comments` (
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=138 ;
 
 --
--- Схема на данните от таблица `comments`
+-- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `user`, `message`, `link`) VALUES
@@ -75,7 +75,7 @@ INSERT INTO `comments` (`id`, `user`, `message`, `link`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `logged_in_users`
+-- Table structure for table `logged_in_users`
 --
 
 CREATE TABLE IF NOT EXISTS `logged_in_users` (
@@ -86,19 +86,20 @@ CREATE TABLE IF NOT EXISTS `logged_in_users` (
   `ID` varchar(150) NOT NULL,
   `loggedInTime` varchar(150) NOT NULL,
   PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=117 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=118 ;
 
 --
--- Схема на данните от таблица `logged_in_users`
+-- Dumping data for table `logged_in_users`
 --
 
 INSERT INTO `logged_in_users` (`member_id`, `username`, `firstname`, `lastname`, `ID`, `loggedInTime`) VALUES
-(116, '111111', 'Потребител', 'Първи', '1111111111', '2014-06-18 22:42:12');
+(116, '111111', 'Потребител', 'Първи', '1111111111', '2014-06-18 22:42:12'),
+(117, '111111', 'Потребител', 'Първи', '1111111111', '2014-06-19 13:48:21');
 
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `map_tests_questions`
+-- Table structure for table `map_tests_questions`
 --
 
 CREATE TABLE IF NOT EXISTS `map_tests_questions` (
@@ -115,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `map_tests_questions` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- Схема на данните от таблица `map_tests_questions`
+-- Dumping data for table `map_tests_questions`
 --
 
 INSERT INTO `map_tests_questions` (`id`, `test_id`, `question_number`, `question_id`, `has_image`, `image_id`) VALUES
@@ -128,7 +129,7 @@ INSERT INTO `map_tests_questions` (`id`, `test_id`, `question_number`, `question
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `messages`
+-- Table structure for table `messages`
 --
 
 CREATE TABLE IF NOT EXISTS `messages` (
@@ -142,10 +143,10 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `readedAdmin` int(1) NOT NULL,
   `deletedAdmin` int(1) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=103 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=105 ;
 
 --
--- Схема на данните от таблица `messages`
+-- Dumping data for table `messages`
 --
 
 INSERT INTO `messages` (`ID`, `fromUser`, `toUser`, `message`, `dateCreated`, `readed`, `deleted`, `readedAdmin`, `deletedAdmin`) VALUES
@@ -156,12 +157,14 @@ INSERT INTO `messages` (`ID`, `fromUser`, `toUser`, `message`, `dateCreated`, `r
 (99, 'Админ (q)', 'd', 'addddddddddd', '2014-06-13 13:01:38', 0, 0, 0, 1),
 (100, 'Админ (asd)', 'f', 'sadasdsadsadsa', '2014-06-17 21:20:30', 0, 0, 0, 1),
 (101, 'Админ (g)', 'asd', 'sad', '2014-06-18 20:26:00', 0, 0, 0, 0),
-(102, '', 'admin2', 'dsadas', '2014-06-18 20:57:46', 0, 0, 0, 0);
+(102, '', 'admin2', 'dsadas', '2014-06-18 20:57:46', 0, 0, 0, 0),
+(103, 'ШЕФЧЕ', '111111', 'Ново, високи оценки по WWW, само ТУК!', '2014-06-19 11:15:32', 0, 0, 0, 0),
+(104, 'СПАМЕР', ' ', 'Новината на деня - слон изяде мечка, жираф го гледаше и се смееше.', '2014-06-19 11:17:42', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `simple_login`
+-- Table structure for table `simple_login`
 --
 
 CREATE TABLE IF NOT EXISTS `simple_login` (
@@ -178,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `simple_login` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=199 ;
 
 --
--- Схема на данните от таблица `simple_login`
+-- Dumping data for table `simple_login`
 --
 
 INSERT INTO `simple_login` (`member_id`, `username`, `isAdmin`, `password`, `salt`, `firstname`, `lastname`, `ID`) VALUES
@@ -216,7 +219,7 @@ INSERT INTO `simple_login` (`member_id`, `username`, `isAdmin`, `password`, `sal
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `tests`
+-- Table structure for table `tests`
 --
 
 CREATE TABLE IF NOT EXISTS `tests` (
@@ -229,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `tests` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Схема на данните от таблица `tests`
+-- Dumping data for table `tests`
 --
 
 INSERT INTO `tests` (`id`, `description`, `has_images`, `image_tile_size`, `image_filenames`) VALUES
@@ -238,7 +241,7 @@ INSERT INTO `tests` (`id`, `description`, `has_images`, `image_tile_size`, `imag
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `test_images`
+-- Table structure for table `test_images`
 --
 
 CREATE TABLE IF NOT EXISTS `test_images` (
@@ -249,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `test_images` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- Схема на данните от таблица `test_images`
+-- Dumping data for table `test_images`
 --
 
 INSERT INTO `test_images` (`id`, `number_of_tiles`, `css_file`) VALUES
@@ -262,7 +265,7 @@ INSERT INTO `test_images` (`id`, `number_of_tiles`, `css_file`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `test_questions`
+-- Table structure for table `test_questions`
 --
 
 CREATE TABLE IF NOT EXISTS `test_questions` (
@@ -278,7 +281,7 @@ CREATE TABLE IF NOT EXISTS `test_questions` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
--- Схема на данните от таблица `test_questions`
+-- Dumping data for table `test_questions`
 --
 
 INSERT INTO `test_questions` (`question_id`, `test_id`, `question`, `answer1`, `answer2`, `answer3`, `answer4`, `true_answer`) VALUES
@@ -293,7 +296,7 @@ INSERT INTO `test_questions` (`question_id`, `test_id`, `question`, `answer1`, `
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `videos`
+-- Table structure for table `videos`
 --
 
 CREATE TABLE IF NOT EXISTS `videos` (
@@ -305,7 +308,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=101 ;
 
 --
--- Схема на данните от таблица `videos`
+-- Dumping data for table `videos`
 --
 
 INSERT INTO `videos` (`ID`, `name`, `link`) VALUES
@@ -314,11 +317,11 @@ INSERT INTO `videos` (`ID`, `name`, `link`) VALUES
 (98, '5445645', '64645654');
 
 --
--- Ограничения за дъмпнати таблици
+-- Constraints for dumped tables
 --
 
 --
--- Ограничения за таблица `map_tests_questions`
+-- Constraints for table `map_tests_questions`
 --
 ALTER TABLE `map_tests_questions`
   ADD CONSTRAINT `map_tests_questions_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `tests` (`id`),

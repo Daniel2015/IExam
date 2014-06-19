@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('connection.php');
-/*if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in')){
+if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in')){
 session_destroy();
 header('location:not_allowed.php');
    exit();
@@ -17,7 +17,7 @@ header('location:main.php');
 if(!isset($_SESSION['SESS_FIRST_NAME'])){
 header('location:not_allowed_admin.php');
    exit();
-}*/
+}
 ?>
 <?php
 require_once('connection.php');
@@ -33,8 +33,15 @@ mysql_close();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Профил</title>
-        <link rel="stylesheet" type="text/css" href="main.css">
-        <link rel="WWW Icon" href="www_icon1.ico"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="WWW Icon" href="images/www_icon1.ico"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="css/protos-ui.css">
+		<script src="js/jquery.2.1.1.min.js" ></script>
+		<script src="js/bootstrap.min.js" ></script>
+		<script src="js/jquery.protos-ui.min.js" ></script>
+		
     </head>
     <body>
         <span id="testtable">
@@ -45,36 +52,7 @@ mysql_close();
                     </td>
                 </tr>
             </table>
-            <table class="table">
-                <tr><td></td></tr>
-                <tr class="top">
-                    <td><b>Тестове</b></td>
-                </tr>
-                <tr><td></td></tr>
-                <tr>
-                    <td><a href="profile.php" class="btn" >Профил</a>
-                    </td>
-                </tr>
-                <tr><td></td></tr>
-                <tr>
-                    <td><a href="statistics.php" class="btn" >Статистика</a>
-                    </td>
-                </tr>
-                <tr><td></td></tr>
-                <tr>
-                    <td><a href="main_login.php" class="btn" >Назад</a>
-                    </td>
-                </tr>
-                <tr><td></td></tr>
-                <tr>
-                    <td>
-                        <a href="?log=out" class="btn" >Излез</a>
-                    </td>
-                </tr>
-                <tr><td></td></tr>
-            </table>
         </span> 
-
     </body>
     <script language="javascript" type="text/javascript">
     var qcanvas = document.getElementById("questionCanvas");
@@ -103,7 +81,7 @@ mysql_close();
                 <?php
                 $i = 0;
                 while ($i < $num) {
-        $field1 = mysql_result($result, $i, "question");
+                $field1 = mysql_result($result, $i, "question");
                 $field2 = mysql_result($result, $i, "answer1");
                 $field3 = mysql_result($result, $i, "answer2");
                 $field4 = mysql_result($result, $i, "answer3");
@@ -119,7 +97,8 @@ mysql_close();
                 trueAnswer[ci] = "<?php echo $field6 ;?>";
                 answerTo[ci] = "0";
                 <?php
-                $i++; }
+                $i++; 
+				}
         ?>
                 loadQuestion();
                 function fillQuestion(){
@@ -177,7 +156,9 @@ mysql_close();
         for (var k = 0; k < questionCount; k++){
         if (trueAnswer[k] == answerTo[k]) correct++;
         }
-        ctx.fillText("Имате " + correct + " верни отговора.", 175, 300);
+		var verni = "верни";
+		if (correct === 1 ) verni = "верен";
+        ctx.fillText("Имате " + correct +" "+verni+" отговора.", 175, 300);
         }
 
         function mouseDown(event){

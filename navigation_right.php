@@ -34,30 +34,49 @@ window.onload=GetClock;
 <span class="badge "><div id="clockbox"></div></span>
 <hr style="border:3px solid red">
 <label><h4>Новини:</h4></label></br>
+
 <?php
 $queryNews = mysql_query("SELECT message FROM messages WHERE toUser=' '");
-$numNews = mysql_num_rows($queryNews);
 
-if(isset($_POST['deleteNews']))
-{
-mysql_query("DELETE FROM messages WHERE fromUser=' ' AND toUser=' '");
-}
+$resultNews=false;
+if($queryNews){
+	$numNews = mysql_num_rows($queryNews);
 
-$k=0;
-while($k < $numNews)
-{
+	if(isset($_POST['deleteNews']))
+	{
+	mysql_query("DELETE FROM messages WHERE fromUser=' ' AND toUser=' '");
+	}
 
-$resultNews = mysql_result($queryNews, $k);
+	$k=0;
+	while($k < $numNews)
+	{
+		$resultNews = mysql_result($queryNews, $k);
+
 ?>
+
 <p>
+
 <?php
-echo '<hr style="border:1px solid black">'; ?>
-<?php echo $resultNews; ?>
+echo '<hr style="border:1px solid black">';
+?>
+
+<?php
+	if($resultNews){
+		echo $resultNews; 
+	}
+?>
+
 </p>
 <form action="" method="POST">
 <button name="deleteNews" class="btn btn-danger">Изтрий</button>
 </form>
-<?php $k++; } ?>
+
+<?php
+		$k++;
+	}
+}
+?>
+
 <hr style="border:3px solid red">
 
 		</div>
