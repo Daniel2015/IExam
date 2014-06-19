@@ -142,7 +142,7 @@
             ctx.fillText("C  " + casnwer3[currentQuestion], 35, 330);
             ctx.fillText("D  " + casnwer4[currentQuestion], 35, 370);
 
-            getQuestionImage(testID, currentQuestion+1);
+            //getQuestionImage(testID, currentQuestion+1);
         }
 
         function clearSelect(){
