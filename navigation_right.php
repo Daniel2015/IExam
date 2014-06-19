@@ -33,7 +33,8 @@ window.onload=GetClock;
 </script>
 <span class="badge "><div id="clockbox"></div></span>
 <hr style="border:3px solid red">
-<label><h4>Новини:</h4></label></br>
+
+<label>Новини:</label></br>
 
 <?php
 $queryNews = mysql_query("SELECT message FROM messages WHERE toUser=' '");
