@@ -1,108 +1,106 @@
 <?php
- session_start();
-if(isset($_SESSION['SESS_ADMIN_USERNAME'])){
-header('location:not_allowed_admin.php');
-}
-if(isset($_SESSION['SESS_FIRST_NAME'])){
-header('location:not_allowed_user.php');
-   exit();
-}
+session_start();
+
+require_once("utilities/SecurityManager.php");
+$securityManager = new SecurityManager;
+$securityManager->escapeAll();
+
+$ProjectName = "IExam";
+
+require_once('connection.php');
+require_once("Authentication.php");
+require_once("Permissions.php");
+require_once('utilities/MessagePage.php');
+
+mysql_query("SET NAMES 'utf8'");
+mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html>	
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
 		<title>Регистрация в IExam</title>
-		<link rel="stylesheet" type="text/css" href="main.css">
-		<link rel="WWW Icon" href="www_icon1.ico"/>
-		<script type="text/javascript" charset="utf-8">
-function validateForm()
-{
-var a=document.forms["reg"]["fname"].value;
-var b=document.forms["reg"]["lname"].value;
-
-var c=document.forms["reg"]["ID"].value;
-var d=document.forms["reg"]["username"].value;
-var e=document.forms["reg"]["password"].value;
-if ((a==null || a=="") && (b==null || b=="") && (c==null || c=="") && (d==null || d=="") && (e==null || e==""))
-  {
-  alert("Всички полета трябва да са попълнени!");
-  return false;
-  }
-if (a==null || a=="")
-  {
-  alert("Моля, попълнете полето Име!");
-  return false;
-  }
-if (b==null || b=="")
-  {
-  alert("Моля, попълнете полето Фамилия!");
-  return false;
-  }
-  if (c==null || c=="")
-  {
-  alert("Моля, попълнете полето ЕГН!");
-  return false;
-  }
-if (d==null || d=="")
-  {
-  alert("Моля, попълнете полето Фак. Номер!");
-  return false;
-  }
-if (e==null || e=="")
-  {
-  alert("Моля, попълнете полето Парола!");
-  return false;
-  }
-}
-		</script>
+		
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="WWW Icon" href="images/www_icon1.ico"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="css/protos-ui.css">
+		
+		
+		<script src="js/jquery.2.1.1.min.js" ></script>
+		<script src="js/bootstrap.min.js" ></script>
+		<script src="js/jquery.protos-ui.min.js" ></script>
 	</head>
 	<body>
-		<b>
-			<table width="80px" align="center" cellpadding="0" cellspacing="0" class="table">
-				<form name="reg" action="code_exec.php" onsubmit="return validateForm()" method="post">
-					<tr><td></td></tr>
-					<tr class="top">
-						<td><img src="secure.png" alt="some_text" width="18" height="18"><b>&nbspРегистрация&nbsp&nbsp</b></td>
-					</tr>
-					<tr>
-						<td>Име:</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="fname" /></td>
-					</tr>
-					<tr>
-						<td>Фамилия:</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="lname" /><td>
-					</tr>
-					<tr>
-						<td>ЕГН:</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="ID" /></td>
-					</tr>
-					<tr>
-						<td>Фак. Номер:</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="username" /></td>
-					</tr>
-					<tr>
-						<td>Парола:</td>
-					</tr>
-					<tr>
-						<td><input type="password" name="password" /></td>
-					</tr>
-					<tr>
-						<td><input name="submit" type="submit" value="Регистрирай се" class="btn"/></td>
-					</tr>
-					<tr>
-						<td><a href="main.php" class="btn" >Назад</a></td>
-					</tr>
-				</form>
-			</table>
-		</b>
+	<header>
+	<h1 class="col-md-offset-1"><span class="glyphicon glyphicon-pencil"></span>IExam</h1>
+	</header>
+	<nav id="navigation" class="col-md-2">
+		<?php
+			include('navigation.php');
+		?>
+	</nav>
+		<section class="container col-md-8">
+		<?php
+			if(isset($_GET['page']))
+			{
+				$filePath = $_GET['page'];
+				if(file_exists($filePath . ".php"))
+				{
+					require($filePath . ".php");
+				}
+				else
+				{
+					require("common pages/404.php");
+				}
+			}
+			else
+			{
+		?>
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<h3 style="display: inline;">Система за тестове <i>IExam </i>!</h3>
+				</div>
+				<div class="panel-body">
+				<p><b>Изготвили: </b></p><br>
+						  Даниел Копев, ф.н. 61599 <br>
+						  Диана Касаветова, ф.н. 61568 <br>
+						  Здравко Петков, ф.н. 61598 <br>
+						  Мариан Грауров, ф.н. 61567 <br>
+						  Симеон Ненов, ф.н. 61577 <br>
+						  Спас Кючучов, ф.н. 61578 <br>
+						  Ралица Йоргова, ф.н. 61557 <br>
+						  </p>
+				<p>Приятно прекарване в компанията на тестовете!</p>
+			</div>
+		</div>
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<h3 style="display: inline;">Статистика на <i>IExam </i>!</h3>
+				</div>
+				<div class="panel-body">
+				<ul class="nav nav-stacked">
+					<li class="active"> <a><span class="badge pull-right"><?php echo mysql_num_rows(mysql_query("SELECT * FROM simple_login")); ?></span>Брой регистрирани потребители:</a></li>
+					<li class="active"> <a><span class="badge pull-right"><?php echo mysql_num_rows(mysql_query("SELECT * FROM test_questions")); ?></span>Брой въпроси:</a></li>
+					<li class="active"> <a><span class="badge pull-right"><?php echo mysql_num_rows(mysql_query("SELECT * FROM simple_login WHERE isAdmin='1'")); ?></span>Брой админи:</a></li>
+				</ul>
+				</div>
+		</div>
+		<?php }  ?>
+		</section>
+ 	<aside id="navigation2" class="col-md-2">
+		<?php
+			include('navigation_right.php');
+		?>
+		</aside>
+<footer id="footer">
+<center>
+<i>Copyright © 2014 ProjectCrew</i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>Contact us: <a href="mailto:projectCrew@gmail.com">projectCrew@gmail.com</a></i>
+</center>
+</footer>
 	</body>
 </html>
+<?php
+	mysql_close($bd);
+?>

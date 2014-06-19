@@ -20,7 +20,7 @@ require_once('connection.php');
 $qanswer = $_POST['true_answer'];
 mysql_query("SET NAMES 'utf8'");
 mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-$result= "SELECT * FROM test WHERE true_answer='$qanswer'";
+$result= "SELECT * FROM test_questions WHERE true_answer='$qanswer'";
 if($result){
 		echo "a";
 		header("Location: test_send_success.php");

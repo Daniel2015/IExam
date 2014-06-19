@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="js/jquery.2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/imageGetter.js"></script>
+	<title>User of Images</title>
+	<style>
+		body{
+			padding: 25px;
+		}
+		h1{
+			margin: 50px;
+		}
+		select{
+			margin-left:50px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Избери изображение и виж с инспектора :D Трябва да си логнат.</h1>
+	<select id="selectImg" onchange="getQuestionImage(1, $('#selectImg').val())">
+		<option value="1">Тест</option>
+		<option value="2">Човка</option>
+		<option value="3">Колиба</option>
+		<option value="4">Нос</option>
+		<option value="5">Цвеке</option>
+	</select>
+	<div id="imageSystem"></div>
+	<script>$(document).ready(getQuestionImage(1, $('#selectImg').val()));</script>
+</body>
+</html>

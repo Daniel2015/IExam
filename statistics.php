@@ -1,62 +1,36 @@
 <?php
-session_start();
-require_once('connection.php');
-if(!isset($_SESSION['log'])|| ($_SESSION['log'] != 'in')){
-session_destroy();
-header('location:not_allowed.php');
-   exit();
-}
-if(isset($_GET['log']) && ($_GET['log']=='out')){
-mysql_query("SET NAMES 'utf8'");
-mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-$result =mysql_query("DELETE FROM logged_in_users WHERE username='".$_SESSION['SESS_USERNAME']."'");
-mysql_close();
-session_destroy();
-header('location:main.php');
-}
-if(!isset($_SESSION['SESS_FIRST_NAME'])){
-header('location:not_allowed_admin.php');
-   exit();
+mysql_query("SELECT FROM test_answers");
+?>
+
+<div class="panel panel-success">
+	<div class="panel-heading">		
+		<span><h4 style="display: inline;">Статистика</h4></span>
+	</div>
+	<div class="panel-body">
+	<?php
+$query = mysql_query("SELECT description, id FROM tests WHERE has_images='0'");
+$num = mysql_num_rows($query);
+
+$i=0;
+if(isset($_POST['test_id']))
+{
+$test_id = $_POST['test_id'];
+
 }
 ?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Статистика</title>
-		<link rel="stylesheet" type="text/css" href="main.css">
-		<link rel="WWW Icon" href="www_icon1.ico"/>
-	
-	</head>
-	<body>
-	<table class="table">
-				<tr><td></td></tr>
-				<tr class="top">
-					<td><b>Статистика</b>
-					</td>
-				</tr>
-				<tr><td></td></tr>
-				<tr>
-					<td><a href="test.php" class="btn" >Тестове</a>
-					</td>
-				</tr>
-				<tr><td></td></tr>
-				<tr>
-					<td><a href="profile.php" class="btn" >Профил</a>
-					</td>
-				</tr>
-				<tr><td></td></tr>
-				<tr>
-					<td><a href="main_login.php" class="btn" >Назад</a>
-					</td>
-				</tr>
-				<tr><td></td></tr>
-				<tr>
-					<td><a href="?log=out" class="btn" >Излез</a>
-					</td>
-				</tr>
-				<tr><td></td></tr>
-			</table>
 
-	</body>
-</html>
+<?php
+while($i < $num)
+{
+$result = mysql_result($query, $i, 'description');
+$resultID = mysql_result($query, $i, 'id');
+?>
+<form name="test_id" method="POST" action="">
+<button type="submit" class="btn btn-info" name="test_id" value="<?php echo $resultID; ?>" /><?php echo $result; ?> </button>
+</form>
+<br>
+<?php
+$i++;}
+?>			
+	</div>
+</div>
