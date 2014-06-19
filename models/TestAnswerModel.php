@@ -3,8 +3,6 @@
 
 	class TestAnswerModel extends ModelBase
 	{	
-		//public $id;
-		
 		public $username;
 		
 		public $questionId;

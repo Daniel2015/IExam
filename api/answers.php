@@ -4,6 +4,8 @@ require_once('APIBase.php');
 
 function insert()
 {
+	Permissions::OnlyAuthenticated();
+	
 	$username = $_SESSION['SESS_USERNAME'];
 	$questionId = $_GET['questionId'];
 	$answer = $_GET['answer'];
