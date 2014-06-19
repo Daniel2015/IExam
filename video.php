@@ -49,7 +49,10 @@ header('location:video');
 	
 .videoHeader {
     white-space: normal;
-    width: 250px;
+    width:75%;
+}
+.videoDelete {
+	white-space: normal;
 }
 </style>
 
@@ -70,53 +73,15 @@ header('location:video');
 			</div>
 			<?php } ?>
 			<div class="panel-body">
-
-<table class="table-sm">
-
-		<?php 
-		while ($i < $num){
-		$result = mysql_result($query, $i); 
-		$url = mysql_result(mysql_query("SELECT link FROM videos WHERE id='$result'"),0); 
-		$name= mysql_result(mysql_query("SELECT name FROM videos WHERE id='$result'"),0);
-		?>
-	<tr>
-		<td style="width:400px;">
-<span>
-		<form name="video" action="" method="POST" >
-		<input style="float:left;" class="btn btn-info videoHeader" value="<?php echo $name; ?>" type="button" onClick="window.location.href='?URL=<?php echo $url; ?>'" />
-		</form>
-			<?php if($isAdmin == 1) { ?>
-
-		<form name="delete" onsubmit="" method="POST" action="" >
-		<button style="float:left;" type="submit" name="delete" class=" btn btn-danger" onclick="" value="<?php echo $result; ?>"/>Изтрий</button>
-		</form>
-</span>
-			<?php }	?>
-		</td>
-	</tr>
-		
-	<tr>
-	<td>
-	<?php
-	if(isset($_GET['URL']) && $_GET['URL'] == $url)
-{
-echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php echo $url;?><?php echo'" frameborder="0" allowfullscreen></iframe>';
-}
-	?>
-	
-	</td>
-	<td rowspan="<?php echo $num;?>" style="width:500px;">
+	<table class="table" style="float:left; width:400px;">
+	<td rowspan="<?php echo $num;?>" style="width:400px;">
 	<?php 
-	if(isset($_GET['URL']) && $_GET['URL'] == $url)
+	if(isset($_GET['URL']))
 	{
+		echo '<iframe width="400" height="300" src="//www.youtube.com/embed/';?><?php echo $_GET['URL'];?><?php echo'" frameborder="0" allowfullscreen></iframe>';
 		echo '<table class="table"><tr><td style="width:40%">Потребител</td><td style="width:60%">Коментар</td></tr></table>';
-		//echo "<span style='float: left; margin-left: 8px;'>Potebitel</span>";
-		//echo "<span style='float: right'>Komentar</span>";
 		echo '<div class="scrollable">';
-	}
 	?>
-		<?php
-	if(isset($_GET['URL']) && $_GET['URL'] == $url){ ?>
 	
 	<table class="table">
 	
@@ -124,8 +89,9 @@ echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php ec
 		<?php
 		
 		$p=0;
-		$query2=mysql_query("SELECT user FROM comments WHERE link='$url'");
-		$query3=mysql_query("SELECT message FROM comments WHERE link='$url'");
+		$url1=$_GET['URL'];
+		$query2=mysql_query("SELECT user FROM comments WHERE link='$url1'");
+		$query3=mysql_query("SELECT message FROM comments WHERE link='$url1'");
 		$numUsers = mysql_num_rows($query2);
 		while ($p < $numUsers){
 		$result2 = mysql_result($query2, $p);
@@ -143,19 +109,55 @@ echo '<iframe width="420" height="315" src="//www.youtube.com/embed/';?><?php ec
 			?>
 			</td>
 		</tr>
-		<?php $p++; } ?>
+		<?php $p++; } 
+		
+		?>
+		</td>
 	</table>
 	</div>
-<form action="" method="POST">
-<textarea style="resize: none;" rows="4" name="message" type="text" class="form-control input-lg" maxlength="1000" placeholder="Коментар"></textarea>
-<input type="hidden" name="url" value="<?php echo $url; ?>">
+<form action="" method="POST" width="400">
+<textarea style="resize: none; width:400px" rows="4" name="message" type="text" class="form-control input-lg" maxlength="1000" placeholder="Коментар"></textarea>
+<input type="hidden" name="url" value="<?php echo $_GET['URL']; ?>">
 <input type="submit" name="submit" class="btn btn-success btn-lg" value="Изпрати" />
 </form>
 	<?php } ?>
 	</div>
 	</td>
+	
+</table>
+<table class="table-sm" style="float:right">
+
+		<?php 
+		while ($i < $num){
+		$result = mysql_result($query, $i); 
+		$url = mysql_result(mysql_query("SELECT link FROM videos WHERE id='$result'"),0); 
+		$name= mysql_result(mysql_query("SELECT name FROM videos WHERE id='$result'"),0);
+		?>
+	<tr>
+		<td style="width:400px;">
+<span>
+		<form name="video" action="" method="POST" >
+		<input style="float:left;" class="btn btn-info videoHeader" value="<?php echo $name; ?>" type="button" onClick="window.location.href='?URL=<?php echo $url; ?>'" />
+		</form>
+			<?php if($isAdmin == 1) { ?>
+
+		<form name="delete" onsubmit="" method="POST" action="" >
+		<button style="float:left;" type="submit" name="delete" class=" btn btn-danger videoDelete" onclick="" value="<?php echo $result; ?>"/>Изтрий</button>
+		</form>
+</span>
+			<?php }	?>
+		</td>
+	</tr>
+		
+	<tr>
+	<td>
+	
+	
+	</td>
+	
 	</tr>
 	<?php		$i++ ; } ?>
-</table>
+	</table>
+
 </div>
 </div>
