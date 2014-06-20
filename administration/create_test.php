@@ -46,7 +46,7 @@ $result= $test->insert();
 }
 ?>
 
-<div class="panel panel-default">
+<div class="panel panel-success">
 
 	  <div class="panel-heading">
 		<span><h4 style="display: inline;">Създай тест</h4></span>
