@@ -20,7 +20,7 @@ function getByTestUser()
 	$testId = $_GET['testId'];
 	$model = new QuestionViewModel;
 	$model->set_selectQuery("SELECT q.question_id, test_id, question, answer1, answer2, answer3, answer4, answer FROM ");
-	$items = $model->getItems("as q LEFT JOIN (SELECT * FROM `test_answers`) as a ON q.question_id = a.question_id 
+	$items = $model->getItems("as q LEFT JOIN (SELECT * FROM `test_answers` WHERE username = '$_SESSION[SESS_USERNAME]') as a ON q.question_id = a.question_id 
 		WHERE test_id='$testId'");
 	
 	return $items;

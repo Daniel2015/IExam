@@ -51,5 +51,34 @@
 				<p><input name="submit" type="submit" value="Редактирай" class="form-control btn btn-primary"/></p>
 			</div>
 			</form>
+				<table class="table table-bordered table-hover table-condensed table-responsive">
+	<tr class="active table-hover info">
+		<td>Тест</td>
+		<td>Процент верни отговори</td>
+	</tr>
+<?php
+	$query = mysql_query("SELECT description, test_id, COUNT(CASE WHEN answer = true_answer THEN 1 END) as trueAnswers
+	FROM test_questions as q 
+	LEFT JOIN (SELECT * FROM `test_answers`) as a 
+		ON q.question_id = a.question_id 
+	LEFT JOIN (SELECT id, description FROM tests) as t
+		ON q.test_id = t.id
+	WHERE username='$_SESSION[SESS_USERNAME]' GROUP BY test_id") or die(mysql_error());
+
+	
+	while ($row = mysql_fetch_array($query)) {
+	$qid = $row['test_id'];
+	$qcount = mysql_result(mysql_query("SELECT COUNT(test_id) FROM test_questions WHERE test_id='$qid'"), 0);
+		echo '<tr class="active table-hover">
+				<td>
+				'.$row['description'].'
+				</td>
+				<td>
+				'.round(($row['trueAnswers'] / $qcount ) * 100, 2) .'%
+				</td>
+				</tr>';
+		}
+?>
+</table>
 		</div>
 	</div>
