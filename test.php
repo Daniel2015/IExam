@@ -27,40 +27,16 @@
 	$(function() {		
 		var dataSource = new protos.dataSource({
 				data: {
-					create: function(dataItems) {
-						dataItems.push({
-							name: 'test_id',
-							value: <?=$_GET["testId"]?>
-						});
-						
-						$.ajax({
-							url: '/<?= $ProjectName ?>/api/questions/insert',
-							data: dataItems,
-							method: 'POST'
-						}).done(function (data) {
-							if(data !== 'Success')
-							{
-								return;
-							}
-							
-							dataSource.dataChanged();
-							$("#addQuestion")[0].reset();
-						}).fail(function () {
-							alert('Fail');
-						});
-					},
 					read: function(query) {
 						$.ajax({
 							type: 'json',
 							contentType: "application/json; charset=utf-8",
 							type: "GET",
 							url: '/<?= $ProjectName ?>/api/questions/getByTestUser?testId=<?=$_GET["testId"]?>',
-							//data: query,
 							success: function(response) {
 								var data = {};
 								data.data = response;
 								data.items = response.length;
-								//dataItems = data;
 
 								dataSource.readed(data);
 							}
@@ -83,8 +59,6 @@
 		
 		var listView = $("#questions").data("listView");
 		$('#questions').on('click', 'input', function(e) {
-			//e.preventDefault();
-			
 			var answerRadio = $(this);
 			var questionUID = answerRadio.closest('li').data('uid');
 			var questionDataItem = listView.dataSource.findItem(questionUID);
