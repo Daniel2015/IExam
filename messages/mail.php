@@ -36,7 +36,7 @@
 			}
 		}
 		$result=mysql_query($query);
-		$num=mysql_numrows($result);
+		$num=mysql_num_rows($result);
 		if(isset($_POST['submit']))
 		{
 			$ID = $_POST['submit'];
@@ -79,7 +79,7 @@
 		}
 
 		$result=mysql_query($query);
-		$num=mysql_numrows($result);
+		$num=mysql_num_rows($result);
 		if(isset($_POST['submit']))
 		{
 			$ID = $_POST['submit'];
