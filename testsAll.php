@@ -1,4 +1,7 @@
 <?php
+
+Permissions::OnlyAuthenticated();
+
 $query = mysql_query("SELECT description, id FROM tests WHERE has_images='0'");
 $num = mysql_num_rows($query);
 

@@ -1,4 +1,6 @@
 <?php
+	Permissions::OnlyAuthenticated();
+	Permissions::OnlyAdmins();
 	//$query="SELECT * FROM simple_login";
 	$usersModel = new UsersModel;
 	$usersModel->getItems();

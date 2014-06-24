@@ -1,3 +1,7 @@
+<?php
+Permissions::OnlyAuthenticated();
+?>
+
 <style>
 #questions > ul > li{
 	width: 100%

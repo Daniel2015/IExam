@@ -1,4 +1,5 @@
 <?php
+	Permissions::OnlyAuthenticated();
 	Permissions::OnlyAdmins();
 ?>
 

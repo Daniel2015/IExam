@@ -1,4 +1,6 @@
 <?php
+	Permissions::OnlyAuthenticated();
+
 
 $logged  = $_SESSION['SESS_USERNAME'];
 $results = mysql_query("SELECT isAdmin FROM simple_login WHERE username='$logged'");

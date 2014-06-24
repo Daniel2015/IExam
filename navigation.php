@@ -28,8 +28,8 @@ if(Authentication::IsAuthenticated())
 else
 {
 ?>
-	<p><a href="/<?=$ProjectName?>/login" class="btn btn-info"><span class="glyphicon glyphicon-log-in"></span>    Login</a></p>
-	<p><a href="/<?=$ProjectName?>/register" class="btn btn-info"><span class="glyphicon glyphicon-registration-mark"></span>    Register</a></p>
+	<p><a href="/<?=$ProjectName?>/login" class="btn btn-info"><span class="glyphicon glyphicon-log-in"></span>    Вход</a></p>
+	<p><a href="/<?=$ProjectName?>/register" class="btn btn-info"><span class="glyphicon glyphicon-registration-mark"></span>    Регистрация</a></p>
 <?php } ?>
 	</div>
 </div>
