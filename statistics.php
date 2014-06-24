@@ -32,12 +32,11 @@ $i++;}
 	</div>
 	<div class="panel-body">
 	
-	<div class="panel panel-info">
-	<div class="panel-heading">		
+
 		<span><h4 style="display: inline;"><?php echo mysql_result(mysql_query("SELECT description FROM tests WHERE id='$test_id'"), 0); ?></h4></span>
-	</div>
-	<div class="panel-body">
-	
+</div>
+
+
 	<table class="table table-bordered table-hover table-condensed table-responsive">
 	<tr class="active table-hover info">
 		<td>Потребител</td>
@@ -68,8 +67,6 @@ $i++;}
 		}
 ?>
 </table>
-	</div>
-</div>	
-	</div>
+
 </div>
 <?php } ?>

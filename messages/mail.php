@@ -118,7 +118,6 @@ function reloadReaded()
 			{
 				header('location:mail?sent=0');
 			}
-				mysql_close();
 }
 
 function reloadDeleted()
@@ -143,7 +142,6 @@ function reloadDeleted()
 			{			
 				(new MessagePage)->show("", "Съобщението e изтрито!", "danger","mail?sent=0","800");		
 			}			
-				mysql_close();
 }
 ?>
 <div class="panel panel-success">

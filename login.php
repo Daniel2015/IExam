@@ -1,7 +1,7 @@
 <?php
 	if(Authentication::IsAuthenticated())
 	{
-		MessagePage::show("", "Вече сте се логнали!", "info", "main_login");
+		MessagePage::show("", "Вече сте се логнали!", "info", "index");
 		exit();
 	}
 	if(isset($_POST['submit']))

@@ -124,7 +124,7 @@ echo mysql_error();
     <div class="col-sm-10">
       <select class="dropdown input-lg form-control" name="user" id="user">
 					<option value="" >Изберете Потребител</option>
-					<option value=" ">ДО ВСИЧКИ!</option>
+						<?php if(Authentication::IsAdmin()) { ?><option value=" ">ДО ВСИЧКИ!</option><?php } ?>
 					<option disabled="disabled"></option>
 					<?php $p=0;
 							while ($p < $num) {

@@ -25,20 +25,53 @@
 		
 		$result= $user->update();
 		if($result){
-			(new MessagePage)->show("", "Редактирането е успешно!", "success", "index");
+			MessagePage::show("", "Редактирането е успешно!", "success", "index");
 			$_SESSION['SESS_FIRST_NAME']= $_POST['first_name_NEW'];
 			exit();
 		}
 	}
-?><div class="panel panel-success">
-		<div class="panel-heading">
-			<span><h4 style="display: inline;">Профил</h4></span>
+	
+	$profile_picture = mysql_result(mysql_query("SELECT profile_picture FROM simple_login WHERE username='" . $_SESSION['SESS_USERNAME'] . "'"), 0);
+	if($profile_picture == null)
+	{
+		$profile_picture = "images/defaultProfile.png";
+	}
+	
+	if(isset($_POST['image']))
+	{
+		$profile_picture = $_POST['images'];
+		mysql_query("UPDATE simple_login SET profile_picture='$profile_picture' WHERE username='" . $_SESSION['SESS_USERNAME'] . "'");
+		header('Location:profile'); 
+	}
+?>
+<script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideToggle(1100);
+  });
+});
+$(document).ready(function(){
+  $("#flip2").click(function(){
+    $("#panel2").slideToggle(1100);
+  });
+});
+</script>
+<div class="panel panel-success">
+		<div class="panel-heading" id="flip">
+			<span><h4 style="display: inline;" >Профил</h4></span>
 		</div>
-		<div class="panel-body">
-		<div class="col-md-3" style="float:left; margin-left:60px;">
-		<img src="images/defaultProfile.png" style="width:96%;"/></div>
-		<form name="submit" method="POST" action="" >
+		<div class="panel-body" id="panel">
+		<div class="col-md-5" style="float:left;" style="float:left;">
+			<form method="POST" action="" class="form-inline"  name="image">
+			<label><strong>Профилна снимка URL:</strong><input name="images" class="form-control"  type="text"/>
+				<button type="submit" class="btn btn-info"  name="image">Смени</button></label>
+			</form>					
+			<img src="<?php echo $profile_picture; ?>" class="img-rounded" style="width:268px; height:268px;"/>
+
+		</div>
+		
 		<div class="col-md-7" style="float:right;">
+		<form name="submit" method="POST" action="" >
 					<div style="float:left;">					
 				<p><label>Фак. Номер: <input type="text" name="username_NEW" class="form-control" id="username_NEW" value="<?= $user->username ?>" disabled="disabled" /></label></p>
 				<p><label>Име: <input type="text" name="first_name_NEW" class="form-control" id="first_name_NEW" value="<?= $user->firstName ?>"/></label></p>
@@ -49,8 +82,16 @@
 				<p><label>Нова парола: <input type="password" name="password_NEW" class="form-control" id="password_NEW" /></label></p>
 				</div>
 				<p><input name="submit" type="submit" value="Редактирай" class="form-control btn btn-primary"/></p>
-			</div>
 			</form>
+			</div>
+
+		</div>
+	</div>
+	<div class="panel panel-success">
+		<div class="panel-heading"   id="flip2">
+			<span><h4 style="display: inline;" >Статискика тестове</h4></span>
+		</div>
+			<div class="panel-body" id="panel2">
 				<table class="table table-bordered table-hover table-condensed table-responsive">
 	<tr class="active table-hover info">
 		<td>Тест</td>
@@ -81,4 +122,4 @@
 ?>
 </table>
 		</div>
-	</div>
+		</div>

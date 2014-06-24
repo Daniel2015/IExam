@@ -1,6 +1,12 @@
 <?php
-	require_once("models/UsersModel.php");
+	if(Authentication::IsAuthenticated())
+	{
+		MessagePage::show("", "Вече сте се регистрирали!", "info", "index");
+		exit();
+	}
 
+	require_once("models/UsersModel.php");
+	
 	if(isset($_POST['submit']))
 	{
 		$fname=$_POST['fname'];
