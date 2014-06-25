@@ -31,6 +31,7 @@ window.onload=GetClock;
 		</div>
 		<div class="panel-body">		
 		<?php 
+		require('connection.php');
 		if(isset($_SESSION['SESS_USERNAME']))
 		{
 			if(Authentication::IsAdmin())

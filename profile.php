@@ -44,29 +44,17 @@
 		header('Location:profile'); 
 	}
 ?>
-<script> 
-$(document).ready(function(){
-  $("#flip").click(function(){
-    $("#panel").slideToggle(1100);
-  });
-});
-$(document).ready(function(){
-  $("#flip2").click(function(){
-    $("#panel2").slideToggle(1100);
-  });
-});
-</script>
 <div class="panel panel-success">
-		<div class="panel-heading" id="flip">
+		<div class="panel-heading">
 			<span><h4 style="display: inline;" >Профил</h4></span>
 		</div>
-		<div class="panel-body" id="panel">
+		<div class="panel-body">
 		<div class="col-md-5" style="float:left;" style="float:left;">
 			<form method="POST" action="" class="form-inline"  name="image">
-			<label><strong>Профилна снимка URL:</strong><input name="images" class="form-control"  type="text"/>
+			<label><strong>Профилна снимка (16*9) URL:</strong><input name="images" class="form-control"  type="text"/>
 				<button type="submit" class="btn btn-info"  name="image">Смени</button></label>
 			</form>					
-			<img src="<?php echo $profile_picture; ?>" class="img-rounded" style="width:268px; height:268px;"/>
+			<img src="<?php echo $profile_picture; ?>" class="img-rounded" style="max-width:320px; max-height:570px;"/>
 
 		</div>
 		
@@ -88,10 +76,27 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<div class="panel panel-success">
-		<div class="panel-heading"   id="flip2">
+		<div class="panel-heading">
 			<span><h4 style="display: inline;" >Статискика тестове</h4></span>
 		</div>
-			<div class="panel-body" id="panel2">
+			<div class="panel-body">
+			<table class="table table-bordered">
+<tr>
+<td style="width:150px;">Брой Тестове:
+</td>
+<td class="success">
+</td>
+<td style="width:150px;">Среден процент верни отговори:
+</td>
+<td class="danger">
+</td>
+<td style="width:150px;">Всички:
+</td>
+<td class="info">
+</td>
+</tr>
+</table> 
+</div>
 				<table class="table table-bordered table-hover table-condensed table-responsive">
 	<tr class="active table-hover info">
 		<td>Тест</td>
@@ -121,5 +126,5 @@ $(document).ready(function(){
 		}
 ?>
 </table>
-		</div>
+		
 		</div>
