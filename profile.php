@@ -30,7 +30,7 @@
 			exit();
 		}
 	}
-	
+
 	$profile_picture = mysql_result(mysql_query("SELECT profile_picture FROM simple_login WHERE username='" . $_SESSION['SESS_USERNAME'] . "'"), 0);
 	if($profile_picture == null)
 	{
@@ -43,6 +43,13 @@
 		mysql_query("UPDATE simple_login SET profile_picture='$profile_picture' WHERE username='" . $_SESSION['SESS_USERNAME'] . "'");
 		header('Location:profile'); 
 	}
+
+		if(isset($_POST['delete']))
+	{
+		$profile_picture = 'NULL';
+		mysql_query("UPDATE simple_login SET profile_picture=$profile_picture WHERE username='" . $_SESSION['SESS_USERNAME'] . "'");
+		header('Location:profile'); 
+	}
 ?>
 <div class="panel panel-success">
 		<div class="panel-heading">
@@ -53,10 +60,14 @@
 			<form method="POST" action="" class="form-inline"  name="image">
 			<label><strong>Профилна снимка (16*9) URL:</strong><input name="images" class="form-control"  type="text"/>
 				<button type="submit" class="btn btn-info"  name="image">Смени</button></label>
-			</form>					
-			<img src="<?php echo $profile_picture; ?>" class="img-rounded" style="max-width:320px; max-height:570px;"/>
-
-		</div>
+			</form>		
+<?php 	if($profile_picture != 'images/defaultProfile.png') { ?>
+			<form method="POST" action="" class="form-inline"  name="delete">
+				<button type="submit" class="btn btn-danger"  name="delete">Изтрий</button></label> 
+			</form>	
+<?php } ?>
+			<img src="<?php echo $profile_picture; ?>" class="img-rounded" style="max-width:320px; max-height:570px;"/> 
+		</div> 
 		
 		<div class="col-md-7" style="float:right;">
 		<form name="submit" method="POST" action="" >
@@ -79,29 +90,29 @@
 		<div class="panel-heading">
 			<span><h4 style="display: inline;" >Статискика тестове</h4></span>
 		</div>
-			<div class="panel-body">
+		<div class="panel-body">
 			<table class="table table-bordered">
-<tr>
-<td style="width:150px;">Брой Тестове:
-</td>
-<td class="success">
-</td>
-<td style="width:150px;">Среден процент верни отговори:
-</td>
-<td class="danger">
-</td>
-<td style="width:150px;">Всички:
-</td>
-<td class="info">
-</td>
-</tr>
-</table> 
-</div>
-				<table class="table table-bordered table-hover table-condensed table-responsive">
-	<tr class="active table-hover info">
-		<td>Тест</td>
-		<td>Процент верни отговори</td>
-	</tr>
+				<tr>
+					<td style="width:150px;">Брой Тестове:
+					</td>
+					<td class="success">
+					</td>
+					<td style="width:150px;">Среден процент верни отговори:
+					</td>
+					<td class="danger">
+					</td>
+					<td style="width:150px;">Всички:
+					</td>
+					<td class="info">
+					</td>
+				</tr>
+			</table> 
+		</div>
+		<table class="table table-bordered table-hover table-condensed table-responsive">
+			<tr class="active table-hover info">
+				<td>Тест</td>
+				<td>Процент верни отговори</td>
+			</tr>
 <?php
 	$query = mysql_query("SELECT description, test_id, COUNT(CASE WHEN answer = true_answer THEN 1 END) as trueAnswers
 	FROM test_questions as q 
@@ -125,6 +136,5 @@
 				</tr>';
 		}
 ?>
-</table>
-		
-		</div>
+		</table>
+	</div>
