@@ -85,6 +85,9 @@
 						Фак. Номер
 						</td>
 						<td>
+						Профил
+						</td>
+						<td>
 						Направи Админ
 						</td>
 						<td>
@@ -111,6 +114,11 @@
 						</td>
 						<td>
 						<?= $user->username; ?>
+						</td>
+						<td>
+						<form name="profile" onsubmit="" method="GET" action="" >
+						<input type="button" class="form-control btn btn-primary" value="Профил" onClick="window.location.href='../profile?id=<?php echo $user->id; ?>'">
+						</form>
 						</td>
 						<td>
 						<form name="login" onsubmit="" method="POST" action="" >

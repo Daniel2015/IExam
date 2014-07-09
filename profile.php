@@ -6,6 +6,21 @@
 	$user = new UsersModel;
 	$user = $user->getItems("WHERE username='" . $_SESSION['SESS_USERNAME'] . "'")[0];
 	
+if(isset($_GET['id']) && !Authentication::IsAdmin())
+{
+header('location:profile');
+}
+
+	if(isset($_GET['id']) && Authentication::IsAdmin())
+	{
+		$member_id = $_GET['id'];
+		$user = $user->getItems("WHERE member_id=$member_id")[0];
+		if(!$user)
+		{
+		header('location:profile');
+		}
+	}
+	
 	if(isset($_POST['submit']))
 	{
 		$fname=$_POST['first_name_NEW'];
@@ -32,6 +47,12 @@
 	}
 
 	$profile_picture = mysql_result(mysql_query("SELECT profile_picture FROM simple_login WHERE username='" . $_SESSION['SESS_USERNAME'] . "'"), 0);
+	
+	if(isset($_GET['id']) && Authentication::IsAdmin())
+	{
+	$profile_picture = mysql_result(mysql_query("SELECT profile_picture FROM simple_login WHERE member_id=$member_id"), 0);
+	}
+	
 	if($profile_picture == null)
 	{
 		$profile_picture = "images/defaultProfile.png";
@@ -57,6 +78,9 @@
 		</div>
 		<div class="panel-body">
 		<div class="col-md-5" style="float:left;" style="float:left;">
+		
+<?php if(!isset($_GET['id'])) { ?>
+		
 			<form method="POST" action="" class="form-inline"  name="image">
 			<label><strong>Профилна снимка (16*9) URL:</strong><input name="images" class="form-control"  type="text"/>
 				<button type="submit" class="btn btn-info"  name="image">Смени</button></label>
@@ -66,6 +90,9 @@
 				<button type="submit" class="btn btn-danger"  name="delete">Изтрий</button></label> 
 			</form>	
 <?php } ?>
+
+<?php } ?>
+		
 			<img src="<?php echo $profile_picture; ?>" class="img-rounded" style="max-width:320px; max-height:570px;"/> 
 		</div> 
 		
@@ -73,14 +100,14 @@
 		<form name="submit" method="POST" action="" >
 					<div style="float:left;">					
 				<p><label>Фак. Номер: <input type="text" name="username_NEW" class="form-control" id="username_NEW" value="<?= $user->username ?>" disabled="disabled" /></label></p>
-				<p><label>Име: <input type="text" name="first_name_NEW" class="form-control" id="first_name_NEW" value="<?= $user->firstName ?>"/></label></p>
-				<p><label>Фамилия: <input type="text" name="last_name_NEW" class="form-control" id="last_name_NEW" value="<?= $user->lastName ?>"/></label></p>
+				<p><label>Име: <input type="text" name="first_name_NEW" class="form-control" id="first_name_NEW" value="<?= $user->firstName ?>" <?php if(isset($_GET['id']) && Authentication::IsAdmin()) { ?> disabled="disabled" <?php } ?> /></label></p>
+				<p><label>Фамилия: <input type="text" name="last_name_NEW" class="form-control" id="last_name_NEW" value="<?= $user->lastName ?>" <?php if(isset($_GET['id']) && Authentication::IsAdmin()) { ?> disabled="disabled" <?php } ?> /></label></p>
 				</div>
 				<div style="float:right;">
-				<p><label>ЕГН: <input type="text" name="ID_NEW" class="form-control" id="ID_NEW" value="<?= $user->egn ?>"/></label></p>
-				<p><label>Нова парола: <input type="password" name="password_NEW" class="form-control" id="password_NEW" /></label></p>
+				<p><label>ЕГН: <input type="text" name="ID_NEW" class="form-control" id="ID_NEW" value="<?= $user->egn ?>" <?php if(isset($_GET['id']) && Authentication::IsAdmin()) { ?> disabled="disabled" <?php } ?> /></label></p>
+				<p><label>Нова парола: <input type="password" name="password_NEW" class="form-control" id="password_NEW" <?php if(isset($_GET['id']) && Authentication::IsAdmin()) { ?> disabled="disabled" <?php } ?> /></label></p>
 				</div>
-				<p><input name="submit" type="submit" value="Редактирай" class="form-control btn btn-primary"/></p>
+				<?php if(!isset($_GET['id'])) { ?><p><input name="submit" type="submit" value="Редактирай" class="form-control btn btn-primary" /></p><?php } ?>
 			</form>
 			</div>
 
@@ -122,6 +149,17 @@
 		ON q.test_id = t.id
 	WHERE username='$_SESSION[SESS_USERNAME]' GROUP BY test_id") or die(mysql_error());
 
+	if(isset($_GET['id']) && Authentication::IsAdmin())
+	{
+		$username =	mysql_result(mysql_query("SELECT username FROM simple_login WHERE member_id=$member_id"), 0);
+		$query = mysql_query("SELECT description, test_id, COUNT(CASE WHEN answer = true_answer THEN 1 END) as trueAnswers
+	FROM test_questions as q 
+	LEFT JOIN (SELECT * FROM `test_answers`) as a 
+		ON q.question_id = a.question_id 
+	LEFT JOIN (SELECT id, description FROM tests) as t
+		ON q.test_id = t.id
+	WHERE username='$username' GROUP BY test_id") or die(mysql_error());
+	}
 	
 	while ($row = mysql_fetch_array($query)) {
 	$qid = $row['test_id'];
