@@ -96,7 +96,7 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
 		</aside>
 <footer id="footer">
 <center>
-<i>Copyright © 2014 IExam</i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>Contact us: <a href="https://github.com/Daniel2015/IExam">github.com/Daniel2015/IExam</a></i>
+<i>Copyright © <?php echo date("Y"); ?> IExam | All Rights Reserved.</i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>Contact us: <a href="https://github.com/Daniel2015/IExam" target="_blank">github.com/Daniel2015/IExam</a></i>
 </center>
 </footer>
 	</body>

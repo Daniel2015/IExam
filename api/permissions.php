@@ -5,7 +5,7 @@ class Permissions
 {
     public static function OnlyAdmins() {
         if (!Authentication::IsAdmin()) {
-            echo "Нямата достъм до тази страница!";
+            echo "Нямате достъп до тази страница!";
             exit();
         }
     }

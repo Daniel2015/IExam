@@ -163,12 +163,18 @@ function reloadDeleted()
 
 <table class="table table-bordered table-hover table-condensed">
 <tr class="active table-hover">
-<td>
-Изпратил
-</td>
+
+
+<?php	if(isset($_GET['sent']) && $_GET['sent'] == 0) // Outgoing messages
+		{ ?>
 <td>
 Получател
 </td>
+<?php } else { ?>
+<td>
+Изпратил
+</td>
+<?php } ?>
 <td>
 Съобщениe
 </td>
@@ -193,12 +199,17 @@ function reloadDeleted()
 						$field4=mysql_result($result,$num-1,"ID");
 					?>
 <tr class="success table-hover" >
-<td>
-<?php echo $field0; ?>
-</td>
+
+<?php	if(isset($_GET['sent']) && $_GET['sent'] == 0) // Outgoing messages
+		{ ?>
 <td>
 <?php echo $field1; ?>
 </td>
+<?php } else { ?>
+<td>
+<?php echo $field0; ?>
+</td>
+<?php } ?>
 <td>
 <?php echo $field2; ?>
 </td>

@@ -14,7 +14,7 @@ header('location:profile');
 	if(isset($_GET['id']) && Authentication::IsAdmin())
 	{
 		$member_id = $_GET['id'];
-		$user = $user->getItems("WHERE member_id=$member_id")[0];
+		$user = $user->getItems("WHERE member_id='$member_id'")[0];
 		if(!$user)
 		{
 		header('location:profile');
