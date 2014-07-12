@@ -7,6 +7,6 @@ require_once('permissions.php');
 
 $action = $_GET['action'];
 
-header('Content-type: application/json');
+header('Content-Type: application/json; charset=UTF-8' );
 echo json_encode($action());
 ?>

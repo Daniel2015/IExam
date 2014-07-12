@@ -53,7 +53,21 @@
 		
 		public function update()
 		{
-			// TODO
+			return mysql_query("UPDATE test_questions
+				SET question='$this->question', 
+					answer1='$this->answer1',
+					answer2='$this->answer2',
+					answer3='$this->answer3',
+					answer4='$this->answer4',
+					true_answer='$this->trueAnswer'
+				WHERE question_id='$this->id'")
+				or die(mysql_error());
+		}
+		
+		public function delete()
+		{
+			return mysql_query("DELETE from test_questions WHERE question_id='$this->id'")
+				or die(mysql_error());
 		}	
 	}
 ?>

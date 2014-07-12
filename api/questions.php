@@ -26,12 +26,13 @@ function getByTestUser()
 	return $items;
 	
 }
+
 function insert()
 {
 	Permissions::OnlyAdmins();
 	
 	$question = new QuestionModel;
-	
+
 	if(empty($_POST['question']))
 	{
 		return 'All fields are required!';
@@ -43,13 +44,54 @@ function insert()
 	$question->answer2 = $_POST['answer2'];
 	$question->answer3 = $_POST['answer3'];
 	$question->answer4 = $_POST['answer4'];
-	$question->trueAnswer = $_POST['true_answer'];
+	$question->trueAnswer = $_POST['trueAnswer'];
 	
 	$result = $question->insert();
 	
 	if($result)
 	{
-		return 'Success';
+		return $result;
+	}
+	
+	return 'Error';
+}
+
+function update()
+{
+	Permissions::OnlyAdmins();
+	
+	$data = json_decode($_GET['data'])[0];
+	$question = (new QuestionModel)->getItems("Where question_id='$data->id'")[0];
+
+	$question->question = $data->question;
+	$question->answer1 =  $data->answer1;
+	$question->answer2 =  $data->answer2;
+	$question->answer3 =  $data->answer3;
+	$question->answer4 =  $data->answer4;
+	$question->trueAnswer = $data->trueAnswer;
+	
+	$result = $question->update();
+	
+	if($result)
+	{
+		return $result;
+	}
+	
+	return 'Error';
+}
+
+function delete()
+{
+	Permissions::OnlyAdmins();
+	
+	$data = json_decode($_GET['data'])[0];
+	$question = (new QuestionModel)->getItems("Where question_id='$data->id'")[0];
+	
+	$result = $question->delete();
+	
+	if($result)
+	{
+		return $result;
 	}
 	
 	return 'Error';

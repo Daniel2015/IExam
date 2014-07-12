@@ -107,10 +107,10 @@ $result= $test->insert();
 							<textarea style="resize: none;" rows="8" class="form-control input-sm" placeholder="Отговор D" id="answer4" name="answer4"></textarea></td>
 						<td class="danger" style="vertical-align:middle">
 						<center>
-							<input id="true_answer" type="radio" name="true_answer" class="radio_button" value="A">A<br>
-							<input id="true_answer" type="radio" name="true_answer" class="radio_button" value="B">B<br>
-							<input id="true_answer" type="radio" name="true_answer" class="radio_button" value="C">C<br>
-							<input id="true_answer" type="radio" name="true_answer" class="radio_button" value="D">D<br>
+							<input id="trueAnswer" type="radio" name="trueAnswer" class="radio_button" value="A">A<br>
+							<input id="trueAnswer" type="radio" name="trueAnswer" class="radio_button" value="B">B<br>
+							<input id="trueAnswer" type="radio" name="trueAnswer" class="radio_button" value="C">C<br>
+							<input id="trueAnswer" type="radio" name="trueAnswer" class="radio_button" value="D">D<br>
 							</center>
 						</td>
 					
@@ -119,9 +119,60 @@ $result= $test->insert();
 			<button type="submit" class="submitBtn btn btn-info">Добави въпрос</button>
 		</form>
 	</div>
+<script id="editTmpl" type="protos-tmpl">
+		<table class="table table-bordered table-hover table-condensed">
+				<tr class="active table-hover" style="text-align:center;">
+					<td>
+					Въпрос
+					</td>
+					<td>
+					A
+					</td>
+					<td>
+					B
+					</td>
+					<td>
+					C
+					</td>
+					<td>
+					D
+					</td>
+					<td>
+					Отговор
+					</td>
+				</tr>
+				<tr>
+		
+						<td class="success">
+							<textarea style="resize: none;" rows="8" class="form-control input-sm" placeholder="Въпрос" id="question" name="question"></textarea></td>
+						<td class="success">	
+							<textarea style="resize: none;" rows="8" class="form-control input-sm" placeholder="Отговор A" id="answer1" name="answer1"></textarea></td>
+						<td class="success">
+							<textarea style="resize: none;" rows="8" class="form-control input-sm" placeholder="Отговор B" id="answer2" name="answer2"></textarea></td>
+						<td class="success">
+							<textarea style="resize: none;" rows="8" class="form-control input-sm" placeholder="Отговор C" id="answer3" name="answer3"></textarea></td>
+						<td class="success">
+							<textarea style="resize: none;" rows="8" class="form-control input-sm" placeholder="Отговор D" id="answer4" name="answer4"></textarea></td>
+						<td class="danger" style="vertical-align:middle">
+						<center>
+								<input type="radio" name="trueAnswer" class="radio_button" value="A">A<br>
+								<input type="radio" name="trueAnswer" class="radio_button" value="B">B<br>
+								<input type="radio" name="trueAnswer" class="radio_button" value="C">C<br>
+								<input type="radio" name="trueAnswer" class="radio_button" value="D">D<br>
+							</center>
+						</td>
+					
+				</tr>
+			</table>
+	<input type="submit" class="submitBtn btn btn-success" value="Update">
+</script>
 <script id="galleryTemplate" type="protos-tmpl">
 	<div class="panel panel-default">
-		<div class="panel-heading">#=question#</div>
+		<div class="panel-heading">
+			#=question#
+			<span class="submitBtn btn btn-info itemEdit">Edit</span>
+			<span class="submitBtn btn btn-info itemDelete">Delete</span>
+		</div>
 		<p class="#=trueAnswer == 'A' ? 'bg-success' : ''#">#=answer1#</p>
 		<p class="#=trueAnswer == 'B' ? 'bg-success' : ''#">#=answer2#</p>
 		<p class="#=trueAnswer == 'C' ? 'bg-success' : ''#">#=answer3#</p>
@@ -133,7 +184,7 @@ $result= $test->insert();
 	$(function() {		
 		var dataSource = new protos.dataSource({
 				data: {
-					create: function(dataItems) {
+					create: function(dataItems, deferred) {
 						dataItems.push({
 							name: 'test_id',
 							value: <?=$_GET["testId"]?>
@@ -144,55 +195,41 @@ $result= $test->insert();
 							data: dataItems,
 							method: 'POST'
 						}).done(function (data) {
-							if(data !== 'Success')
-							{
-								return;
-							}
-							
-							dataSource.dataChanged();
+							deferred.resolve($('#addQuestion').serializeJson());
 							$("#addQuestion")[0].reset();
 						}).fail(function () {
 							alert('Fail');
 						});
 					},
-					read: function(query) {
-						$.ajax({
-							type: 'json',
-							contentType: "application/json; charset=utf-8",
-							type: "GET",
-							url: '/<?= $ProjectName ?>/api/questions/getByTest?testId=<?=$_GET["testId"]?>',
-							//data: query,
-							success: function(response) {
-								var data = {};
-								data.data = response;
-								data.items = response.length;
-								dataItems = data;
-								
-								dataSource.readed(data);
-							}
-						});
-						return;
-					}
+					read: '/<?= $ProjectName ?>/api/questions/getByTest?testId=<?=$_GET["testId"]?>',
+					update: '/<?= $ProjectName ?>/api/questions/update',
+					delete: '/<?= $ProjectName ?>/api/questions/delete'
+				},
+				prepareData: function(x) {
+					return { data: JSON.stringify(x) };
 				},
 				server: {
 					paging: false,
 					filtering: false,
-					sorting: false
+					sorting: true
 				}
 			});
 		
 		$("#questions").protos().listView({
 			data: dataSource,
 			pageSize: 5,
-			templateId: 'galleryTemplate'
+			editTemplate: 'editTmpl',
+			templateId: 'galleryTemplate',
+			popUp: {
+				title: 'Edit question',
+				width: 650,
+				height: 340
+			}
 		});
 		
-		$('form').on('submit', function(e) {
+		$('#addQuestion').on('submit', function(e) {
 			e.preventDefault();
-			
-			var form = $(this)
-			, formData = form.serializeArray();
-			dataSource.addItems(formData);
+			dataSource.create($(this).serializeArray());
 		});
 	});
 </script>

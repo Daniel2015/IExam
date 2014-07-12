@@ -31,7 +31,7 @@ Permissions::OnlyAuthenticated();
 	$(function() {		
 		var dataSource = new protos.dataSource({
 				data: {
-					read: function(query) {
+					read: function(query, deferred) {
 						$.ajax({
 							type: 'json',
 							contentType: "application/json; charset=utf-8",
@@ -42,7 +42,7 @@ Permissions::OnlyAuthenticated();
 								data.data = response;
 								data.items = response.length;
 
-								dataSource.readed(data);
+								deferred.resolve(response);
 							}
 						});
 						return;
@@ -66,6 +66,8 @@ Permissions::OnlyAuthenticated();
 			var answerRadio = $(this);
 			var questionUID = answerRadio.closest('li').data('uid');
 			var questionDataItem = listView.dataSource.findItem(questionUID);
+			
+			questionDataItem.answer = $(this).data('char');
 			
 			$.ajax({
 				url: '/<?= $ProjectName ?>/api/answers/insert',
