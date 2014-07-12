@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	require_once("models/UsersModel.php");
 	
 	Permissions::OnlyAuthenticated();
