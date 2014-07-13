@@ -88,7 +88,7 @@ window.onload=GetClock;
 						$resultNewsID = mysql_result($queryNews, $k, "ID");
 
 				?>
-				<div class="alert alert-warning">
+				<div class="alert alert-warning breakable">
 				<?php
 						if($resultNews){
 							echo $resultNews;
