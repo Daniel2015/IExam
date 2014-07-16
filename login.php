@@ -17,7 +17,7 @@ $asd = $_POST['username'];
 if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $asd))
 {
 
-MessagePage::show("", "невъзможна данни", "warning");
+MessagePage::show("/[\'^£$%&*()}{@#~?><>,|=_+¬-]/", "Забранени символи:", "warning");
 }
 else
 {
@@ -31,34 +31,42 @@ else
 		}				
 		$login = clean($_POST['username']);
 		
-		$salt = mysql_result(mysql_query("SELECT salt FROM simple_login WHERE username='$login'"), 0);
-		$password = crypt(clean($_POST['password']), '$2a$10$' . $salt);
-		
-		
-		if($login == '') {
-			$errmsg_arr[] = 'Login ID missing';
-			$errflag = true;
-		}
-		if($password == '') {
-			$errmsg_arr[] = 'Password missing';
-			$errflag = true;
-		}
-		
-		//if inputs are empty
-		if($errflag) {
-			$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-			session_write_close();
-			MessagePage::show("", "Моля попълнете полетата!", "danger", "login");
-			exit();
-		}
-		mysql_query("SET NAMES 'utf8'");
-		mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-		
-		$logged = Authentication::Login($login, $password);
-		if($logged)
+		$salt_query = mysql_query("SELECT salt FROM simple_login WHERE username='$login'");
+		if(mysql_num_rows($salt_query) == 1)
 		{
-			MessagePage::show("", "Влязохте успешно!", "success", "index");
-			exit();
+			$salt = mysql_result($salt_query, 0, "salt");
+			$password = crypt(clean($_POST['password']), '$2a$10$' . $salt);
+			
+			
+			if($login == '') {
+				$errmsg_arr[] = 'Login ID missing';
+				$errflag = true;
+			}
+			if($password == '') {
+				$errmsg_arr[] = 'Password missing';
+				$errflag = true;
+			}
+			
+			//if inputs are empty
+			if($errflag) {
+				$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+				session_write_close();
+				MessagePage::show("", "Моля попълнете полетата!", "danger", "login");
+				exit();
+			}
+			mysql_query("SET NAMES 'utf8'");
+			mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+			
+			$logged = Authentication::Login($login, $password);
+			if($logged)
+			{
+				MessagePage::show("", "Влязохте успешно!", "success", "index");
+				exit();
+			}
+			else
+			{
+				MessagePage::show("", "Греша Парола или Фак. Номер!", "danger");
+			}
 		}
 		else
 		{

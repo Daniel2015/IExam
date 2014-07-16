@@ -25,11 +25,11 @@ setTimeout("GetClock()", 1000);
 window.onload=GetClock;
 </script>
 <span>
-	<div class="panel panel-default">
+	<div class="panel panel-default breakable">
 		<div class="panel-heading">
 			<span><h3 style="display: inline;">IExam</h3></span>
 		</div>
-		<div class="panel-body">		
+		<div class="panel-body breakable">		
 		<?php 
 		require('connection.php');
 		if(isset($_SESSION['SESS_USERNAME']))

@@ -146,7 +146,7 @@ function reloadDeleted()
 				mysql_close();
 }
 ?>
-<div class="panel panel-success">
+<div class="panel panel-success breakable">
 
 					<div class="panel-heading">
 						<span><h4 style="display: inline;">Поща</h4></span>
@@ -211,7 +211,7 @@ function reloadDeleted()
 </td>
 <?php } ?>
 <td>
-<?php echo $field2; ?>
+<div style="width:550px;"><?php echo $field2; ?></div>
 </td>
 <td>
 <?php echo $field3; ?>
